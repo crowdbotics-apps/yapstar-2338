@@ -16,19 +16,19 @@ The Fabric Pod is a dependency for all Fabric SDKs and is included when installi
 
 1. Open Fabric.app, login and select an SDK to install.
 
-   ![Fabric Plugin](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-fabric-plugin.png)
+    ![Fabric Plugin](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-fabric-plugin.png)
 
 1. The Fabric app automatically detects when a project uses CocoaPods and gives you the option to install via the Podfile or Xcode.
 
-   ![Fabric Installation Options](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-pod-installation-option.png)
+	![Fabric Installation Options](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-pod-installation-option.png)
 
 1. Select the Podfile option and follow the installation instructions to update your Podfile. Note: the example below is for the Crashlytics SDK. The instructions will vary based on the selected SDK.
 
-   ![Fabric Podfile Instructions](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-podfile-instructions.png)
+	![Fabric Podfile Instructions](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-podfile-instructions.png)
 
 1. Add a Run Script Build Phase and build your app.
 
-   ![Fabric Run Script Build Phase](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-rsbp.png)
+	![Fabric Run Script Build Phase](https://docs.fabric.io/ios/cocoapod-readmes/cocoapods-rsbp.png)
 
 1. Initialize the SDK by inserting code outlined in Fabric.app.
 
@@ -36,7 +36,7 @@ The Fabric Pod is a dependency for all Fabric SDKs and is included when installi
 
 ## Resources
 
-- [Documentation](https://docs.fabric.io/)
-- [Forums](https://stackoverflow.com/questions/tagged/google-fabric)
-- [Website](https://get.fabric.io)
-- Follow us on Twitter: [@fabric](https://twitter.com/fabric)
+* [Documentation](https://docs.fabric.io/)
+* [Forums](https://stackoverflow.com/questions/tagged/google-fabric)
+* [Website](https://get.fabric.io)
+* Follow us on Twitter: [@fabric](https://twitter.com/fabric)
