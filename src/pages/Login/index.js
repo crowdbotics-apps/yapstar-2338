@@ -77,21 +77,6 @@ class LoginScreen extends React.Component {
           <View style={styles.container}>
             <Image source={LogoIcon} style={styles.logo} resizeMode="contain" />
             <View style={styles.content}>
-              <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={this.state.email}
-                autoCapitalize="none"
-                onChangeText={(value) => this.inputChanged('email', value)}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={this.state.password}
-                autoCapitalize="none"
-                secureTextEntry={true}
-                onChangeText={(value) => this.inputChanged('password', value)}
-              />
               <Button
                 containerStyle={styles.loginBtn}
                 textStyle={styles.login}
