@@ -1,38 +1,38 @@
 {
   "project_info": {
-    "project_number": "141970371154",
-    "firebase_url": "https://yapstar-fab38.firebaseio.com",
-    "project_id": "yapstar-fab38",
-    "storage_bucket": "yapstar-fab38.appspot.com"
+    "project_number": "919346065255",
+    "firebase_url": "https://yapstar-52ee7.firebaseio.com",
+    "project_id": "yapstar-52ee7",
+    "storage_bucket": "yapstar-52ee7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:141970371154:android:32b00c1b6e244994",
+        "mobilesdk_app_id": "1:919346065255:android:32b00c1b6e244994",
         "android_client_info": {
           "package_name": "com.crowdbotics.yapstar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "141970371154-v4delujjnpjj87roaef743muobu4t65e.apps.googleusercontent.com",
+          "client_id": "919346065255-r0j6objn08nblib5fmrk1pb8pvvpuu57.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC72MeNgBjrqu0gelTT4cLJ1hq13p8QxT4"
+          "current_key": "AIzaSyDDNLA6Ax4vgI5-XLYoGrqPvtqm3xmUtwk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "141970371154-v4delujjnpjj87roaef743muobu4t65e.apps.googleusercontent.com",
+              "client_id": "919346065255-r0j6objn08nblib5fmrk1pb8pvvpuu57.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "141970371154-a8tqvqsinha8v221sodc4m696ikcb0pl.apps.googleusercontent.com",
+              "client_id": "919346065255-bherbfaenj71158gssg964r67625t8uk.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.crowdbotics.yapstar"
