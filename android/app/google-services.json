@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "509625931637",
+    "firebase_url": "https://yapstars-c16ff.firebaseio.com",
+    "project_id": "yapstars-c16ff",
+    "storage_bucket": "yapstars-c16ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509625931637:android:4023898d7a612c34",
+        "android_client_info": {
+          "package_name": "com.crowdbotics.yapstars"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509625931637-vbb90qgq43pvtdn1jdl3324e4ka4fegd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJzC0ZjUBHPXVr_3rx2AHRgPd4fkAeLPA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "509625931637-vbb90qgq43pvtdn1jdl3324e4ka4fegd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.crowdbotics.yapstars"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

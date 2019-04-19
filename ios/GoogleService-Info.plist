@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>141970371154-a8tqvqsinha8v221sodc4m696ikcb0pl.apps.googleusercontent.com</string>
+	<string>509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.141970371154-a8tqvqsinha8v221sodc4m696ikcb0pl</string>
+	<string>com.googleusercontent.apps.509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAe_yUmCJtUUidyWGR3fVfipQweOBg3Y4E</string>
+	<string>AIzaSyAr90beOkNbUnInHrwOEc0Ih4bZvWWcdGw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>141970371154</string>
+	<string>509625931637</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.crowdbotics.yapstar</string>
+	<string>com.crowdbotics.yapstars</string>
 	<key>PROJECT_ID</key>
-	<string>yapstar-fab38</string>
+	<string>yapstars-c16ff</string>
 	<key>STORAGE_BUCKET</key>
-	<string>yapstar-fab38.appspot.com</string>
+	<string>yapstars-c16ff.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:141970371154:ios:32b00c1b6e244994</string>
+	<string>1:509625931637:ios:4023898d7a612c34</string>
 	<key>DATABASE_URL</key>
-	<string>https://yapstar-fab38.firebaseio.com</string>
+	<string>https://yapstars-c16ff.firebaseio.com</string>
 </dict>
 </plist>
