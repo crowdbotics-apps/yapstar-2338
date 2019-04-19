@@ -1,12 +1,13 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '10.0'
+platform :ios, '9.0'
 
-target 'Yapstar' do
+target 'YapStars' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  # Pods for Yapstar
+  # Pods for YapStars
 
+  # Required by RNFirebase
   pod 'Firebase/Core', '~> 5.20.1'
 
   pod 'Firebase/AdMob', '~> 5.20.1'
@@ -23,4 +24,5 @@ target 'Yapstar' do
   # Crashlytics
   pod 'Fabric', '~> 1.9.0'
   pod 'Crashlytics', '~> 3.12.0'
+
 end
