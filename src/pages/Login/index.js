@@ -3,6 +3,9 @@ import { View, Image, TextInput, Text, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import firebase from 'react-native-firebase';
+
 import { AuthController } from 'app/services';
 import { AppContext, Button } from 'app/components';
 import { alert } from 'app/utils/Alert';
@@ -70,6 +73,48 @@ class LoginScreen extends React.Component {
     }
   };
 
+  facebookLogin = async () => {
+    try {
+      const result = await LoginManager.logInWithReadPermissions([
+        'public_profile',
+        'email'
+      ]);
+
+      if (result.isCancelled) {
+        // handle this however suites the flow of your app
+        throw new Error('User cancelled request');
+      }
+
+      console.log(
+        `Login success with permissions: ${result.grantedPermissions.toString()}`
+      );
+
+      // get the access token
+      const data = await AccessToken.getCurrentAccessToken();
+
+      if (!data) {
+        // handle this however suites the flow of your app
+        throw new Error(
+          'Something went wrong obtaining the users access token'
+        );
+      }
+
+      // create a new firebase credential with the token
+      const credential = firebase.auth.FacebookAuthProvider.credential(
+        data.accessToken
+      );
+
+      // login with credential
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential);
+
+      console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   render() {
     return (
       <ScrollView>
@@ -77,26 +122,11 @@ class LoginScreen extends React.Component {
           <View style={styles.container}>
             <Image source={LogoIcon} style={styles.logo} resizeMode="contain" />
             <View style={styles.content}>
-              <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={this.state.email}
-                autoCapitalize="none"
-                onChangeText={(value) => this.inputChanged('email', value)}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={this.state.password}
-                autoCapitalize="none"
-                secureTextEntry={true}
-                onChangeText={(value) => this.inputChanged('password', value)}
-              />
               <Button
                 containerStyle={styles.loginBtn}
                 textStyle={styles.login}
-                text="Log In"
-                onPress={this.login}
+                text="Facebook Log In"
+                onPress={this.facebookLogin}
               />
               <Button
                 containerStyle={styles.forgotpswdBtn}

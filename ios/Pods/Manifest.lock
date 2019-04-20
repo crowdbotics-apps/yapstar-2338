@@ -1,4 +1,10 @@
 PODS:
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - BoringSSL-GRPC (0.0.2):
     - BoringSSL-GRPC/Implementation (= 0.0.2)
     - BoringSSL-GRPC/Interface (= 0.0.2)
@@ -8,6 +14,12 @@ PODS:
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
   - Fabric (1.9.0)
+  - FBSDKCoreKit (4.41.2):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.41.2):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.41.2):
+    - FBSDKCoreKit
   - Firebase/AdMob (5.20.2):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (~> 7.42)
@@ -186,6 +198,9 @@ PODS:
 DEPENDENCIES:
   - Crashlytics (~> 3.12.0)
   - Fabric (~> 1.9.0)
+  - FBSDKCoreKit (~> 4.41.0)
+  - FBSDKLoginKit (~> 4.41.0)
+  - FBSDKShareKit (~> 4.41.0)
   - Firebase/AdMob (~> 5.20.1)
   - Firebase/Auth (~> 5.20.1)
   - Firebase/Core (~> 5.20.1)
@@ -200,9 +215,13 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Bolts
     - BoringSSL-GRPC
     - Crashlytics
     - Fabric
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -231,9 +250,13 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  FBSDKCoreKit: 559246ca24848bf7254695476df425b88651dcb3
+  FBSDKLoginKit: 48f1758be0779ac5d2ef1b50ddfa75f8ad683180
+  FBSDKShareKit: 96723a1d2e68f732385ec9ca74ae5d1bdba3c473
   Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
   FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
@@ -261,6 +284,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
 
-PODFILE CHECKSUM: f83ad761a44124591d68dfd8f5ecf14a1c82a679
+PODFILE CHECKSUM: 917d12a6f4dcefe6383283f1880145aa7183ff69
 
 COCOAPODS: 1.6.1
