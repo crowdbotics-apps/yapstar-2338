@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TextInput, Text, ScrollView } from 'react-native';
+import { View, Image, NativeModules, Text, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -13,10 +13,13 @@ import { alert } from 'app/utils/Alert';
 import styles from './style';
 import LogoIcon from 'app/assets/images/logo.png';
 
-const emailRegEx =
-  // eslint-disable-next-line max-len
-  /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const { RNTwitterSignIn } = NativeModules;
+const { TwitterAuthProvider } = firebase.auth;
 
+const TwitterKeys = {
+  TWITTER_CONSUMER_KEY: 'D4l2twTmZr4031COwB8yJo9cE',
+  TWITTER_CONSUMER_SECRET: 'KUqeSgJ9WIv4n4Ah6eC3E04n97goCUV1MEUl2g04DTOSrYEFXU'
+};
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -27,50 +30,12 @@ class LoginScreen extends React.Component {
     };
   }
 
-  inputChanged = (type, value) => {
-    this.setState({
-      [type]: value
-    });
-  };
-
   goToSignUp = () => {
     this.props.navigation.navigate('signup');
   };
 
   goToForgotpswd = () => {
     this.props.navigation.navigate('forgotpassword');
-  };
-
-  login = async () => {
-    let { email, password } = this.state;
-
-    if (!emailRegEx.test(email)) {
-      alert('Email is not valid!');
-      return;
-    }
-
-    if (password.length < 6) {
-      alert('Password should be longer than 6 letters!');
-      return;
-    }
-
-    try {
-      this.context.showLoading();
-      let user = await AuthController.login({
-        email,
-        password
-      });
-      if (!user.user.emailVerified) {
-        await AuthController.sendEmailVerification();
-        alert('Verification email is sent. Please verify email first.');
-      } else {
-        this.props.navigation.navigate('main');
-      }
-      this.context.hideLoading();
-    } catch (error) {
-      this.context.hideLoading();
-      alert(error.message);
-    }
   };
 
   facebookLogin = async () => {
@@ -115,6 +80,36 @@ class LoginScreen extends React.Component {
     }
   };
 
+  twitterLogin = () => {
+    console.log('twitter login');
+    RNTwitterSignIn.init(
+      TwitterKeys.TWITTER_CONSUMER_KEY,
+      TwitterKeys.TWITTER_CONSUMER_SECRET
+    );
+
+    RNTwitterSignIn.logIn()
+      .then((loginData) => {
+        console.log(loginData);
+        const { authToken, authTokenSecret } = loginData;
+        if (authToken && authTokenSecret) {
+          this.setState({
+            isLoggedIn: true
+          });
+          return TwitterAuthProvider.credential(authToken, authTokenSecret);
+        }
+      })
+      .then((credential) => {
+        console.log('firebase auth credential', credential);
+        return firebase.auth().signInWithCredential(credential);
+      })
+      .then((firebaseUserCredential) => {
+        console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   render() {
     return (
       <ScrollView>
@@ -127,6 +122,12 @@ class LoginScreen extends React.Component {
                 textStyle={styles.login}
                 text="Facebook Log In"
                 onPress={this.facebookLogin}
+              />
+              <Button
+                containerStyle={styles.loginBtn}
+                textStyle={styles.login}
+                text="Twitter Log In"
+                onPress={this.twitterLogin}
               />
               <Button
                 containerStyle={styles.forgotpswdBtn}

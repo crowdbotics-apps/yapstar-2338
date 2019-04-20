@@ -55,6 +55,7 @@
 		3AEBA9E8226B73E0004F45DF /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEBA9E7226B73E0004F45DF /* libFBSDKCoreKit.a */; };
 		3AEBA9EA226B73E0004F45DF /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEBA9E9226B73E0004F45DF /* libFBSDKLoginKit.a */; };
 		3AEBA9EC226B73E0004F45DF /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEBA9EB226B73E0004F45DF /* libFBSDKShareKit.a */; };
+		3AEBAA2C226B8732004F45DF /* libRNTwitterSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEBAA2B226B8725004F45DF /* libRNTwitterSignIn.a */; };
 		68B70528A2734DEA89C8B214 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBC8C743C046423C960F2237 /* libRNFirebase.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8E7D4B171F8AFD9C00699FE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */; };
@@ -195,6 +196,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
+		};
+		3AEBAA2A226B8725004F45DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3AEBA9FC226B8725004F45DF /* RNTwitterSignIn.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D07E57251F07806700A7160F;
+			remoteInfo = RNTwitterSignIn;
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -409,6 +417,7 @@
 		3AEBA9E7226B73E0004F45DF /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKCoreKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEBA9E9226B73E0004F45DF /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKLoginKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEBA9EB226B73E0004F45DF /* libFBSDKShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKShareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AEBA9FC226B8725004F45DF /* RNTwitterSignIn.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNTwitterSignIn.xcodeproj; path = "../node_modules/react-native-twitter-signin/ios/RNTwitterSignIn.xcodeproj"; sourceTree = "<group>"; };
 		4031C5D3468A6410BB4016B9 /* Pods-YapStars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapStars.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YapStars/Pods-YapStars.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -433,6 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AEBAA2C226B8732004F45DF /* libRNTwitterSignIn.a in Frameworks */,
 				3AEBA9E8226B73E0004F45DF /* libFBSDKCoreKit.a in Frameworks */,
 				3AEBA9EA226B73E0004F45DF /* libFBSDKLoginKit.a in Frameworks */,
 				3AEBA9EC226B73E0004F45DF /* libFBSDKShareKit.a in Frameworks */,
@@ -636,6 +646,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3AEBA9FD226B8725004F45DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3AEBAA2B226B8725004F45DF /* libRNTwitterSignIn.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +684,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3AEBA9FC226B8725004F45DF /* RNTwitterSignIn.xcodeproj */,
 				3AEBA9B8226B73CE004F45DF /* RCTFBSDK.xcodeproj */,
 				3AABA1E62269D04D002F9BAB /* RNGestureHandler.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -791,6 +810,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */,
 				83B761F71FE42BDD00F21A7A /* Crashlytics */,
+				0C0AE8424F5B0CC46F85C9AB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -938,6 +958,10 @@
 					ProductGroup = 3AABA1E72269D04D002F9BAB /* Products */;
 					ProjectRef = 3AABA1E62269D04D002F9BAB /* RNGestureHandler.xcodeproj */;
 				},
+				{
+					ProductGroup = 3AEBA9FD226B8725004F45DF /* Products */;
+					ProjectRef = 3AEBA9FC226B8725004F45DF /* RNTwitterSignIn.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1067,6 +1091,13 @@
 			fileType = archive.ar;
 			path = libRCTFBSDK.a;
 			remoteRef = 3AEBA9C1226B73CE004F45DF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3AEBAA2B226B8725004F45DF /* libRNTwitterSignIn.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNTwitterSignIn.a;
+			remoteRef = 3AEBAA2A226B8725004F45DF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -1304,6 +1335,30 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		0C0AE8424F5B0CC46F85C9AB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-frameworks.sh",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1358,11 +1413,15 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

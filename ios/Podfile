@@ -31,4 +31,6 @@ target 'YapStars' do
     pod 'FBSDKCoreKit', '~> 4.41.0'
     pod 'FBSDKLoginKit', '~> 4.41.0'
     pod 'FBSDKShareKit', '~> 4.41.0'
+    pod 'TwitterKit', '~> 3.3.0'
+
 end
