@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.oblador.vectoricons.VectorIconsPackage;
-import io.invertase.firebase.RNFirebasePackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
@@ -61,8 +59,6 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(new MainReactPackage(),
-            new VectorIconsPackage(),
-            new RNFirebasePackage(),
             new FastImageViewPackage(), new RNGoogleSigninPackage(), new RNCWebViewPackage(),
           new TwitterSigninPackage(),
 

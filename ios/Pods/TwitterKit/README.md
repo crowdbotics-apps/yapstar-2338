@@ -22,8 +22,8 @@ To show a single Tweet, you first need to load that Tweet from the network and t
 
 <img src="https://dev.twitter.com/_images/search_timeline.png" width="250"/>
 
-#### Configuring Tweet View Colors & Themes
 
+#### Configuring Tweet View Colors & Themes
 To change the colors of a Tweet view you can either set properties directly on the `TWTRTweetView` instances or on the `UIAppearanceProxy` of the `TWTRTweetView`.
 
 ```swift
@@ -36,6 +36,8 @@ To change the colors of a Tweet view you can either set properties directly on t
 ```
 
 <img src="https://dev.twitter.com/_images/show_tweet_themed.png" width="250"/>
+
+
 
 Set visual properties using the `UIAppearanceProxy` for `TWTRTweetView`.
 
@@ -64,9 +66,10 @@ class UserTimelineViewController: TWTRTimelineViewController {
 
 <img src="https://dev.twitter.com/_images/user_timeline.png" width="250"/>
 
-### Compose Tweets
 
+### Compose Tweets
 To allow users to composer their own Tweets from within your app, simply create a `TWTRComposer` and call `show(from: UIViewController, completion:)` on the instance. This class automatically handles presenting a log in controller if there are no logged in sessions.
+
 
 ```swift
 
@@ -87,8 +90,10 @@ composer.show(from: self.navigationController!) { (result in
 
 <img src="https://dev.twitter.com/_images/compose_tweet.png" width="250"/>
 
-## Resources
 
-- [Documentation](https://dev.twitter.com/twitterkit/ios/overview)
-- [Forums](https://twittercommunity.com/c/publisher/twitter)
-- Follow us on Twitter: [@TwitterDev](https://twitter.com/TwitterDev)
+
+## Resources		
+
+ * [Documentation](https://dev.twitter.com/twitterkit/ios/overview)		
+ * [Forums](https://twittercommunity.com/c/publisher/twitter)		
+ * Follow us on Twitter: [@TwitterDev](https://twitter.com/TwitterDev)		
