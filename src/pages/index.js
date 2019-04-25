@@ -34,7 +34,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'login'
+    initialRouteName: 'signupphone'
   }
 );
 

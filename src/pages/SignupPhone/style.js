@@ -10,78 +10,58 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'center'
+    padding: 8
   },
-  logo: {
-    width: dm.width * 0.8,
-    justifyContent: 'flex-end'
+  bottomContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    height: 60,
+    width: '100%',
+    backgroundColor: '#450d42',
+    alignItems: 'flex-end',
+    justifyContent: 'center'
   },
-  btnImg: {
-    marginTop: 40,
-    width: dm.width * 0.15,
-    height: dm.width * 0.15
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-  desc: {
-    // fontWeight: '600',
-    // fontStyle: 'italic',
-    // fontFamily: 'SFProTextRegular',
-    fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    lineHeight: 20,
-    letterSpacing: -0.34,
-    textAlign: 'center',
-    color: '#ffffff50'
-  },
-
-  buttonContainer: {
-    marginBottom: 40,
-    flexDirection: 'row',
-    width: dm.width * 0.6,
-    justifyContent: 'space-between'
-  },
-  tosContainer: {
-    marginBottom: 40,
-    alignItems: 'center'
-  },
-  signupContainer: {
-    marginBottom: 20,
-    alignItems: 'center'
-  },
-  description: {
-    // fontFamily: 'SFProTextRegular',
-    fontSize: 14,
-    fontWeight: 'normal',
-    fontStyle: 'normal',
-    letterSpacing: -0.34,
-    textAlign: 'center',
-    color: '#ffffff'
-  },
-  tosDesc: {
-    // fontFamily: 'SFProTextRegular',
+  button: {
+    fontFamily: 'SFProText-Regular',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
     letterSpacing: -0.34,
     textAlign: 'center',
     color: '#fd9426',
-    marginTop: 4
+    marginTop: 4,
+    marginRight: 16
   },
-  signup: {
-    color: '#fd9426'
+  titleContainer: {
+    width: '70%',
+    alignItems: 'flex-start'
   },
-  checkbox: {
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    marginRight: 5,
-    padding: 0
+  title: {
+    marginTop: 40,
+    fontFamily: 'SFProText-Regular',
+    fontSize: 21,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    lineHeight: 29,
+    letterSpacing: -0.51,
+    color: '#ffffff'
   },
-  checkContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
+  phoneContainer: {
+    marginTop: 10,
+    borderBottomColor: '#FFFFFF',
+    borderBottomWidth: 1
+  },
+  phone: {
+    marginBottom: 10
+  },
+  phoneText: {
+    color: '#FFFFFF',
+    fontFamily: 'SFProText-Regular',
+    fontSize: 21,
+    fontWeight: '500',
+    fontStyle: 'normal',
+    letterSpacing: 2,
+    color: '#ffffff'
   }
 });
