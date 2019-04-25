@@ -17,6 +17,7 @@ import { AuthController } from 'app/services';
 import { AppContext, Button } from 'app/components';
 import { alert } from 'app/utils/Alert';
 import { GOOGLE_AUTH, TwitterKeys } from '../../constant';
+import Authentication from '../../services/Authentication';
 import styles from './style';
 
 const IMAGE_LOGO = require('app/assets/images/app_logo.png');
@@ -42,12 +43,15 @@ class LoginScreen extends React.Component {
 
   facebookLogin = async () => {
     try {
+      await this.context.showLoading();
+
       const result = await LoginManager.logInWithReadPermissions([
         'public_profile',
         'email'
       ]);
 
       if (result.isCancelled) {
+        // handle this however suites the flow of your app
         console.log('User cancelled request');
       }
 
@@ -62,21 +66,20 @@ class LoginScreen extends React.Component {
         alert('Something went wrong obtaining the users access token');
       }
 
-      const credential = firebase.auth.FacebookAuthProvider.credential(
+      const credential = await firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
 
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
-
-      return this.props.navigation.navigate('main');
+      return this.nextStep(credential);
     } catch (e) {
+      await this.context.hideLoading();
       console.error(e);
     }
   };
 
   twitterLogin = () => {
+    this.context.showLoading();
+
     RNTwitterSignIn.init(
       TwitterKeys.TWITTER_CONSUMER_KEY,
       TwitterKeys.TWITTER_CONSUMER_SECRET
@@ -93,17 +96,17 @@ class LoginScreen extends React.Component {
         }
       })
       .then((credential) => {
-        console.log('firebase auth credential', credential);
-        firebase.auth().signInWithCredential(credential);
-        return this.props.navigation.navigate('main');
+        return this.nextStep(credential);
       })
       .catch((error) => {
+        this.context.hideLoading();
         console.log(error);
       });
   };
 
   async googleLogin() {
     try {
+      await this.context.showLoading();
       await GoogleSignin.configure(GOOGLE_AUTH);
 
       const data = await GoogleSignin.signIn();
@@ -113,15 +116,35 @@ class LoginScreen extends React.Component {
         data.accessToken
       );
 
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
-
-      return this.props.navigation.navigate('main');
+      return this.nextStep(credential);
     } catch (e) {
+      this.context.hideLoading();
       console.error(e);
     }
   }
+
+  nextStep = async (credential) => {
+    const firebaseUserCredential = await firebase
+      .auth()
+      .signInWithCredential(credential);
+
+    const user = firebaseUserCredential.user._user;
+
+    console.log(user);
+    await this.setState({
+      uid: user.uid
+    });
+    const exist = await Authentication.checkUser(user.uid);
+    await this.context.hideLoading();
+    if (exist) {
+      return this.props.navigation.navigate('main', {
+        uid: this.state.uid
+      });
+    } else {
+      alert("You didn't registered. Please register first.");
+      return this.props.navigation.navigate('signup');
+    }
+  };
 
   render() {
     return (

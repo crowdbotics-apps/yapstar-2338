@@ -1,25 +1,19 @@
 import React from 'react';
 import {
   View,
-  Image,
-  NativeModules,
   Text,
   SafeAreaView,
   ImageBackground,
-  TouchableOpacity,
-  Linking
+  TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import firebase from 'react-native-firebase';
 import PhoneInput from 'react-native-phone-input';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AuthController } from 'app/services';
 import { AppContext, Navbar } from 'app/components';
 import { alert } from 'app/utils/Alert';
 import styles from './style';
 
-const IMAGE_LOGO = require('app/assets/images/app_logo.png');
 const IMAGE_BACKGROUND_GRADIENT = require('app/assets/images/gradient.png');
 
 class SignupPhoneScreen extends React.Component {
@@ -30,7 +24,13 @@ class SignupPhoneScreen extends React.Component {
       valid: false,
       type: null,
       value: null,
-      phoneNumber: ''
+      nickName: this.props.navigation.getParam('nickName'),
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('provider')
     };
   }
 
@@ -39,15 +39,27 @@ class SignupPhoneScreen extends React.Component {
   };
 
   rightHandler = async () => {
-    this.props.navigation.navigate('signupcategory', { phoneNumber: '' });
+    this.props.navigation.navigate('signupcategory', {
+      nickName: this.props.navigation.getParam('nickName'),
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.state.phoneNumber,
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('provider')
+    });
   };
 
   next = async () => {
+    await this.context.showLoading();
+
     await this.setState({
       valid: this.phone.isValidNumber(),
       type: this.phone.getNumberType(),
       value: this.phone.getValue()
     });
+
+    await this.context.hideLoading();
 
     if (!this.state.valid) {
       alert('Please enter valid Phone Number');
@@ -55,7 +67,13 @@ class SignupPhoneScreen extends React.Component {
     }
 
     this.props.navigation.navigate('signupcategory', {
-      phoneNumber: this.state.phoneNumber
+      nickName: this.props.navigation.getParam('nickName'),
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.state.phoneNumber,
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('provider')
     });
   };
 

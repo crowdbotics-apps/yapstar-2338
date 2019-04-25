@@ -9,10 +9,10 @@ import {
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AuthController } from 'app/services';
 import { AppContext, Navbar } from 'app/components';
 import { alert } from 'app/utils/Alert';
 import styles from './style';
+import Authentication from '../../services/Authentication';
 
 const IMAGE_BACKGROUND_GRADIENT = require('app/assets/images/gradient.png');
 
@@ -177,8 +177,19 @@ class SignupCategoryScreen extends React.Component {
   }
 
   finish = async () => {
+    await this.context.showLoading();
     if (this.state.items.length < 2) {
       alert('Please choose at least 2 interests');
+      await this.context.hideLoading();
+      return;
+    }
+
+    const done = await Authentication.signup(this.state);
+
+    await this.context.hideLoading();
+
+    if (done) {
+      this.props.navigation.navigate('main');
     }
   };
 

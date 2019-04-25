@@ -5,35 +5,40 @@ const store = firebase.firestore();
 
 const signup = async (payload) => {
   try {
-    let user = await auth.createUserWithEmailAndPassword(
-      payload.email,
-      payload.password
-    );
-    await user.user.sendEmailVerification({
-      ios: {
-        bundleId: 'com.crowdbotics.yapstars'
-      },
-      android: {
-        packageName: 'com.crowdbotics.yapstars'
-      }
-    });
-    await user.user.updateProfile({
-      displayName: payload.name
-    });
-    let ref = store.collection('users').doc(user.user.uid);
+    let ref = store.collection('users').doc(payload.uid);
     await store.runTransaction(async (transaction) => {
       const doc = await transaction.get(ref);
 
       if (!doc.exists) {
         transaction.set(ref, {
-          id: user.user.uid,
-          name: payload.name,
-          email: payload.email
+          id: payload.uid,
+          nickName: payload.nickName,
+          fullName: payload.fullName,
+          email: payload.email,
+          phoneNumber: payload.phoneNumber,
+          photoUrl: payload.photoUrl,
+          provider: payload.provider,
+          interests: payload.items
         });
       }
-      return user;
     });
-    return user;
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const checkUser = async (uid) => {
+  try {
+    let usersRef = await store.collection('users').doc(uid);
+    let userExist = false;
+
+    const docSnapshot = await usersRef.get();
+
+    if (docSnapshot.exists) {
+      userExist = true;
+    }
+    return userExist;
   } catch (error) {
     throw error;
   }
@@ -104,5 +109,6 @@ export default {
   logout,
   updateUser,
   sendEmailVerification,
-  forgotPassword
+  forgotPassword,
+  checkUser
 };

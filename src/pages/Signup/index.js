@@ -62,6 +62,8 @@ class SingupScreen extends React.Component {
     }
 
     try {
+      await this.context.showLoading();
+
       const result = await LoginManager.logInWithReadPermissions([
         'public_profile',
         'email'
@@ -89,6 +91,7 @@ class SingupScreen extends React.Component {
 
       return this.nextStep(credential);
     } catch (e) {
+      await this.context.hideLoading();
       console.error(e);
     }
   };
@@ -98,6 +101,8 @@ class SingupScreen extends React.Component {
       alert('To register, you have to agree our Terms of Conditions.');
       return false;
     }
+
+    this.context.showLoading();
 
     RNTwitterSignIn.init(
       TwitterKeys.TWITTER_CONSUMER_KEY,
@@ -118,6 +123,7 @@ class SingupScreen extends React.Component {
         return this.nextStep(credential);
       })
       .catch((error) => {
+        this.context.hideLoading();
         console.log(error);
       });
   };
@@ -129,6 +135,7 @@ class SingupScreen extends React.Component {
     }
 
     try {
+      await this.context.showLoading();
       await GoogleSignin.configure(GOOGLE_AUTH);
 
       const data = await GoogleSignin.signIn();
@@ -140,6 +147,7 @@ class SingupScreen extends React.Component {
 
       return this.nextStep(credential);
     } catch (e) {
+      this.context.hideLoading();
       console.error(e);
     }
   }
@@ -168,8 +176,7 @@ class SingupScreen extends React.Component {
       photoUrl: this.state.photoUrl,
       provider: this.state.provider
     });
-
-    return this.props.navigation.navigate('signupnickname');
+    await this.context.hideLoading();
   };
 
   render() {

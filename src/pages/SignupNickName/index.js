@@ -16,7 +16,6 @@ import styles from './style';
 import { TextInput } from 'react-native-gesture-handler';
 
 const IMAGE_BACKGROUND_GRADIENT = require('app/assets/images/gradient.png');
-const ICON_GL = require('app/assets/images/google.png');
 
 class SignupNickNameScreen extends React.Component {
   constructor(props) {
@@ -38,14 +37,14 @@ class SignupNickNameScreen extends React.Component {
   };
 
   rightHandler = async () => {
-    this.props.navigation.navigate('signupcategory', {
+    this.props.navigation.navigate('signupphone', {
       nickName: this.state.nickName,
       uid: this.props.navigation.getParam('uid'),
       fullName: this.props.navigation.getParam('fullName'),
       email: this.props.navigation.getParam('email'),
       phoneNumber: this.props.navigation.getParam('phoneNumber'),
       photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('providerId')
+      provider: this.props.navigation.getParam('provider')
     });
   };
 
@@ -55,14 +54,14 @@ class SignupNickNameScreen extends React.Component {
       return;
     }
 
-    this.props.navigation.navigate('signupcategory', {
+    this.props.navigation.navigate('signupphone', {
       nickName: this.state.nickName,
       uid: this.props.navigation.getParam('uid'),
       fullName: this.props.navigation.getParam('fullName'),
       email: this.props.navigation.getParam('email'),
       phoneNumber: this.props.navigation.getParam('phoneNumber'),
       photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('providerId')
+      provider: this.props.navigation.getParam('provider')
     });
   };
 
