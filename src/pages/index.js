@@ -14,6 +14,7 @@ import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import SignupPhoneScreen from './SignupPhone';
 import SignupNickNameScreen from './SignupNickName';
+import SignupCategoryScreen from './SignupCategory';
 import ProfileScreen from './Profile';
 import MainScreen from './Main';
 
@@ -34,11 +35,14 @@ const AuthNavigator = createStackNavigator(
     },
     signupnickname: {
       screen: SignupNickNameScreen
+    },
+    signupnickcategory: {
+      screen: SignupCategoryScreen
     }
   },
   {
     headerMode: 'none',
-    initialRouteName: 'signupnickname'
+    initialRouteName: 'signupnickcategory'
   }
 );
 
