@@ -26,7 +26,6 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   desc: {
-    opacity: 0.5,
     // fontFamily: "SFProText",
     fontSize: 14,
     fontWeight: 'normal',
@@ -34,7 +33,7 @@ export default StyleSheet.create({
     lineHeight: 20,
     letterSpacing: -0.34,
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#ffffff50'
   },
   buttonContainer: {
     marginBottom: 40,

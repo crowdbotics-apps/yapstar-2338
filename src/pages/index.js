@@ -34,7 +34,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'login'
+    initialRouteName: 'signup'
   }
 );
 
@@ -48,7 +48,7 @@ const MainTabNavigator = createBottomTabNavigator(
         // custom icon setting.
       },
       tabBarLabel: ({ focused, tintColor }) => {
-       // custom label setting.
+        // custom label setting.
       }
     }),
     tabBarOptions: {
@@ -62,7 +62,7 @@ const MainTabNavigator = createBottomTabNavigator(
 const MainNavigator = createDrawerNavigator(
   {
     home: MainTabNavigator,
-    profile: ProfileScreen,
+    profile: ProfileScreen
   },
   {
     drawerWidth: dm.width * 0.6,

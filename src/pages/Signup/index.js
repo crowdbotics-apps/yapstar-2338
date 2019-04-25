@@ -2,47 +2,49 @@ import React from 'react';
 import {
   View,
   Image,
-  TextInput,
+  NativeModules,
   Text,
-  Linking,
-  ScrollView
+  SafeAreaView,
+  ImageBackground,
+  TouchableOpacity,
+  Linking
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { CheckBox } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
-import { AppContext, Button } from 'app/components';
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
+import firebase from 'react-native-firebase';
+// import InstagramLogin from 'react-native-instagram-login';
+import { GoogleSignin } from 'react-native-google-signin';
 import { AuthController } from 'app/services';
-import { alert, success } from 'app/utils/Alert';
-
-import styles from './style';
-import LogoIcon from 'app/assets/images/logo.png';
+import { AppContext, Button } from 'app/components';
+import { alert } from 'app/utils/Alert';
 import { ToS_URL } from '../../constant';
+import styles from './style';
 
-const emailRegEx =
-  // eslint-disable-next-line max-len
-  /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const IMAGE_LOGO = require('app/assets/images/app_logo.png');
+const IMAGE_BACKGROUND = require('app/assets/images/background.png');
+const ICON_FB = require('app/assets/images/facebook.png');
+const ICON_TW = require('app/assets/images/twitter.png');
+const ICON_GL = require('app/assets/images/instagram.png');
 
-class SignupScreen extends React.Component {
+const { RNTwitterSignIn } = NativeModules;
+const { TwitterAuthProvider } = firebase.auth;
+
+const TwitterKeys = {
+  TWITTER_CONSUMER_KEY: 'D4l2twTmZr4031COwB8yJo9cE',
+  TWITTER_CONSUMER_SECRET: 'KUqeSgJ9WIv4n4Ah6eC3E04n97goCUV1MEUl2g04DTOSrYEFXU'
+};
+
+GoogleSignin.configure();
+class SingupScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      confirmpswd: '',
-      agreeTerms: false,
-      allowResendEmail: true,
-      step: 1
+      agreeTerms: false
     };
   }
-
-  inputChanged = (type, value) => {
-    this.setState({
-      [type]: value
-    });
-  };
 
   agreeTerms = () => {
     this.setState({
@@ -50,213 +52,223 @@ class SignupScreen extends React.Component {
     });
   };
 
-  validate = () => {
-    let { name, email, password, confirmpswd, agreeTerms } = this.state;
-    if (!name) {
-      alert("Name can't be empty!");
-      return false;
-    }
-    if (!email) {
-      alert("Email can't be empty!");
-      return false;
-    }
-    if (!emailRegEx.test(email)) {
-      alert('Email is not valid!');
-      return false;
-    }
-    if (!password || !confirmpswd) {
-      alert("Password can't be empty!");
-      return false;
-    }
-    if (password !== confirmpswd) {
-      alert("Password doesn't match!");
-      return false;
-    }
-    if (password.length < 6) {
-      alert('Password should be longer than 6 letters!');
-      return false;
-    }
-    if (!agreeTerms) {
-      alert('To register, you have to agree our Terms of Conditions.');
-      return false;
-    }
-    return true;
-  };
-
-  signup = async () => {
-    // fields validation
-    if (!this.validate()) {
-      return;
-    }
-    let { name, email, password } = this.state;
-    try {
-      this.context.showLoading();
-      let user = await AuthController.signup({
-        name,
-        email,
-        password
-      });
-      this.context.hideLoading();
-      await this.setState({
-        step: 2,
-        allowResendEmail: false
-      });
-      setTimeout(() => {
-        this.setState({ allowResendEmail: true });
-      }, 30000);
-    } catch (error) {
-      this.context.hideLoading();
-      alert(error.message);
-    }
-  };
-
   goToLogin = () => {
     this.props.navigation.goBack();
   };
 
-  resendVerification = async () => {
+  goToForgotpswd = () => {
+    this.props.navigation.navigate('forgotpassword');
+  };
+
+  facebookLogin = async () => {
+    if (!this.state.agreeTerms) {
+      alert('To register, you have to agree our Terms of Conditions.');
+      return false;
+    }
+
     try {
-      this.context.showLoading();
-      await AuthController.sendEmailVerification();
-      success(`Verification email was resent to ${this.state.email}`);
-      this.context.hideLoading();
-      await this.setState({ allowResendEmail: false });
-      setTimeout(() => {
-        this.setState({ allowResendEmail: true });
-      }, 30000);
-    } catch (error) {
-      this.context.hideLoading();
-      alert(error.message);
+      const result = await LoginManager.logInWithReadPermissions([
+        'public_profile',
+        'email'
+      ]);
+
+      if (result.isCancelled) {
+        // handle this however suites the flow of your app
+        throw new Error('User cancelled request');
+      }
+
+      console.log(
+        `Login success with permissions: ${result.grantedPermissions.toString()}`
+      );
+
+      const data = await AccessToken.getCurrentAccessToken();
+
+      if (!data) {
+        // handle this however suites the flow of your app
+        throw new Error(
+          'Something went wrong obtaining the users access token'
+        );
+      }
+
+      const credential = firebase.auth.FacebookAuthProvider.credential(
+        data.accessToken
+      );
+
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential);
+
+      console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
+
+      this.props.navigation.navigate('main');
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  termsPressed = () => {
-    Linking.canOpenURL(ToS_URL)
-      .then((supported) => {
-        if (!supported) {
-          console.log("Can't handle url: " + ToS_URL);
-        } else {
-          return Linking.openURL(ToS_URL);
+  twitterLogin = () => {
+    if (!this.state.agreeTerms) {
+      alert('To register, you have to agree our Terms of Conditions.');
+      return false;
+    }
+
+    RNTwitterSignIn.init(
+      TwitterKeys.TWITTER_CONSUMER_KEY,
+      TwitterKeys.TWITTER_CONSUMER_SECRET
+    );
+
+    RNTwitterSignIn.logIn()
+      .then((loginData) => {
+        const { authToken, authTokenSecret } = loginData;
+        if (authToken && authTokenSecret) {
+          this.setState({
+            isLoggedIn: true
+          });
+          return TwitterAuthProvider.credential(authToken, authTokenSecret);
         }
       })
-      .catch((err) => console.error('An error occurred', err));
+      .then((credential) => {
+        console.log('firebase auth credential', credential);
+        firebase.auth().signInWithCredential(credential);
+        return this.props.navigation.navigate('main');
+      })
+      // .then((firebaseUserCredential) => {
+      //   console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      //   // this.props.navigation.navigate('main');
+      // })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  renderSignup = () => {
-    return (
-      <ScrollView>
-        <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-          <View style={styles.content}>
-            <Image source={LogoIcon} style={styles.logo} resizeMode="contain" />
-            <View style={styles.content}>
-              <TextInput
-                style={styles.input}
-                placeholder="Name *"
-                value={this.state.name}
-                autoCapitalize="none"
-                onChangeText={(value) => this.inputChanged('name', value)}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Email *"
-                value={this.state.email}
-                autoCapitalize="none"
-                onChangeText={(value) => this.inputChanged('email', value)}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Password *"
-                value={this.state.password}
-                autoCapitalize="none"
-                onChangeText={(value) => this.inputChanged('password', value)}
-                secureTextEntry={true}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Confirm Password *"
-                value={this.state.confirmpswd}
-                autoCapitalize="none"
-                onChangeText={(value) =>
-                  this.inputChanged('confirmpswd', value)
-                }
-                secureTextEntry={true}
-              />
-              <View style={styles.termsContainer}>
-                <CheckBox
-                  containerStyle={styles.checkbox}
-                  checked={this.state.agreeTerms}
-                  onIconPress={this.agreeTerms}
-                />
-                <Text style={styles.terms}>{'Agree to '}</Text>
-                <Button
-                  textStyle={styles.termsBtnText}
-                  text="Terms and Conditions"
-                  onPress={this.termsPressed}
-                />
-              </View>
-              <Button
-                // disabled={!this.state.agreeTerms}
-                containerStyle={styles.signupBtn}
-                textStyle={styles.signup}
-                text="Register Me"
-                onPress={this.signup}
-              />
-              <View style={styles.loginContainer}>
-                <Text style={styles.description}>
-                  Already have an account?{' '}
-                </Text>
-                <Button
-                  textStyle={styles.login}
-                  text="Log In"
-                  onPress={this.goToLogin}
-                />
-              </View>
-            </View>
-          </View>
-        </KeyboardAwareScrollView>
-      </ScrollView>
-    );
-  };
+  async googleLogin() {
+    if (!this.state.agreeTerms) {
+      alert('To register, you have to agree our Terms of Conditions.');
+      return false;
+    }
 
-  renderVerifcation = () => {
-    return (
-      <View style={styles.container}>
-        <Image source={LogoIcon} style={styles.logo} resizeMode="contain" />
-        <Text style={styles.title}> We sent verification email.</Text>
-        <Button
-          disabled={!this.state.allowResendEmail}
-          containerStyle={styles.resendBtn}
-          textStyle={
-            this.state.allowResendEmail
-              ? styles.resendActive
-              : styles.resendInactive
-          }
-          text="Resend verification email"
-          onPress={this.resendVerification}
-        />
-        <Button
-          containerStyle={styles.signupBtn}
-          textStyle={styles.signup}
-          text="Log In"
-          onPress={this.goToLogin}
-        />
-      </View>
-    );
-  };
+    try {
+      await GoogleSignin.configure({
+        webClient:
+          '509625931637-vbb90qgq43pvtdn1jdl3324e4ka4fegd.apps.googleusercontent.com',
+        iosClientId:
+          '509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673.apps.googleusercontent.com'
+      });
 
-  render() {
-    if (this.state.step === 1) {
-      return this.renderSignup();
-    } else {
-      return this.renderVerifcation();
+      const data = await GoogleSignin.signIn();
+
+      const credential = firebase.auth.GoogleAuthProvider.credential(
+        data.idToken,
+        data.accessToken
+      );
+
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential);
+
+      // console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      return this.props.navigation.navigate('main');
+    } catch (e) {
+      console.error(e);
     }
   }
+
+  render() {
+    return (
+      <ImageBackground source={IMAGE_BACKGROUND} style={styles.background}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+          <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
+              <View style={styles.content}>
+                <Image
+                  source={IMAGE_LOGO}
+                  style={styles.logo}
+                  resizeMode="contain"
+                />
+              </View>
+              <View style={styles.content}>
+                <Text style={styles.desc}>
+                  Sign Up with your social media acoount
+                </Text>
+                <View style={styles.buttonContainer}>
+                  <TouchableOpacity
+                    onPress={() => this.facebookLogin()}
+                    style={styles.button}
+                  >
+                    <Image
+                      source={ICON_FB}
+                      style={styles.btnImg}
+                      resizeMode="contain"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.twitterLogin()}
+                    style={styles.button}
+                  >
+                    <Image
+                      source={ICON_TW}
+                      style={styles.btnImg}
+                      resizeMode="contain"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.googleLogin()}
+                    style={styles.button}
+                  >
+                    <Image
+                      source={ICON_GL}
+                      style={styles.btnImg}
+                      resizeMode="contain"
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.tosContainer}>
+                  <View style={styles.checkContainer}>
+                    <CheckBox
+                      containerStyle={styles.checkbox}
+                      checked={this.state.agreeTerms}
+                      onIconPress={this.agreeTerms}
+                      size={20}
+                    />
+                    <Text style={styles.desc}>
+                      By signing up, you agree to our
+                    </Text>
+                  </View>
+
+                  <TouchableOpacity onPress={() => Linking.openURL(ToS_URL)}>
+                    <Text style={styles.tosDesc}>ToS & Privacy policy</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.signupContainer}>
+                  <TouchableOpacity onPress={() => this.goToLogin()}>
+                    <Text style={styles.description}>
+                      Already have an account?{' '}
+                      <Text style={styles.signup}>Log In</Text>
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              {/* <InstagramLogin
+                ref={(ref) => (this.instagramLogin = ref)}
+                clientId="5d40831591bc467d835d3bfa61884cf4"
+                redirectUrl="http://bolthill.com"
+                scopes={['public_content', 'follower_list']}
+                onLoginSuccess={(token) => this.setState({ token })}
+                onLoginFailure={(data) => console.log(data)}
+              /> */}
+            </View>
+          </SafeAreaView>
+        </KeyboardAwareScrollView>
+      </ImageBackground>
+    );
+  }
 }
+SingupScreen.contextType = AppContext;
 
-SignupScreen.contextType = AppContext;
-
-SignupScreen.propTypes = {
+SingupScreen.propTypes = {
   navigation: PropTypes.object
 };
 
-export default SignupScreen;
+export default SingupScreen;

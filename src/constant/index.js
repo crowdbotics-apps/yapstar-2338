@@ -1,1 +1,1 @@
-export const ToS_URL = 'https://google.com';
+export const ToS_URL = 'https://yapstars.com';

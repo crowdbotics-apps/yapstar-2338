@@ -3,91 +3,83 @@ import Colors from '../../theme/Colors';
 
 const dm = Dimensions.get('screen');
 export default StyleSheet.create({
+  background: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'stretch'
+  },
   container: {
     flex: 1,
     alignItems: 'center'
   },
   logo: {
-    marginTop: 50,
-    width: dm.width * 0.6,
-    height: dm.width * 0.6
+    width: dm.width * 0.8,
+    justifyContent: 'flex-end'
+  },
+  btnImg: {
+    marginTop: 40,
+    width: dm.width * 0.15,
+    height: dm.width * 0.15
   },
   content: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
-  input: {
-    width: dm.width * 0.8,
-    height: 50,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    fontSize: 16,
-    marginBottom: 20
+  desc: {
+    // fontFamily: "SFProText",
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 20,
+    letterSpacing: -0.34,
+    textAlign: 'center',
+    color: '#ffffff50'
   },
-  termsContainer: {
+
+  buttonContainer: {
+    marginBottom: 40,
     flexDirection: 'row',
+    width: dm.width * 0.6,
+    justifyContent: 'space-between'
+  },
+  tosContainer: {
+    marginBottom: 40,
     alignItems: 'center'
   },
+  signupContainer: {
+    marginBottom: 20,
+    alignItems: 'center'
+  },
+  description: {
+    // fontFamily: "SFProText",
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: -0.34,
+    textAlign: 'center',
+    color: '#ffffff'
+  },
+  tosDesc: {
+    // fontFamily: "SFProText",
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: -0.34,
+    textAlign: 'center',
+    color: '#fd9426',
+    marginTop: 4
+  },
+  signup: {
+    color: '#fd9426'
+  },
   checkbox: {
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     borderWidth: 0,
     marginRight: 5,
     padding: 0
   },
-  terms: {
-    fontSize: 16,
-    fontWeight: 'normal'
-  },
-  termsBtnText: {
-    fontSize: 16,
-    fontWeight: '600',
-    textDecorationLine: 'underline'
-  },
-  signupBtn: {
-    marginTop: 20,
-    width: 150,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: Colors.ButtonColor
-  },
-  signup: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#fff'
-  },
-  loginContainer: {
+  checkContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20
-  },
-  description: {
-    fontSize: 16
-  },
-  login: {
-    fontSize: 18,
-    fontWeight: '600'
-  },
-  title: {
-    marginTop: 100,
-    fontSize: 18,
-    fontWeight: '600'
-  },
-  resendBtn: {
-    marginTop: 20,
-    marginBottom: 20
-  },
-  resendActive: {
-    fontSize: 16,
-    textDecorationLine: 'underline'
-  },
-  resendInactive: {
-    fontSize: 16,
-    textDecorationLine: 'underline',
-    color: '#cccccc'
+    alignItems: 'center'
   }
 });

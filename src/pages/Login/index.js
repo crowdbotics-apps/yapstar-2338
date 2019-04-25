@@ -201,7 +201,7 @@ class LoginScreen extends React.Component {
                   <TouchableOpacity onPress={() => this.goToSignUp()}>
                     <Text style={styles.description}>
                       Do not have an account?{' '}
-                      <Text style={styles.signup}>Sign up</Text>
+                      <Text style={styles.signup}>Sign Up</Text>
                     </Text>
                   </TouchableOpacity>
                 </View>
