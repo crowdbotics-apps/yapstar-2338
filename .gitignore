@@ -54,3 +54,11 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# blueprints
+#
+blueprints/
+
+# ignite
+#
+ignite/

@@ -5,6 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
+import InstagramLogin from 'react-native-instagram-login';
 
 import { AuthController } from 'app/services';
 import { AppContext, Button } from 'app/components';
@@ -74,7 +75,9 @@ class LoginScreen extends React.Component {
         .auth()
         .signInWithCredential(credential);
 
-      console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
+
+      this.props.navigation.navigate('main');
     } catch (e) {
       console.error(e);
     }
@@ -102,9 +105,10 @@ class LoginScreen extends React.Component {
         console.log('firebase auth credential', credential);
         return firebase.auth().signInWithCredential(credential);
       })
-      .then((firebaseUserCredential) => {
-        console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
-      })
+      // .then((firebaseUserCredential) => {
+      //   console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      //   // this.props.navigation.navigate('main');
+      // })
       .catch((error) => {
         console.log(error);
       });
@@ -120,14 +124,20 @@ class LoginScreen extends React.Component {
               <Button
                 containerStyle={styles.loginBtn}
                 textStyle={styles.login}
-                text="Facebook Log In"
+                text="Facebook"
                 onPress={this.facebookLogin}
               />
               <Button
                 containerStyle={styles.loginBtn}
                 textStyle={styles.login}
-                text="Twitter Log In"
+                text="Twitter"
                 onPress={this.twitterLogin}
+              />
+              <Button
+                containerStyle={styles.loginBtn}
+                textStyle={styles.login}
+                text="Instagram"
+                onPress={() => this.instagramLogin.show()}
               />
               <Button
                 containerStyle={styles.forgotpswdBtn}
@@ -145,6 +155,14 @@ class LoginScreen extends React.Component {
                 />
               </View>
             </View>
+            <InstagramLogin
+              ref={(ref) => (this.instagramLogin = ref)}
+              clientId="5d40831591bc467d835d3bfa61884cf4"
+              redirectUrl="http://bolthill.com"
+              scopes={['public_content', 'follower_list']}
+              onLoginSuccess={(token) => this.setState({ token })}
+              onLoginFailure={(data) => console.log(data)}
+            />
           </View>
         </KeyboardAwareScrollView>
       </ScrollView>

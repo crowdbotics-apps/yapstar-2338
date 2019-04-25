@@ -44,6 +44,7 @@
     "react-native-fbsdk": "0.8.0",
     "react-native-firebase": "^5.2.0",
     "react-native-gesture-handler": "^1.1.0",
+    "react-native-instagram-login": "^1.1.1",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-simple-radio-button": "^2.7.3",
     "react-native-twitter-signin": "^1.1.1",

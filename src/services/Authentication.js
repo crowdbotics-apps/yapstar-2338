@@ -11,10 +11,10 @@ const signup = async (payload) => {
     );
     await user.user.sendEmailVerification({
       ios: {
-        bundleId: 'com.chipstacks.chipstacks'
+        bundleId: 'com.crowdbotics.yapstars'
       },
       android: {
-        packageName: 'com.chipstacks.chipstacks'
+        packageName: 'com.crowdbotics.yapstars'
       }
     });
     await user.user.updateProfile({
