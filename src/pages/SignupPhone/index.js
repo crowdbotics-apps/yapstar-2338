@@ -27,7 +27,10 @@ class SignupPhoneScreen extends React.Component {
     super(props);
 
     this.state = {
-      agreeTerms: false
+      valid: false,
+      type: null,
+      value: null,
+      phoneNumber: ''
     };
   }
 
@@ -36,16 +39,25 @@ class SignupPhoneScreen extends React.Component {
   };
 
   rightHandler = async () => {
-    this.props.navigation.navigate('signupcategory');
+    this.props.navigation.navigate('signupcategory', { phoneNumber: '' });
   };
 
-  updateInfo() {
-    this.setState({
+  next = async () => {
+    await this.setState({
       valid: this.phone.isValidNumber(),
       type: this.phone.getNumberType(),
       value: this.phone.getValue()
     });
-  }
+
+    if (!this.state.valid) {
+      alert('Please enter valid Phone Number');
+      return;
+    }
+
+    this.props.navigation.navigate('signupcategory', {
+      phoneNumber: this.state.phoneNumber
+    });
+  };
 
   render() {
     return (
@@ -105,6 +117,9 @@ class SignupPhoneScreen extends React.Component {
                   }}
                   style={styles.phone}
                   textStyle={styles.phoneText}
+                  onChangePhoneNumber={(value) =>
+                    this.setState({ phoneNumber: value })
+                  }
                 />
               </View>
             </View>

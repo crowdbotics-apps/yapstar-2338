@@ -36,13 +36,13 @@ const AuthNavigator = createStackNavigator(
     signupnickname: {
       screen: SignupNickNameScreen
     },
-    signupnickcategory: {
+    signupcategory: {
       screen: SignupCategoryScreen
     }
   },
   {
     headerMode: 'none',
-    initialRouteName: 'signupnickcategory'
+    initialRouteName: 'signup'
   }
 );
 

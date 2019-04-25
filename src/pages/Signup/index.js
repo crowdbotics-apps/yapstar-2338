@@ -35,7 +35,13 @@ class SingupScreen extends React.Component {
     super(props);
 
     this.state = {
-      agreeTerms: false
+      agreeTerms: false,
+      fullName: '',
+      email: '',
+      phoneNumber: '',
+      photoUrl: '',
+      uid: '',
+      provider: ''
     };
   }
 
@@ -47,10 +53,6 @@ class SingupScreen extends React.Component {
 
   goToLogin = () => {
     this.props.navigation.goBack();
-  };
-
-  goToForgotpswd = () => {
-    this.props.navigation.navigate('forgotpassword');
   };
 
   facebookLogin = async () => {
@@ -81,17 +83,11 @@ class SingupScreen extends React.Component {
         alert('Something went wrong obtaining the users access token');
       }
 
-      const credential = firebase.auth.FacebookAuthProvider.credential(
+      const credential = await firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
 
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
-
-      console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
-
-      this.props.navigation.navigate('main');
+      return this.nextStep(credential);
     } catch (e) {
       console.error(e);
     }
@@ -119,14 +115,8 @@ class SingupScreen extends React.Component {
         }
       })
       .then((credential) => {
-        console.log('firebase auth credential', credential);
-        firebase.auth().signInWithCredential(credential);
-        return this.props.navigation.navigate('main');
+        return this.nextStep(credential);
       })
-      // .then((firebaseUserCredential) => {
-      //   console.log(JSON.stringify(firebaseUserCredential.user.toJSON()));
-      //   // this.props.navigation.navigate('main');
-      // })
       .catch((error) => {
         console.log(error);
       });
@@ -148,16 +138,39 @@ class SingupScreen extends React.Component {
         data.accessToken
       );
 
-      const firebaseUserCredential = await firebase
-        .auth()
-        .signInWithCredential(credential);
-
-      // console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
-      return this.props.navigation.navigate('main');
+      return this.nextStep(credential);
     } catch (e) {
       console.error(e);
     }
   }
+
+  nextStep = async (credential) => {
+    const firebaseUserCredential = await firebase
+      .auth()
+      .signInWithCredential(credential);
+
+    const user = firebaseUserCredential.user._user;
+    console.log(user);
+    await this.setState({
+      uid: user.uid,
+      fullName: user.displayName || '',
+      email: user.email || '',
+      phoneNumber: user.phoneNumber || '',
+      photoUrl: user.photoURL || '',
+      provider: user.providerId || ''
+    });
+
+    this.props.navigation.navigate('signupnickname', {
+      uid: this.state.uid,
+      fullName: this.state.fullName,
+      email: this.state.email,
+      phoneNumber: this.state.phoneNumber,
+      photoUrl: this.state.photoUrl,
+      provider: this.state.provider
+    });
+
+    return this.props.navigation.navigate('signupnickname');
+  };
 
   render() {
     return (

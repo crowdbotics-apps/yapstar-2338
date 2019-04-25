@@ -2,19 +2,14 @@ import React from 'react';
 import {
   View,
   Image,
-  NativeModules,
   Text,
   SafeAreaView,
   ImageBackground,
-  TouchableOpacity,
-  Linking
+  TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import firebase from 'react-native-firebase';
-import PhoneInput from 'react-native-phone-input';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AuthController } from 'app/services';
 import { AppContext, Navbar } from 'app/components';
 import { alert } from 'app/utils/Alert';
 import styles from './style';
@@ -28,7 +23,13 @@ class SignupNickNameScreen extends React.Component {
     super(props);
 
     this.state = {
-      agreeTerms: false
+      nickName: '',
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('provider')
     };
   }
 
@@ -37,16 +38,33 @@ class SignupNickNameScreen extends React.Component {
   };
 
   rightHandler = async () => {
-    this.props.navigation.navigate('signupcategory');
+    this.props.navigation.navigate('signupcategory', {
+      nickName: this.state.nickName,
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('providerId')
+    });
   };
 
-  updateInfo() {
-    this.setState({
-      valid: this.phone.isValidNumber(),
-      type: this.phone.getNumberType(),
-      value: this.phone.getValue()
+  next = async () => {
+    if (this.state.nickName === '') {
+      alert('Please enter Nick Name');
+      return;
+    }
+
+    this.props.navigation.navigate('signupcategory', {
+      nickName: this.state.nickName,
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('providerId')
     });
-  }
+  };
 
   render() {
     return (
@@ -66,12 +84,17 @@ class SignupNickNameScreen extends React.Component {
               <View style={{ flexDirection: 'row' }}>
                 <View style={styles.avatarContainer}>
                   <View style={styles.avatarCircle}>
-                    <Image source={ICON_GL} style={styles.avatar} />
+                    <Image
+                      source={{ uri: this.state.photoUrl }}
+                      style={styles.avatar}
+                    />
                   </View>
                 </View>
                 <View style={[styles.titleContainer]}>
                   <Text style={styles.title}>
-                    {'Congrats! Priya Ranjan, welcome to your Stardom'}
+                    {`Congrats! ${
+                      this.state.fullName
+                    }, welcome to your Stardom`}
                   </Text>
                   <Text
                     style={[
@@ -132,6 +155,7 @@ class SignupNickNameScreen extends React.Component {
     );
   }
 }
+
 SignupNickNameScreen.contextType = AppContext;
 
 SignupNickNameScreen.propTypes = {

@@ -78,6 +78,7 @@ export default StyleSheet.create({
   avatar: {
     width: dm.width * 0.15 - 8,
     height: dm.width * 0.15 - 8,
+    borderRadius: (dm.width * 0.15 - 8) / 2,
     marginLeft: 3,
     marginTop: 3
   },

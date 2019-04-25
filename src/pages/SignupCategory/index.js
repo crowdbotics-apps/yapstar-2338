@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import firebase from 'react-native-firebase';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthController } from 'app/services';
 import { AppContext, Navbar } from 'app/components';
@@ -127,7 +126,14 @@ class SignupCategoryScreen extends React.Component {
         }
       ],
       items: [],
-      showMore: false
+      showMore: false,
+      nickName: this.props.navigation.getParam('nickName'),
+      uid: this.props.navigation.getParam('uid'),
+      fullName: this.props.navigation.getParam('fullName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoUrl: this.props.navigation.getParam('photoUrl'),
+      provider: this.props.navigation.getParam('providerId')
     };
   }
 
@@ -141,7 +147,7 @@ class SignupCategoryScreen extends React.Component {
 
   updateItem(data) {
     console.log(data);
-    let { categories, others } = this.state;
+    let { categories, others, items } = this.state;
 
     categories.map((category, index) => {
       const selected = category.selected;
@@ -157,8 +163,24 @@ class SignupCategoryScreen extends React.Component {
       }
     });
 
-    this.setState({ categories, others });
+    if (items.includes(data.value)) {
+      for (var i = 0; i < items.length; i++) {
+        if (items[i] === data.value) {
+          items.splice(i, 1);
+        }
+      }
+    } else {
+      items.push(data.value);
+    }
+    console.log(items);
+    this.setState({ categories, others, items });
   }
+
+  finish = async () => {
+    if (this.state.items.length < 2) {
+      alert('Please choose at least 2 interests');
+    }
+  };
 
   render() {
     const { categories, others, items, showMore } = this.state;
@@ -268,7 +290,7 @@ class SignupCategoryScreen extends React.Component {
           </SafeAreaView>
         </KeyboardAwareScrollView>
         <View style={styles.bottomContainer}>
-          <TouchableOpacity onPress={this.next}>
+          <TouchableOpacity onPress={this.finish}>
             <Text style={styles.button}>
               {'Finish  '}
               <Ionicons

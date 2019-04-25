@@ -40,10 +40,6 @@ class LoginScreen extends React.Component {
     this.props.navigation.navigate('signup');
   };
 
-  goToForgotpswd = () => {
-    this.props.navigation.navigate('forgotpassword');
-  };
-
   facebookLogin = async () => {
     try {
       const result = await LoginManager.logInWithReadPermissions([
