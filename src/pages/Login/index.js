@@ -23,7 +23,7 @@ const IMAGE_LOGO = require('app/assets/images/app_logo.png');
 const IMAGE_BACKGROUND = require('app/assets/images/background.png');
 const ICON_FB = require('app/assets/images/facebook.png');
 const ICON_TW = require('app/assets/images/twitter.png');
-const ICON_GL = require('app/assets/images/instagram.png');
+const ICON_GL = require('app/assets/images/google.png');
 
 const { RNTwitterSignIn } = NativeModules;
 const { TwitterAuthProvider } = firebase.auth;

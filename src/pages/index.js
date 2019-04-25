@@ -13,6 +13,7 @@ import LoadingScreen from './Loading';
 import LoginScreen from './Login';
 import SignupScreen from './Signup';
 import SignupPhoneScreen from './SignupPhone';
+import SignupNickNameScreen from './SignupNickName';
 import ProfileScreen from './Profile';
 import MainScreen from './Main';
 
@@ -30,11 +31,14 @@ const AuthNavigator = createStackNavigator(
     },
     signupphone: {
       screen: SignupPhoneScreen
+    },
+    signupnickname: {
+      screen: SignupNickNameScreen
     }
   },
   {
     headerMode: 'none',
-    initialRouteName: 'signupphone'
+    initialRouteName: 'signupnickname'
   }
 );
 
