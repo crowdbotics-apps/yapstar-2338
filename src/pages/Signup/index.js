@@ -14,12 +14,11 @@ import { CheckBox } from 'react-native-elements';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
-// import InstagramLogin from 'react-native-instagram-login';
 import { GoogleSignin } from 'react-native-google-signin';
 import { AuthController } from 'app/services';
 import { AppContext, Button } from 'app/components';
 import { alert } from 'app/utils/Alert';
-import { ToS_URL } from '../../constant';
+import { ToS_URL, GOOGLE_AUTH, TwitterKeys } from '../../constant';
 import styles from './style';
 
 const IMAGE_LOGO = require('app/assets/images/app_logo.png');
@@ -31,12 +30,6 @@ const ICON_GL = require('app/assets/images/instagram.png');
 const { RNTwitterSignIn } = NativeModules;
 const { TwitterAuthProvider } = firebase.auth;
 
-const TwitterKeys = {
-  TWITTER_CONSUMER_KEY: 'D4l2twTmZr4031COwB8yJo9cE',
-  TWITTER_CONSUMER_SECRET: 'KUqeSgJ9WIv4n4Ah6eC3E04n97goCUV1MEUl2g04DTOSrYEFXU'
-};
-
-GoogleSignin.configure();
 class SingupScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +67,7 @@ class SingupScreen extends React.Component {
 
       if (result.isCancelled) {
         // handle this however suites the flow of your app
-        throw new Error('User cancelled request');
+        console.log('User cancelled request');
       }
 
       console.log(
@@ -85,9 +78,7 @@ class SingupScreen extends React.Component {
 
       if (!data) {
         // handle this however suites the flow of your app
-        throw new Error(
-          'Something went wrong obtaining the users access token'
-        );
+        alert('Something went wrong obtaining the users access token');
       }
 
       const credential = firebase.auth.FacebookAuthProvider.credential(
@@ -148,12 +139,7 @@ class SingupScreen extends React.Component {
     }
 
     try {
-      await GoogleSignin.configure({
-        webClient:
-          '509625931637-vbb90qgq43pvtdn1jdl3324e4ka4fegd.apps.googleusercontent.com',
-        iosClientId:
-          '509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673.apps.googleusercontent.com'
-      });
+      await GoogleSignin.configure(GOOGLE_AUTH);
 
       const data = await GoogleSignin.signIn();
 
@@ -250,14 +236,6 @@ class SingupScreen extends React.Component {
                   </TouchableOpacity>
                 </View>
               </View>
-              {/* <InstagramLogin
-                ref={(ref) => (this.instagramLogin = ref)}
-                clientId="5d40831591bc467d835d3bfa61884cf4"
-                redirectUrl="http://bolthill.com"
-                scopes={['public_content', 'follower_list']}
-                onLoginSuccess={(token) => this.setState({ token })}
-                onLoginFailure={(data) => console.log(data)}
-              /> */}
             </View>
           </SafeAreaView>
         </KeyboardAwareScrollView>

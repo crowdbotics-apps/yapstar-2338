@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.goldenowl.twittersignin.TwitterSigninPackage;
@@ -57,7 +60,10 @@ public class MainApplication extends Application implements ReactApplication {
     @SuppressLint("MissingPermission")
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.asList(new MainReactPackage(), new RNGoogleSigninPackage(), new RNCWebViewPackage(),
+      return Arrays.asList(new MainReactPackage(),
+            new VectorIconsPackage(),
+            new RNFirebasePackage(),
+            new FastImageViewPackage(), new RNGoogleSigninPackage(), new RNCWebViewPackage(),
           new TwitterSigninPackage(),
 
           new FBSDKPackage(mCallbackManager),

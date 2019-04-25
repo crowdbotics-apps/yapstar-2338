@@ -26,7 +26,9 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   desc: {
-    fontFamily: 'SFProText-Regular',
+    // fontWeight: '600',
+    // fontStyle: 'italic',
+    // fontFamily: 'SFProTextRegular',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -35,18 +37,23 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: '#ffffff50'
   },
+
   buttonContainer: {
     marginBottom: 40,
     flexDirection: 'row',
     width: dm.width * 0.6,
     justifyContent: 'space-between'
   },
+  tosContainer: {
+    marginBottom: 40,
+    alignItems: 'center'
+  },
   signupContainer: {
     marginBottom: 20,
     alignItems: 'center'
   },
   description: {
-    fontFamily: 'SFProText-Regular',
+    // fontFamily: 'SFProTextRegular',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -54,7 +61,27 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: '#ffffff'
   },
+  tosDesc: {
+    // fontFamily: 'SFProTextRegular',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: -0.34,
+    textAlign: 'center',
+    color: '#fd9426',
+    marginTop: 4
+  },
   signup: {
     color: '#fd9426'
+  },
+  checkbox: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    marginRight: 5,
+    padding: 0
+  },
+  checkContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });

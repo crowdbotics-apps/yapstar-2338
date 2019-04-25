@@ -11,8 +11,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import LoadingScreen from './Loading';
 import LoginScreen from './Login';
-import ForgotPasswordScreen from './PasswordReset';
 import SignupScreen from './Signup';
+import SignupPhoneScreen from './SignupPhone';
 import ProfileScreen from './Profile';
 import MainScreen from './Main';
 
@@ -28,13 +28,13 @@ const AuthNavigator = createStackNavigator(
     signup: {
       screen: SignupScreen
     },
-    forgotpassword: {
-      screen: ForgotPasswordScreen
+    signupphone: {
+      screen: SignupPhoneScreen
     }
   },
   {
     headerMode: 'none',
-    initialRouteName: 'signup'
+    initialRouteName: 'login'
   }
 );
 

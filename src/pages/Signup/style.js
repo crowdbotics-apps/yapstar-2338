@@ -26,7 +26,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   desc: {
-    // fontFamily: "SFProText",
+    fontFamily: 'SFProText-Regular',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -51,7 +51,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   description: {
-    // fontFamily: "SFProText",
+    fontFamily: 'SFProText-Regular',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',
@@ -60,7 +60,7 @@ export default StyleSheet.create({
     color: '#ffffff'
   },
   tosDesc: {
-    // fontFamily: "SFProText",
+    fontFamily: 'SFProText-Regular',
     fontSize: 14,
     fontWeight: 'normal',
     fontStyle: 'normal',

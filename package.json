@@ -54,5 +54,10 @@
   "prettier": {
     "singleQuote": true,
     "arrowParens": "always"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
   }
 }
