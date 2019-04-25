@@ -35,6 +35,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* YapStarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* YapStarsTests.m */; };
+		3A765792227197BB000821CD /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A765791227197BB000821CD /* libRNGoogleSignin.a */; };
 		3AABA2152269D05D002F9BAB /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AABA2122269D04D002F9BAB /* libRNGestureHandler.a */; };
 		3AABA2262269D0C3002F9BAB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AABA2172269D0C3002F9BAB /* Octicons.ttf */; };
 		3AABA2272269D0C3002F9BAB /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AABA2182269D0C3002F9BAB /* Feather.ttf */; };
@@ -147,6 +148,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "YapStars-tvOS";
+		};
+		3A76578F227197A6000821CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9FD355121D3E4A2900D06170;
+			remoteInfo = RNGoogleSignin;
 		};
 		3AABA1C32269CCFD002F9BAB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -397,6 +405,9 @@
 		2D02E47B1E0B4A5D006451C7 /* YapStars-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YapStars-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* YapStars-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YapStars-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		333056BA5B7ADABE709DF4A1 /* libPods-YapStars.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapStars.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A76575F22719774000821CD /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
+		3A765791227197BB000821CD /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AABA1E62269D04D002F9BAB /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		3AABA2172269D0C3002F9BAB /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		3AABA2182269D0C3002F9BAB /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -442,6 +453,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A765792227197BB000821CD /* libRNGoogleSignin.a in Frameworks */,
 				3AEBAA2C226B8732004F45DF /* libRNTwitterSignIn.a in Frameworks */,
 				3AEBA9E8226B73E0004F45DF /* libFBSDKCoreKit.a in Frameworks */,
 				3AEBA9EA226B73E0004F45DF /* libFBSDKLoginKit.a in Frameworks */,
@@ -606,6 +618,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3A76578C227197A6000821CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A765790227197A6000821CD /* libRNGoogleSignin.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3AABA1E72269D04D002F9BAB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +704,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */,
 				3AEBA9FC226B8725004F45DF /* RNTwitterSignIn.xcodeproj */,
 				3AEBA9B8226B73CE004F45DF /* RCTFBSDK.xcodeproj */,
 				3AABA1E62269D04D002F9BAB /* RNGestureHandler.xcodeproj */,
@@ -761,6 +782,8 @@
 		927E270FF1706B5003F5613D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A765791227197BB000821CD /* libRNGoogleSignin.a */,
+				3A76575F22719774000821CD /* libRNGoogleSignin.a */,
 				3AEBA9E7226B73E0004F45DF /* libFBSDKCoreKit.a */,
 				3AEBA9E9226B73E0004F45DF /* libFBSDKLoginKit.a */,
 				3AEBA9EB226B73E0004F45DF /* libFBSDKShareKit.a */,
@@ -959,6 +982,10 @@
 					ProjectRef = 3AABA1E62269D04D002F9BAB /* RNGestureHandler.xcodeproj */;
 				},
 				{
+					ProductGroup = 3A76578C227197A6000821CD /* Products */;
+					ProjectRef = 3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */;
+				},
+				{
 					ProductGroup = 3AEBA9FD226B8725004F45DF /* Products */;
 					ProjectRef = 3AEBA9FC226B8725004F45DF /* RNTwitterSignIn.xcodeproj */;
 				},
@@ -1042,6 +1069,13 @@
 			fileType = archive.ar;
 			path = "libjsinspector-tvOS.a";
 			remoteRef = 21BD0A8F216B7CEC00CE6C8C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3A765790227197A6000821CD /* libRNGoogleSignin.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGoogleSignin.a;
+			remoteRef = 3A76578F227197A6000821CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3AABA1C42269CCFD002F9BAB /* libjsi.a */ = {
@@ -1413,6 +1447,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates.bundle",
@@ -1420,6 +1455,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",

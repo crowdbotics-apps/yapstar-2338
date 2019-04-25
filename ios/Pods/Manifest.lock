@@ -146,11 +146,22 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - GoogleSignIn (4.4.0):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
   - GoogleToolboxForMac/Defines (2.2.0)
   - GoogleToolboxForMac/Logger (2.2.0):
     - GoogleToolboxForMac/Defines (= 2.2.0)
   - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
     - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.0)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.0)
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
   - GoogleUtilities/AppDelegateSwizzler (5.7.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -200,6 +211,9 @@ PODS:
     - React
   - React/Core (0.58.6):
     - yoga (= 0.58.6.React)
+  - RNGoogleSignin (1.2.3):
+    - GoogleSignIn (~> 4.4.0)
+    - React
   - TwitterCore (3.2.0)
   - TwitterKit (3.3.0):
     - TwitterCore (>= 3.1.0)
@@ -224,6 +238,7 @@ DEPENDENCIES:
   - Firebase/Storage (~> 5.20.1)
   - React (from `../node_modules/react-native`)
   - react-native-webview (from `../node_modules/react-native-webview`)
+  - RNGoogleSignin (from `../node_modules/react-native-google-signin`)
   - TwitterKit (~> 3.3.0)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -254,6 +269,7 @@ SPEC REPOS:
     - FirebaseStorage
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
+    - GoogleSignIn
     - GoogleToolboxForMac
     - GoogleUtilities
     - "gRPC-C++"
@@ -270,6 +286,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
+  RNGoogleSignin:
+    :path: "../node_modules/react-native-google-signin"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -299,6 +317,7 @@ SPEC CHECKSUMS:
   FirebaseStorage: 6162ef4322502b818d9de0ec552f5226d283de43
   Google-Mobile-Ads-SDK: 8f4f7e793bfd3fff5b082181b54112f81b579a67
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
+  GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
@@ -309,10 +328,11 @@ SPEC CHECKSUMS:
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   React: 130b87b2d5e2baac646954282cab87be986d98fc
   react-native-webview: 69ca34f590814ae44260d30e293ab4b7b3eea793
+  RNGoogleSignin: ca4746b76a9d58fb68408d3a120a0ce7120e2eda
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
   yoga: 32d7ef1081951e9a35a4c72a7be797598b138a48
 
-PODFILE CHECKSUM: 15ee06721c7d0022087758b785a28a9351a62a04
+PODFILE CHECKSUM: 9f874d7b073bd3366a6d33eec43e062f202c0644
 
 COCOAPODS: 1.6.1

@@ -7096,6 +7096,11 @@ react-native-gesture-handler@^1.1.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-google-signin@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.3.tgz#700943177a55cd8668a8fb85e370bcf1cb920d1e"
+  integrity sha512-9n1vkxYI2uwt91Jvx2BUqL5xeyNivytMnaR5OWIVujVGj1y2bpn4XCwT7R2C2WzYRrcD8xw9R6Pp5R4Linj1hg==
+
 react-native-instagram-login@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-instagram-login/-/react-native-instagram-login-1.1.1.tgz#51d33c252b414949e4458fb444e5f898db18bba5"

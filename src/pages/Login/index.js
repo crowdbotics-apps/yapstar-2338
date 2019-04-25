@@ -5,19 +5,20 @@ import {
   NativeModules,
   Text,
   SafeAreaView,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
-import InstagramLogin from 'react-native-instagram-login';
+// import InstagramLogin from 'react-native-instagram-login';
+import { GoogleSignin } from 'react-native-google-signin';
 import { AuthController } from 'app/services';
 import { AppContext, Button } from 'app/components';
 import { alert } from 'app/utils/Alert';
-
 import styles from './style';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 const IMAGE_LOGO = require('app/assets/images/app_logo.png');
 const IMAGE_BACKGROUND = require('app/assets/images/background.png');
 const ICON_FB = require('app/assets/images/facebook.png');
@@ -31,14 +32,13 @@ const TwitterKeys = {
   TWITTER_CONSUMER_KEY: 'D4l2twTmZr4031COwB8yJo9cE',
   TWITTER_CONSUMER_SECRET: 'KUqeSgJ9WIv4n4Ah6eC3E04n97goCUV1MEUl2g04DTOSrYEFXU'
 };
+
+GoogleSignin.configure();
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      email: '',
-      password: ''
-    };
+    this.state = {};
   }
 
   goToSignUp = () => {
@@ -65,7 +65,6 @@ class LoginScreen extends React.Component {
         `Login success with permissions: ${result.grantedPermissions.toString()}`
       );
 
-      // get the access token
       const data = await AccessToken.getCurrentAccessToken();
 
       if (!data) {
@@ -75,12 +74,10 @@ class LoginScreen extends React.Component {
         );
       }
 
-      // create a new firebase credential with the token
       const credential = firebase.auth.FacebookAuthProvider.credential(
         data.accessToken
       );
 
-      // login with credential
       const firebaseUserCredential = await firebase
         .auth()
         .signInWithCredential(credential);
@@ -94,7 +91,6 @@ class LoginScreen extends React.Component {
   };
 
   twitterLogin = () => {
-    console.log('twitter login');
     RNTwitterSignIn.init(
       TwitterKeys.TWITTER_CONSUMER_KEY,
       TwitterKeys.TWITTER_CONSUMER_SECRET
@@ -124,7 +120,32 @@ class LoginScreen extends React.Component {
       });
   };
 
-  googleLogin() {}
+  async googleLogin() {
+    try {
+      await GoogleSignin.configure({
+        webClient:
+          '509625931637-vbb90qgq43pvtdn1jdl3324e4ka4fegd.apps.googleusercontent.com',
+        iosClientId:
+          '509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673.apps.googleusercontent.com'
+      });
+
+      const data = await GoogleSignin.signIn();
+
+      const credential = firebase.auth.GoogleAuthProvider.credential(
+        data.idToken,
+        data.accessToken
+      );
+
+      const firebaseUserCredential = await firebase
+        .auth()
+        .signInWithCredential(credential);
+
+      // console.warn(JSON.stringify(firebaseUserCredential.user.toJSON()));
+      return this.props.navigation.navigate('main');
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   render() {
     return (
