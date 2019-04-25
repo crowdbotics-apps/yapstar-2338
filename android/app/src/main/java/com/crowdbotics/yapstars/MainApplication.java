@@ -33,22 +33,21 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 
-
-    import com.facebook.CallbackManager;
-    import com.facebook.FacebookSdk;
-    //import com.facebook.reactnative.androidsdk.FBSDKPackage;
-    import com.facebook.appevents.AppEventsLogger;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+//import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.facebook.appevents.AppEventsLogger;
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
-    private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
 
-    protected static CallbackManager getCallbackManager() {
-        return mCallbackManager;
-    }
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
@@ -58,34 +57,18 @@ public class MainApplication extends Application implements ReactApplication {
     @SuppressLint("MissingPermission")
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.asList(
-        new MainReactPackage(),
-            new RNGoogleSigninPackage(),
-            new RNCWebViewPackage(),
-            new TwitterSigninPackage(),
+      return Arrays.asList(new MainReactPackage(), new RNGoogleSigninPackage(), new RNCWebViewPackage(),
+          new TwitterSigninPackage(),
 
-    new FBSDKPackage(mCallbackManager)
-            new FBSDKPackage(),
-        new VectorIconsPackage(),
-        new RNGestureHandlerPackage(),
-        new RNFirebasePackage(),
-        // add/remove these packages as appropriate
-        new RNFirebaseAdMobPackage(),
-        new RNFirebaseAnalyticsPackage(),
-        new RNFirebaseAuthPackage(),
-        new RNFirebaseRemoteConfigPackage(),
-        new RNFirebaseCrashlyticsPackage(),
-        new RNFirebaseDatabasePackage(),
-        new RNFirebaseFirestorePackage(),
-        new RNFirebaseFunctionsPackage(),
-        new RNFirebaseInstanceIdPackage(),
-        new RNFirebaseInvitesPackage(),
-        new RNFirebaseLinksPackage(),
-        new RNFirebaseMessagingPackage(),
-        new RNFirebaseNotificationsPackage(),
-        new RNFirebasePerformancePackage(),
-        new RNFirebaseStoragePackage()
-      );
+          new FBSDKPackage(mCallbackManager),
+          // new FBSDKPackage(),
+          new VectorIconsPackage(), new RNGestureHandlerPackage(), new RNFirebasePackage(),
+          // add/remove these packages as appropriate
+          new RNFirebaseAdMobPackage(), new RNFirebaseAnalyticsPackage(), new RNFirebaseAuthPackage(),
+          new RNFirebaseRemoteConfigPackage(), new RNFirebaseCrashlyticsPackage(), new RNFirebaseDatabasePackage(),
+          new RNFirebaseFirestorePackage(), new RNFirebaseFunctionsPackage(), new RNFirebaseInstanceIdPackage(),
+          new RNFirebaseInvitesPackage(), new RNFirebaseLinksPackage(), new RNFirebaseMessagingPackage(),
+          new RNFirebaseNotificationsPackage(), new RNFirebasePerformancePackage(), new RNFirebaseStoragePackage());
     }
 
     @Override
