@@ -7,7 +7,6 @@ import com.facebook.react.ReactApplication;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
-import com.goldenowl.twittersignin.TwitterSigninPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;

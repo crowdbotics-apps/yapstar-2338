@@ -6,7 +6,8 @@ export default StyleSheet.create({
   background: {
     width: '100%',
     height: '100%',
-    resizeMode: 'stretch'
+    resizeMode: 'stretch',
+    backgroundColor: 'transparent'
   },
   container: {
     flex: 1,

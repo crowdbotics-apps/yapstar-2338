@@ -31,12 +31,34 @@ target 'YapStars' do
     pod 'FBSDKCoreKit', '~> 4.41.0'
     pod 'FBSDKLoginKit', '~> 4.41.0'
     pod 'FBSDKShareKit', '~> 4.41.0'
-    pod 'TwitterKit', '~> 3.3.0'
+    # pod 'TwitterKit', '~> 3.3.0'
+    rn_path = '../node_modules/react-native'
+    pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+    pod 'React', path: '../node_modules/react-native', :subspecs => [
+      'Core',
+      # 'Folly',
+      'DevSupport',
+      'RCTActionSheet',
+      'RCTAnimation',
+      'RCTGeolocation',
+      'RCTImage',
+      'RCTLinkingIOS',
+      'RCTNetwork',
+      'RCTSettings',
+      'RCTText',
+      'RCTVibration',
+      'RCTWebSocket',
+    ]
 
-    pod 'React', :path => '../node_modules/react-native'
-    pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
     pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
     pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
+    post_install do |installer|
+      installer.pods_project.targets.each do |target|
+        if target.name == "React"
+          target.remove_from_project
+        end
+      end
+    end
 end

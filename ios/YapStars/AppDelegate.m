@@ -11,7 +11,7 @@
 #import <React/RCTRootView.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Firebase.h>
-#import <TwitterKit/TWTRKit.h>
+//#import <TwitterKit/TWTRKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
 @implementation AppDelegate
@@ -50,7 +50,7 @@
             annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
           ];
   
-      handled = [[Twitter sharedInstance] application:application openURL:url options:options];
+//      handled = [[Twitter sharedInstance] application:application openURL:url options:options];
   
       handled = [RNGoogleSignin application:application
                                 openURL:url
