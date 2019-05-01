@@ -45,6 +45,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* YapStarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* YapStarsTests.m */; };
 		34C3A8864F6645E98C98B1E3 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EBBC0A185EBE40A69DAE111A /* SF-Pro-Display-Semibold.otf */; };
 		35F082D212A347D3AC7DE0F2 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 636B067C0A874ED1A75F1E63 /* SF-Pro-Display-Ultralight.otf */; };
+		3A2F787822776BE6009DBC21 /* libRNTwitterSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2F76DF2276E920009DBC21 /* libRNTwitterSignIn.a */; };
+		3A2F787922776BE6009DBC21 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2F759E2276A59F009DBC21 /* Twitter.framework */; };
 		3A765792227197BB000821CD /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A765791227197BB000821CD /* libRNGoogleSignin.a */; };
 		3AABA2152269D05D002F9BAB /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AABA2122269D04D002F9BAB /* libRNGestureHandler.a */; };
 		3AABA2262269D0C3002F9BAB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AABA2172269D0C3002F9BAB /* Octicons.ttf */; };
@@ -544,6 +546,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A2F787822776BE6009DBC21 /* libRNTwitterSignIn.a in Frameworks */,
+				3A2F787922776BE6009DBC21 /* Twitter.framework in Frameworks */,
 				3A765792227197BB000821CD /* libRNGoogleSignin.a in Frameworks */,
 				3AEBA9E8226B73E0004F45DF /* libFBSDKCoreKit.a in Frameworks */,
 				3AEBA9EA226B73E0004F45DF /* libFBSDKLoginKit.a in Frameworks */,
@@ -978,6 +982,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */,
 				83B761F71FE42BDD00F21A7A /* Crashlytics */,
+				3D2EF25920B679030A18F627 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1040,7 +1045,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6YKR59QXKM;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1578,6 +1583,30 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		3D2EF25920B679030A18F627 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-frameworks.sh",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7EEED693062F803EA2B9E72F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1619,12 +1648,16 @@
 				"${PODS_ROOT}/Target Support Files/Pods-YapStars/Pods-YapStars-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1753,7 +1786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = YapStars/YapStars.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6YKR59QXKM;
@@ -1776,7 +1809,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yapstars;
 				PRODUCT_NAME = YapStars;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = dev_yapstars;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1788,8 +1821,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = YapStars/YapStars.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6YKR59QXKM;
 				DISPLAY_NAME = YapStars;
@@ -1811,7 +1844,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yapstars;
 				PRODUCT_NAME = YapStars;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = appstore_yapstars;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -243,6 +243,9 @@ PODS:
   - RNGoogleSignin (1.2.3):
     - GoogleSignIn (~> 4.4.0)
     - React
+  - TwitterCore (3.2.0)
+  - TwitterKit (3.3.0):
+    - TwitterCore (>= 3.1.0)
   - yoga (0.58.6.React)
 
 DEPENDENCIES:
@@ -276,6 +279,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNGoogleSignin (from `../node_modules/react-native-google-signin`)
+  - TwitterKit (~> 3.3.0)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
@@ -314,6 +318,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - TwitterCore
+    - TwitterKit
 
 EXTERNAL SOURCES:
   React:
@@ -363,8 +369,10 @@ SPEC CHECKSUMS:
   React: 130b87b2d5e2baac646954282cab87be986d98fc
   react-native-webview: 69ca34f590814ae44260d30e293ab4b7b3eea793
   RNGoogleSignin: ca4746b76a9d58fb68408d3a120a0ce7120e2eda
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
   yoga: 32d7ef1081951e9a35a4c72a7be797598b138a48
 
-PODFILE CHECKSUM: 0459d076486537c49f2723be1029a7a69e6e4734
+PODFILE CHECKSUM: 949c4169ff33082f2ffa458ec71bbaa2a8f077f5
 
 COCOAPODS: 1.6.1
