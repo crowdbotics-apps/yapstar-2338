@@ -3,61 +3,58 @@ import Colors from '../../theme/Colors';
 
 const dm = Dimensions.get('screen');
 export default StyleSheet.create({
+  background: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'stretch'
+  },
   container: {
     flex: 1,
     alignItems: 'center'
   },
   logo: {
-    marginTop: 50,
-    width: dm.width * 0.6,
-    height: dm.width * 0.6
+    width: dm.width * 0.8,
+    justifyContent: 'flex-end'
+  },
+  btnImg: {
+    marginTop: 40,
+    width: dm.width * 0.15,
+    height: dm.width * 0.15
   },
   content: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end'
   },
-  input: {
-    width: dm.width * 0.8,
-    height: 50,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    fontSize: 16,
-    marginBottom: 20
+  desc: {
+    fontFamily: 'SFProText-Regular',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 20,
+    letterSpacing: -0.34,
+    textAlign: 'center',
+    color: '#ffffff50'
   },
-  loginBtn: {
-    marginTop: 50,
-    width: 150,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: Colors.ButtonColor
-  },
-  login: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#fff'
-  },
-  forgotpswdBtn: {
-    marginTop: 25
-  },
-  forgotpswd: {
-    fontSize: 16,
-    fontWeight: '600',
-    textDecorationLine: 'underline'
+  buttonContainer: {
+    marginBottom: 40,
+    flexDirection: 'row',
+    width: dm.width * 0.6,
+    justifyContent: 'space-between'
   },
   signupContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 20
+    marginBottom: 20,
+    alignItems: 'center'
   },
   description: {
-    fontSize: 16
+    fontFamily: 'SFProText-Regular',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    letterSpacing: -0.34,
+    textAlign: 'center',
+    color: '#ffffff'
   },
   signup: {
-    fontSize: 18,
-    fontWeight: '600'
+    color: '#fd9426'
   }
 });

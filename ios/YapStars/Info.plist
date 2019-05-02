@@ -17,29 +17,63 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterkit-D4l2twTmZr4031COwB8yJo9cE</string>
+				<string>fb2908719935812333</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.509625931637-ubkfca4o7irg1ucv9e5r7dprj6uhf673</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
+	<key>FacebookAppID</key>
+	<string>2908719935812333</string>
+	<key>FacebookDisplayName</key>
+	<string>YapStars</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>twitter</string>
+		<string>twitterauth</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need sensitive user data.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<string>Need sensitive user data.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -57,24 +91,50 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>SF-Pro-Display-Black.otf</string>
+		<string>SF-Pro-Display-BlackItalic.otf</string>
+		<string>SF-Pro-Display-Bold.otf</string>
+		<string>SF-Pro-Display-BoldItalic.otf</string>
+		<string>SF-Pro-Display-Heavy.otf</string>
+		<string>SF-Pro-Display-HeavyItalic.otf</string>
+		<string>SF-Pro-Display-Light.otf</string>
+		<string>SF-Pro-Display-LightItalic.otf</string>
+		<string>SF-Pro-Display-Medium.otf</string>
+		<string>SF-Pro-Display-MediumItalic.otf</string>
+		<string>SF-Pro-Display-Regular.otf</string>
+		<string>SF-Pro-Display-RegularItalic.otf</string>
+		<string>SF-Pro-Display-Semibold.otf</string>
+		<string>SF-Pro-Display-SemiboldItalic.otf</string>
+		<string>SF-Pro-Display-Thin.otf</string>
+		<string>SF-Pro-Display-ThinItalic.otf</string>
+		<string>SF-Pro-Display-Ultralight.otf</string>
+		<string>SF-Pro-Display-UltralightItalic.otf</string>
+		<string>SF-Pro-Text-Bold.otf</string>
+		<string>SF-Pro-Text-BoldItalic.otf</string>
+		<string>SF-Pro-Text-Heavy.otf</string>
+		<string>SF-Pro-Text-HeavyItalic.otf</string>
+		<string>SF-Pro-Text-Light.otf</string>
+		<string>SF-Pro-Text-LightItalic.otf</string>
+		<string>SF-Pro-Text-Medium.otf</string>
+		<string>SF-Pro-Text-MediumItalic.otf</string>
+		<string>SF-Pro-Text-Regular.otf</string>
+		<string>SF-Pro-Text-RegularItalic.otf</string>
+		<string>SF-Pro-Text-Semibold.otf</string>
+		<string>SF-Pro-Text-SemiboldItalic.otf</string>
 	</array>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSAppTransportSecurity</key>
-	<!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
-	<dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

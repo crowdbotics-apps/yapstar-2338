@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-
-let dm = Dimensions.get('screen');
-
+import Authentication from '../../services/Authentication';
 import { AppContext, Navbar } from 'app/components';
-
 import styles from './style';
 
+let dm = Dimensions.get('screen');
 class MainScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      uid: this.props.navigation.getParam('uid')
+    };
   }
 
   async componentDidMount() {
@@ -29,7 +29,13 @@ class MainScreen extends Component {
     this.props.navigation.toggleDrawer();
   };
 
+  logout() {
+    Authentication.logout();
+    this.props.navigation.navigate('auth');
+  }
+
   render() {
+    console.log(this.state.uid);
     return (
       <View style={styles.container}>
         <Navbar
@@ -37,6 +43,10 @@ class MainScreen extends Component {
           leftHandler={this.leftHandler}
           title="Dashboard"
         />
+
+        <TouchableOpacity onPress={() => this.logout()}>
+          <Text> Log out </Text>
+        </TouchableOpacity>
       </View>
     );
   }

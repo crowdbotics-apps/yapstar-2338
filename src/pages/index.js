@@ -11,8 +11,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import LoadingScreen from './Loading';
 import LoginScreen from './Login';
-import ForgotPasswordScreen from './PasswordReset';
 import SignupScreen from './Signup';
+import SignupPhoneScreen from './SignupPhone';
+import SignupNickNameScreen from './SignupNickName';
+import SignupCategoryScreen from './SignupCategory';
 import ProfileScreen from './Profile';
 import MainScreen from './Main';
 
@@ -28,8 +30,14 @@ const AuthNavigator = createStackNavigator(
     signup: {
       screen: SignupScreen
     },
-    forgotpassword: {
-      screen: ForgotPasswordScreen
+    signupphone: {
+      screen: SignupPhoneScreen
+    },
+    signupnickname: {
+      screen: SignupNickNameScreen
+    },
+    signupcategory: {
+      screen: SignupCategoryScreen
     }
   },
   {
@@ -48,7 +56,7 @@ const MainTabNavigator = createBottomTabNavigator(
         // custom icon setting.
       },
       tabBarLabel: ({ focused, tintColor }) => {
-       // custom label setting.
+        // custom label setting.
       }
     }),
     tabBarOptions: {
@@ -62,7 +70,7 @@ const MainTabNavigator = createBottomTabNavigator(
 const MainNavigator = createDrawerNavigator(
   {
     home: MainTabNavigator,
-    profile: ProfileScreen,
+    profile: ProfileScreen
   },
   {
     drawerWidth: dm.width * 0.6,

@@ -28,9 +28,9 @@ export default class App extends React.Component {
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        <SafeAreaView style={styles.container}>
-          <AppNavigator />
-        </SafeAreaView>
+        {/* <SafeAreaView style={styles.container}> */}
+        <AppNavigator />
+        {/* </SafeAreaView> */}
         <LoadingView />
       </AppContext.Provider>
     );

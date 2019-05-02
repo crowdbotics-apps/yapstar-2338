@@ -120,6 +120,16 @@ android {
     // because of firestore:
     multiDexEnabled true
   }
+  signingConfigs {
+    release {
+      if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+        storeFile file(MYAPP_RELEASE_STORE_FILE)
+        storePassword MYAPP_RELEASE_STORE_PASSWORD
+        keyAlias MYAPP_RELEASE_KEY_ALIAS
+        keyPassword MYAPP_RELEASE_KEY_PASSWORD
+      }
+    }
+  }
   splits {
     abi {
       reset()
@@ -132,6 +142,7 @@ android {
     release {
       minifyEnabled enableProguardInReleaseBuilds
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+      signingConfig signingConfigs.release
     }
     debug {
       minifyEnabled false
@@ -154,6 +165,12 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-google-signin')
+    implementation project(':react-native-webview')
+
+    implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
+    //implementation project(':react-native-fbsdk')
+    implementation project(':react-native-fbsdk')
   implementation 'com.android.support:multidex:1.0.3'
   implementation 'com.android.support:design:27.1.0'
 
@@ -232,6 +249,27 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
   from configurations.compile
   into 'libs'
+}
+
+subprojects {
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.android.support'
+                    && !details.requested.name.contains('multidex') ) {
+                details.useVersion "27.1.1"
+            }
+        }
+    }
+    afterEvaluate {
+        android {
+            compileSdkVersion 27
+            buildToolsVersion "27.0.3"
+
+            defaultConfig {
+                targetSdkVersion 27
+            }
+        }
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
