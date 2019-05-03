@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		008187E780EB459FBFD4F775 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13ABE9E4D19C40C5A36EE63A /* Zocial.ttf */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -45,7 +44,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* YapStarsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* YapStarsTests.m */; };
 		34C3A8864F6645E98C98B1E3 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EBBC0A185EBE40A69DAE111A /* SF-Pro-Display-Semibold.otf */; };
 		35F082D212A347D3AC7DE0F2 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 636B067C0A874ED1A75F1E63 /* SF-Pro-Display-Ultralight.otf */; };
-		3A2F787822776BE6009DBC21 /* libRNTwitterSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2F76DF2276E920009DBC21 /* libRNTwitterSignIn.a */; };
 		3A2F787922776BE6009DBC21 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2F759E2276A59F009DBC21 /* Twitter.framework */; };
 		3A765792227197BB000821CD /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A765791227197BB000821CD /* libRNGoogleSignin.a */; };
 		3AABA2152269D05D002F9BAB /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AABA2122269D04D002F9BAB /* libRNGestureHandler.a */; };
@@ -194,13 +192,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "YapStars-tvOS";
-		};
-		3A2F76DE2276E920009DBC21 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3A2F76D92276E920009DBC21 /* RNTwitterSignIn.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D07E57251F07806700A7160F;
-			remoteInfo = RNTwitterSignIn;
 		};
 		3A76578F227197A6000821CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -464,7 +455,6 @@
 		333056BA5B7ADABE709DF4A1 /* libPods-YapStars.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YapStars.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FC2E5F41E54F9FBE86B595 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Black.otf"; path = "../src/assets/fonts/SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		3A2F759E2276A59F009DBC21 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		3A2F76D92276E920009DBC21 /* RNTwitterSignIn.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNTwitterSignIn.xcodeproj; path = "../node_modules/react-native-twitter-signin/ios/RNTwitterSignIn.xcodeproj"; sourceTree = "<group>"; };
 		3A2F77412276FEA1009DBC21 /* YapStars.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = YapStars.entitlements; path = YapStars/YapStars.entitlements; sourceTree = "<group>"; };
 		3A76575F22719774000821CD /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
@@ -546,7 +536,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A2F787822776BE6009DBC21 /* libRNTwitterSignIn.a in Frameworks */,
 				3A2F787922776BE6009DBC21 /* Twitter.framework in Frameworks */,
 				3A765792227197BB000821CD /* libRNGoogleSignin.a in Frameworks */,
 				3AEBA9E8226B73E0004F45DF /* libFBSDKCoreKit.a in Frameworks */,
@@ -713,14 +702,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3A2F76DA2276E920009DBC21 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3A2F76DF2276E920009DBC21 /* libRNTwitterSignIn.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3A76578C227197A6000821CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -851,7 +832,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				3A2F76D92276E920009DBC21 /* RNTwitterSignIn.xcodeproj */,
 				3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */,
 				3AEBA9B8226B73CE004F45DF /* RCTFBSDK.xcodeproj */,
 				3AABA1E62269D04D002F9BAB /* RNGestureHandler.xcodeproj */,
@@ -1140,10 +1120,6 @@
 					ProductGroup = 3A76578C227197A6000821CD /* Products */;
 					ProjectRef = 3A76578B227197A6000821CD /* RNGoogleSignin.xcodeproj */;
 				},
-				{
-					ProductGroup = 3A2F76DA2276E920009DBC21 /* Products */;
-					ProjectRef = 3A2F76D92276E920009DBC21 /* RNTwitterSignIn.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1224,13 +1200,6 @@
 			fileType = archive.ar;
 			path = "libjsinspector-tvOS.a";
 			remoteRef = 21BD0A8F216B7CEC00CE6C8C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3A2F76DF2276E920009DBC21 /* libRNTwitterSignIn.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNTwitterSignIn.a;
-			remoteRef = 3A2F76DE2276E920009DBC21 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3A765790227197A6000821CD /* libRNGoogleSignin.a */ = {
