@@ -54,6 +54,8 @@ target 'YapStars' do
 
     pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
 
+    pod 'react-native-twitter-signin', :path => '../node_modules/react-native-twitter-signin'
+
     post_install do |installer|
       installer.pods_project.targets.each do |target|
         if target.name == "React"

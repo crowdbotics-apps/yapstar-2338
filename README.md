@@ -1,3 +1,10 @@
+# YapStars - Crowdbotics Social Event broadcasting app.
+
+## Issue:
+
+Now `react-native-twitter-signin` library has release issues on iOS and android.
+ref: https://github.com/GoldenOwlAsia/react-native-twitter-signin/issues/130
+
 # Crowdbotics React Native Firebase Scaffold
 
 A frontend scaffold for our next cross-platform React Native app.
