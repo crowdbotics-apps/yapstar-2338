@@ -56,6 +56,10 @@ target 'YapStars' do
 
     pod 'react-native-twitter-signin', :path => '../node_modules/react-native-twitter-signin'
 
+    pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+    pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
     post_install do |installer|
       installer.pods_project.targets.each do |target|
         if target.name == "React"

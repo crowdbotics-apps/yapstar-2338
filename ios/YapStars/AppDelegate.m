@@ -13,6 +13,7 @@
 #import <Firebase.h>
 #import <TwitterKit/TWTRKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -36,6 +37,7 @@
 
     [[FBSDKApplicationDelegate sharedInstance] application:application
     didFinishLaunchingWithOptions:launchOptions];
+  [RNSplashScreen show];
   return YES;
 }
 

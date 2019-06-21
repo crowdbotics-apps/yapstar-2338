@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import firebase from 'react-native-firebase';
+import Splash from 'react-native-splash-screen'
 
 import { AppContext } from 'app/components';
 
@@ -17,6 +18,7 @@ class LoadingScreen extends Component {
   componentDidMount() {
     this.context.showLoading();
     this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
+      Splash.hide()
       this.context.hideLoading();
       if (user) {
         this.props.navigation.navigate('main');
