@@ -5,11 +5,11 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import AppNavigator from '../pages';
+import AppNavigator from '../navigators/AppNavigator';
 import sagas from '../sagas';
 import { SagaReducer } from './SagaReducer';
 
-const initialNavState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('loading'));
+const initialNavState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('splash1'));
 
 const NavReducer = (state = initialNavState, action) => {
   let nextState;
