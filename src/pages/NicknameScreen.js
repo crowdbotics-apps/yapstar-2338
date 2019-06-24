@@ -2,6 +2,7 @@ import React from 'react'
 import { SafeAreaView, StyleSheet, View, Image, ImageBackground, TouchableOpacity, TextInput, Text } from 'react-native'
 import { Input, colors } from 'react-native-elements'
 import PropTypes from 'prop-types';
+import Orientation from 'react-native-orientation'
 import { AppContext, Navbar } from '../components';
 
 const IMAGE_BACKGROUND = require('app/assets/images/profile.png');
@@ -17,14 +18,16 @@ export default class NicknameScreen extends React.Component {
       nickName: '',
       placeholder:'@the_best_fan' ,
       uid: this.props.navigation.getParam('uid'),
-      fullName: this.props.navigation.getParam('fullName'),
+      displayName: this.props.navigation.getParam('displayName'),
       email: this.props.navigation.getParam('email'),
       phoneNumber: this.props.navigation.getParam('phoneNumber'),
-      photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('provider')
+      photoURL: this.props.navigation.getParam('photoURL'),
+      providerId: this.props.navigation.getParam('providerId')
     };
   }
-  
+  componentDidMount() {
+    Orientation.lockToPortrait();
+  }
   // onPresNext() {
   //   console.warn('press next')
   // }
@@ -33,29 +36,31 @@ export default class NicknameScreen extends React.Component {
       alert('Please enter Nick Name');
       return;
     }
-    this.props.navigation.navigate('signupphone', {
-      nickName: this.state.nickName,
-      uid: this.props.navigation.getParam('uid'),
-      fullName: this.props.navigation.getParam('fullName'),
-      email: this.props.navigation.getParam('email'),
-      phoneNumber: this.props.navigation.getParam('phoneNumber'),
-      photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('provider')
-    });
+    this.props.navigation.navigate('signin')
+    // this.props.navigation.navigate('signupphone', {
+    //   nickName: this.state.nickName,
+    //   uid: this.props.navigation.getParam('uid'),
+    //   displayName: this.props.navigation.getParam('displayName'),
+    //   email: this.props.navigation.getParam('email'),
+    //   phoneNumber: this.props.navigation.getParam('phoneNumber'),
+    //   photoURL: this.props.navigation.getParam('photoURL'),
+    //   providerId: this.props.navigation.getParam('providerId')
+    // });
   };
   // onPressSkip() {
   //   console.warn('press skip')
   // }
   onPressSkip = async () => {
-    this.props.navigation.navigate('signupphone', {
-      nickName: this.state.nickName,
-      uid: this.props.navigation.getParam('uid'),
-      fullName: this.props.navigation.getParam('fullName'),
-      email: this.props.navigation.getParam('email'),
-      phoneNumber: this.props.navigation.getParam('phoneNumber'),
-      photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('provider')
-    });
+    this.props.navigation.navigate('signin')
+    // this.props.navigation.navigate('signupphone', {
+    //   nickName: this.state.nickName,
+    //   uid: this.props.navigation.getParam('uid'),
+    //   displayName: this.props.navigation.getParam('displayName'),
+    //   email: this.props.navigation.getParam('email'),
+    //   phoneNumber: this.props.navigation.getParam('phoneNumber'),
+    //   photoURL: this.props.navigation.getParam('photoURL'),
+    //   providerId: this.props.navigation.getParam('providerId')
+    // });
   };
 
   render() {

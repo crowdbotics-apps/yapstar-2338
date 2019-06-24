@@ -60,6 +60,8 @@ target 'YapStars' do
 
     pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+    pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
+
     post_install do |installer|
       installer.pods_project.targets.each do |target|
         if target.name == "React"

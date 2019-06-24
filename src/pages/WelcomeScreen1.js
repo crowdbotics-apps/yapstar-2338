@@ -1,4 +1,5 @@
 import React from 'react'
+import Orientation from 'react-native-orientation'
 import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity } from 'react-native'
 
 const IMAGE_BACKGROUND = require('app/assets/images/welcome1.png');
@@ -9,11 +10,12 @@ export default class WelcomeScreen1 extends React.Component {
   constructor (props) {
 		super(props)
   }
-  
+  componentDidMount() {
+    Orientation.lockToPortrait();
+  }
   onPress() {
     this.props.navigation.navigate('welcome2');
   }
-
   render() {
     return(
       <SafeAreaView style={styles.container}>
@@ -27,7 +29,6 @@ export default class WelcomeScreen1 extends React.Component {
     )
   }  
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1, 

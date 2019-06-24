@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-apply plugin: "com.google.firebase.firebase-perf"
+// apply plugin: "com.google.firebase.firebase-perf"
 apply plugin: 'io.fabric'
 
 import com.android.build.OutputFile
@@ -141,7 +141,7 @@ android {
   buildTypes {
     release {
       minifyEnabled enableProguardInReleaseBuilds
-      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro" // -keep class io.grpc.** {*;}
       signingConfig signingConfigs.release
     }
     debug {
@@ -165,6 +165,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-orientation')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-twitter-signin')
@@ -175,7 +176,7 @@ dependencies {
     //implementation project(':react-native-fbsdk')
     implementation project(':react-native-fbsdk')
   implementation 'com.android.support:multidex:1.0.3'
-  implementation 'com.android.support:design:27.1.0'
+  implementation 'com.android.support:design:28.0.0'
 
   implementation project(':react-native-gesture-handler')
   implementation project(':react-native-firebase')
@@ -186,7 +187,7 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation fileTree(dir: "libs", include: ["*.jar"])
 
-   implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+  implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
 
 /* ----------------------------
    *    REACT NATIVE FIREBASE
@@ -196,42 +197,15 @@ dependencies {
   // implementation project(path: ':react-native-firebase', configuration: 'default')
   // Required dependencies
   //noinspection GradleCompatible
-  implementation "com.google.firebase:firebase-core:16.0.6"
+  
   implementation "com.google.android.gms:play-services-base:16.0.1"
-
-  /* -------------------------
-   *   OPTIONAL FIREBASE SDKS
-   * ------------------------- */
-
-  implementation('com.google.firebase:firebase-ads:15.0.1') {
-    // exclude `customtabs` as the support lib version is out of date
-    // we manually add it as a dependency below with a custom version
-    exclude group: 'com.android.support', module: 'customtabs'
-  }
-
-  // Authentication
-  implementation "com.google.firebase:firebase-auth:16.1.0"
-  // Analytics
-  implementation "com.google.firebase:firebase-analytics:16.0.6"
-  // Performance Monitoring
-  implementation "com.google.firebase:firebase-perf:16.2.3"
-  // Remote Config
-  implementation "com.google.firebase:firebase-config:16.1.2"
-  // Cloud Storage
-  implementation "com.google.firebase:firebase-storage:16.0.5"
-  // Invites
-  implementation "com.google.firebase:firebase-invites:16.0.6"
-  // Dynamic Links
-  implementation "com.google.firebase:firebase-dynamic-links:16.1.5"
-  // Real-time Database
-  implementation "com.google.firebase:firebase-database:16.0.5"
-  // Cloud Functions
-  implementation "com.google.firebase:firebase-functions:16.1.3"
-  // Cloud Firestore
-  implementation "com.google.firebase:firebase-firestore:17.1.5"
-  // Cloud Messaging / FCM
-  implementation "com.google.firebase:firebase-messaging:17.3.4"
-  // Crashlytics
+  implementation "com.google.firebase:firebase-core:16.0.8"
+  implementation "com.google.firebase:firebase-auth:17.0.0"
+  implementation "com.google.firebase:firebase-firestore:19.0.0"
+  implementation "com.google.firebase:firebase-functions:16.3.0"
+  implementation "com.google.firebase:firebase-messaging:18.0.0"
+  implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
+  implementation "com.google.firebase:firebase-storage:16.1.0"
   implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
     transitive = true
   }

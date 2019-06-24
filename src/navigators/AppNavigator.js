@@ -31,7 +31,7 @@ const dm = Dimensions.get('screen');
 
 const AuthNavigator = createStackNavigator(
   {
-    siginin: {
+    signin: {
       screen: SigninScreen
     },
     welcome3: {
@@ -59,7 +59,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     headerMode: 'none',
-    initialRouteName: 'siginin'
+    initialRouteName: 'signin'
   }
 );
 
@@ -120,7 +120,7 @@ const MainStackNavigator = createStackNavigator(
   }
 );
 
-const AppNavigator = createSwitchNavigator(
+export default createSwitchNavigator(
   {
     splash1: SplashScreen1,
     splash2: SplashScreen2,
@@ -133,6 +133,3 @@ const AppNavigator = createSwitchNavigator(
     initialRouteName: 'splash1'
   }
 );
-
-// export default createAppContainer(AppNavigator);
-export default AppNavigator;

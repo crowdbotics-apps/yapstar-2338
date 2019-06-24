@@ -11,15 +11,15 @@ import PropTypes from 'prop-types';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import firebase from 'react-native-firebase';
 import { GoogleSignin } from 'react-native-google-signin';
-import { AuthController } from '../services';
 import { AppContext, Button } from '../components';
 import { alert } from '../utils/Alert';
 import { GOOGLE_AUTH, TwitterKeys } from '../constant';
 import Authentication from '../services/Authentication';
+import Orientation from 'react-native-orientation'
 
+const firestore = firebase.firestore()
 const { RNTwitterSignIn } = NativeModules;
 const { TwitterAuthProvider } = firebase.auth;
-
 const IMAGE_BACKGROUND = require('app/assets/images/signin.png');
 const IMAGE_MARK = require('app/assets/images/signin_mark.png');
 const IMAGE_GOOGLE = require('app/assets/images/signin_google.png');
@@ -28,17 +28,16 @@ const IMAGE_TWITTER = require('app/assets/images/signin_twitter.png');
 const IMAGE_POLICY = require('app/assets/images/signin_policy.png');
 
 GoogleSignin.configure();
+
 export default class SigninScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state ={
-      fullName: '',
-      email: '',
-      phoneNumber: '',
-      photoUrl: '',
-      uid: '',
-      provider: ''
     }
+  }
+
+  componentDidMount() {
+    Orientation.lockToPortrait();
   }
 
   facebookLogin = async () => {
@@ -73,7 +72,6 @@ export default class SigninScreen extends React.Component {
 
   twitterLogin = () => {
     this.context.showLoading();
-
     RNTwitterSignIn.init(
       TwitterKeys.TWITTER_CONSUMER_KEY,
       TwitterKeys.TWITTER_CONSUMER_SECRET
@@ -102,7 +100,6 @@ export default class SigninScreen extends React.Component {
     try {
       await this.context.showLoading();
       await GoogleSignin.configure(GOOGLE_AUTH);
-
       const data = await GoogleSignin.signIn();
       const credential = firebase.auth.GoogleAuthProvider.credential(
         data.idToken,
@@ -116,36 +113,50 @@ export default class SigninScreen extends React.Component {
   }
 
   nextStep = async (credential) => {
+    console.warn(credential)
     const firebaseUserCredential = await firebase
       .auth()
       .signInWithCredential(credential);
-
     const user = await firebaseUserCredential.user._user;
-    console.warn(user);
-    await this.setState({
-      uid: user.uid,
-      fullName: user.displayName,
-      email: user.email || '',
-      phoneNumber: user.phoneNumber || '',
-      photoUrl: user.photoURL || '',
-      provider: user.providerId || ''
-    });
-    const exist = await Authentication.checkUser(user.uid);
+    // const exist = Authentication.checkUser(user.uid);
     await this.context.hideLoading();
-    if (exist) {
-      this.props.navigation.navigate('main', {
-        uid: user.uid,
-      });
-    } else {
+    // if (exist) {
+    //   this.props.navigation.navigate('main', {
+    //     'uid': user.uid,
+    //   });
+    // } else {
       this.props.navigation.navigate('welcome3', {
-        uid: user.uid,
-        fullName: user.displayName,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        photoUrl: user.photoURL,
-        provider: user.providerId
+        'uid': user.uid,
+        'displayName': user.displayName,
+        'email': user.email,
+        'phoneNumber': user.phoneNumber,
+        'photoURL': user.photoURL,
+        'providerId': user.providerId
       });
-    }
+    // }
+    // firestore.collection('users').where('id', '==', user.uid).get()
+    // .then(users => {
+    //   console.warn()
+    //   this.context.hideLoading();
+    //   if (users.docs.length > 0) {
+    //     this.props.navigation.navigate('main', {
+    //       'uid': user.uid,
+    //     });
+    //   } else {
+    //     this.props.navigation.navigate('welcome3', {
+    //       'uid': user.uid,
+    //       'displayName': user.displayName,
+    //       'email': user.email,
+    //       'phoneNumber': user.phoneNumber,
+    //       'photoURL': user.photoURL,
+    //       'providerId': user.providerId
+    //     });
+    //   }
+    // })
+    // .catch(() => {
+    //   this.context.hideLoading();
+    //   alert('Auth error. Please try again later.');
+    // })
   };
   
   onPressPolicy() {
@@ -158,10 +169,10 @@ export default class SigninScreen extends React.Component {
         <Image source={IMAGE_BACKGROUND} style={styles.background}/>
         <View style={styles.view_main}>
           <Image source={IMAGE_MARK} style={styles.mark}/>
-          <TouchableOpacity onPress={()=>this.googleLogin()}>
+          <TouchableOpacity>
             <Image source={IMAGE_GOOGLE} style={styles.google}/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>this.facebookLogin()}>
+          <TouchableOpacity>
             <Image source={IMAGE_FACEBOOK} style={styles.facebook}/>
           </TouchableOpacity>
           <TouchableOpacity onPress={()=>this.twitterLogin()}>

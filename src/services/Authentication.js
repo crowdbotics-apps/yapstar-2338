@@ -29,8 +29,19 @@ const signup = async (payload) => {
 };
 
 const checkUser = async (uid) => {
+  // store.collection('users').where('id', '==', uid).get()
+  // .then(user => {
+  //   if (user.docs.length > 0) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // })
+  // .catch(() => {
+  //   return false
+  // })
   try {
-    let usersRef = await store.collection('users').doc(uid);
+    let usersRef = store.collection('users').doc(uid);
     let userExist = false;
 
     const docSnapshot = await usersRef.get();

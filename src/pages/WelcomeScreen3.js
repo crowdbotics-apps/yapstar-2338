@@ -8,6 +8,7 @@ import {
   Text, 
   View } from 'react-native'
 import PropTypes from 'prop-types';
+import Orientation from 'react-native-orientation'
 import { AppContext, Navbar } from 'app/components';
 
 const IMAGE_BACKGROUND = require('app/assets/images/welcome3.png');
@@ -20,33 +21,33 @@ export default class WelcomeScreen3 extends React.Component {
     super(props)
     this.state={
       uid: '',
-      fullName: '',
+      displayName: '',
       email: '',
       phoneNumber: '',
-      photoUrl: '',
-      provider: ''
+      photoURL: '',
+      providerId: ''
     }
   }
   componentDidMount() {
-    console.warn(this.props.navigation.getParam('photoUrl'))
+    Orientation.lockToPortrait();
     this.setState({
-      uid: this.props.navigation.getParam('uid'),
-      fullName: this.props.navigation.getParam('fullName'),
-      email: this.props.navigation.getParam('email'),
-      phoneNumber: this.props.navigation.getParam('phoneNumber'),
-      photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('provider')
+      uid: this.props.navigation.getParam('uid', ''),
+      displayName: this.props.navigation.getParam('displayName', ''),
+      email: this.props.navigation.getParam('email', ''),
+      phoneNumber: this.props.navigation.getParam('phoneNumber', ''),
+      photoURL: this.props.navigation.getParam('photoURL', ''),
+      providerId: this.props.navigation.getParam('providerId', '')
     })
   }
   
   onPress() {
     this.props.navigation.navigate('nickname', {
       uid: this.state.uid,
-      fullName: this.state.fullName,
+      displayName: this.state.displayName,
       email: this.state.email,
       phoneNumber: this.state.phoneNumber,
-      photoUrl: this.state.photoUrl,
-      provider: this.state.provider
+      photoURL: this.state.photoURL,
+      providerId: this.state.providerId
     });
   }
 
@@ -55,13 +56,13 @@ export default class WelcomeScreen3 extends React.Component {
       <SafeAreaView style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='cover'>
           <View style={styles.view_photo}>
-            <Image source={{uri: this.state.photoUrl}} style={styles.image_photo} resizeMode='cover'/>
+            <Image source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
           </View>
           <View style={styles.view_rect}>
             <Image source={IMAGE_RECT} style={styles.image_rect} resizeMode='stretch'/>
           </View>
           <View style={styles.view_text}>
-            <Text style={styles.text_name}>{`Hi ${this.state.fullName}`}</Text>
+            <Text style={styles.text_name}>{`Hi ${this.state.displayName}`}</Text>
             <Image source={IMAGE_TEXT} style={styles.text}/>
           </View>
           <TouchableOpacity onPress={()=>this.onPress()}>

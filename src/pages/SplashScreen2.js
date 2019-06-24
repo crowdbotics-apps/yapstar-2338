@@ -1,4 +1,5 @@
 import React from 'react'
+import Orientation from 'react-native-orientation'
 import { SafeAreaView, StyleSheet, Image } from 'react-native'
 
 const IMAGE_BACKGROUND = require('app/assets/images/splash2.png');
@@ -9,6 +10,7 @@ export default class SplashScreen2 extends React.Component {
   }
   
   componentDidMount() {
+    Orientation.lockToPortrait();
     setTimeout(() => {
       this.props.navigation.navigate('auth');
     }, 1000);
