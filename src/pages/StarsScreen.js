@@ -12,13 +12,12 @@ const IMAGE_GRADIENT = require('app/assets/images/interests_gradient.png');
 const ICON_SEARCH = require('app/assets/images/ic_search.png');
 const ICON_BACK = require('app/assets/images/ic_back.png');
 
-const IMAGE_CRICKET = require('app/assets/images/image_cricket.png');
-const IMAGE_ART = require('app/assets/images/image_art.png');
-const IMAGE_BOLLYWOOD = require('app/assets/images/image_bollywood.png');
-const IMAGE_DANCE = require('app/assets/images/image_dance.png');
-const IMAGE_FILM = require('app/assets/images/image_film.png');
-const IMAGE_SPORTS = require('app/assets/images/image_sports.png');
-const IMAGE_STANDUP = require('app/assets/images/image_standup.png');
+const IMAGE_VIRAT = require('app/assets/images/image_virat.png');
+const IMAGE_PRIYANKA = require('app/assets/images/image_priyanka.png');
+const IMAGE_AMITABH = require('app/assets/images/image_amitabh.png');
+const IMAGE_KANGANA = require('app/assets/images/image_kangana.png');
+const IMAGE_AAMIR = require('app/assets/images/image_aamir.png');
+const IMAGE_SALMAN = require('app/assets/images/image_salman.png');
 
 export default class StarsScreen extends React.Component {
   constructor (props) {
@@ -28,85 +27,85 @@ export default class StarsScreen extends React.Component {
       placeholder: 'Search Virat Kohli, Priyanka Chopra etc',
       categories_: [
         {
-          name: 'CRICKET',
-          image: IMAGE_CRICKET,
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
           selected: false
         },
         {
-          name: 'BOLLYWOOD',
-          image: IMAGE_BOLLYWOOD,
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
           selected: false
         },
         {
-          name: 'ART & CRAFT',
-          image: IMAGE_ART,
+          name: 'AMITABH BACHCHAN',
+          image: IMAGE_AMITABH,
           selected: false
         },
         {
-          name: 'DANCE',
-          image: IMAGE_DANCE,
+          name: 'AAMIR KHAN',
+          image: IMAGE_AAMIR,
           selected: false
         },
         {
-          name: 'STAND UP',
-          image: IMAGE_STANDUP,
+          name: 'SALMAN KHAN',
+          image: IMAGE_SALMAN,
           selected: false
         },
         {
-          name: 'SPORTS',
-          image: IMAGE_SPORTS,
+          name: 'KANGANA',
+          image: IMAGE_KANGANA,
           selected: false
         },
         {
-          name: 'ART & CRAFT',
-          image: IMAGE_ART,
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
           selected: false
         },
         {
-          name: 'FILM',
-          image: IMAGE_FILM,
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
           selected: false
         }
       ],
       categories: [
         {
-          name: 'CRICKET',
-          image: IMAGE_CRICKET,
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
           selected: false
         },
         {
-          name: 'BOLLYWOOD',
-          image: IMAGE_BOLLYWOOD,
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
           selected: false
         },
         {
-          name: 'ART & CRAFT',
-          image: IMAGE_ART,
+          name: 'AMITABH BACHCHAN',
+          image: IMAGE_AMITABH,
           selected: false
         },
         {
-          name: 'DANCE',
-          image: IMAGE_DANCE,
+          name: 'AAMIR KHAN',
+          image: IMAGE_AAMIR,
           selected: false
         },
         {
-          name: 'STAND UP',
-          image: IMAGE_STANDUP,
+          name: 'SALMAN KHAN',
+          image: IMAGE_SALMAN,
           selected: false
         },
         {
-          name: 'SPORTS',
-          image: IMAGE_SPORTS,
+          name: 'KANGANA',
+          image: IMAGE_KANGANA,
           selected: false
         },
         {
-          name: 'ART & CRAFT',
-          image: IMAGE_ART,
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
           selected: false
         },
         {
-          name: 'FILM',
-          image: IMAGE_FILM,
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
           selected: false
         }
       ],
@@ -116,7 +115,7 @@ export default class StarsScreen extends React.Component {
     Orientation.lockToPortrait();
   }
   onPressNextButton() {
-    console.warn('dddddddddddddd')
+    // console.warn('dddddddddddddd')
   }
   onPressItem(index) {
     this.state.categories[index].selected = !this.state.categories[index].selected
@@ -290,14 +289,14 @@ const styles = StyleSheet.create({
     width: (screenWidth-65)/2, 
     height:((screenWidth-65)/2)*(350/312), 
     borderRadius: 10, 
-    marginTop: 15,
+    marginBottom: 60,
     alignItems: 'center', 
   },
   view_item_select: {
     width: (screenWidth-65)/2, 
     height:((screenWidth-65)/2)*(350/312), 
     borderRadius: 10, 
-    marginTop: 15,
+    marginBottom: 60,
     alignItems: 'center', 
     borderWidth: 2,
     borderColor:'#F8D099'
@@ -316,9 +315,11 @@ const styles = StyleSheet.create({
   },
   text_item: {
     width: '90%', 
+    height: 50,
+    marginBottom: -25, 
+    paddingHorizontal: 10,
     textAlign: 'center',
-    paddingVertical: 5,
-    marginBottom: 15, 
+    textAlignVertical: 'center',
     backgroundColor: '#666A', 
     borderRadius: 5, 
     color: 'white', 

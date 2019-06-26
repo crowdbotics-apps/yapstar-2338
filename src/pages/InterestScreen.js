@@ -290,30 +290,18 @@ const styles = StyleSheet.create({
     width: (screenWidth-65)/2, 
     height:((screenWidth-65)/2)*(350/312), 
     borderRadius: 10, 
-    marginTop: 15,
+    marginBottom: 15,
     alignItems: 'center', 
   },
   view_item_select: {
     width: (screenWidth-65)/2, 
     height:((screenWidth-65)/2)*(350/312), 
     borderRadius: 10, 
-    marginTop: 15,
+    marginBottom: 15,
     alignItems: 'center', 
     borderWidth: 2,
     borderColor:'#F8D099'
   },
-  // view_item2: {
-  //   width: (screenWidth-55)/2, 
-  //   height:((screenWidth-55)/2)*(350/312), 
-  //   borderRadius: 10,
-  //   marginTop: 30, 
-  //   marginLeft: 8,
-  //   marginRight: 8,
-  //   marginBottom: 8,
-  //   alignItems: 'center', 
-  //   borderWidth: 2,
-  //   borderColor:'#F8D099'
-  // },
   image_item: {
     width:'100%', 
     height: '100%', 
@@ -329,7 +317,7 @@ const styles = StyleSheet.create({
   text_item: {
     width: '90%', 
     textAlign: 'center',
-    paddingVertical: 5,
+    paddingVertical: 10,
     marginBottom: 15, 
     backgroundColor: '#666A', 
     borderRadius: 5, 
