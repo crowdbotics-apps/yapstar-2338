@@ -29,9 +29,6 @@ export default class NicknameScreen extends React.Component {
   componentDidMount() {
     Orientation.lockToPortrait();
   }
-  // onPresNext() {
-  //   console.warn('press next')
-  // }
   onPresNext = async () => {
     if (this.state.nickName === '') {
       alert('Please enter Nick Name');

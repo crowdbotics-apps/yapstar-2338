@@ -26,7 +26,7 @@ export default class SplashScreen1 extends React.Component {
 		// 	}
     // });
     Splash.hide()
-    this.props.navigation.navigate('interest');
+    this.props.navigation.navigate('welcome1');
   }
 
   render() {

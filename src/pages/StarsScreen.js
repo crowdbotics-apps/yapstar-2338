@@ -316,6 +316,7 @@ const styles = StyleSheet.create({
   text_item: {
     width: '90%', 
     height: 50,
+    fontSize: 16,
     marginBottom: -25, 
     paddingHorizontal: 10,
     textAlign: 'center',

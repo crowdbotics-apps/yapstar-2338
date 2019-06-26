@@ -185,7 +185,7 @@ export default class InterestScreen extends React.Component {
               </TouchableOpacity>
             }
             centerComponent={{ text: 'Your Interests', style: cStyles.headerText }}
-            rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=>console.warn('reeeeeeeeeeee') }}
+            rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=> this.props.navigation.openDrawer()}}
           />
           <Text style={styles.text_search}>
             SEARCH YOUR INTERESTS
@@ -316,8 +316,10 @@ const styles = StyleSheet.create({
   },
   text_item: {
     width: '90%', 
+    fontSize: 14,
+    height: 30,
     textAlign: 'center',
-    paddingVertical: 10,
+    textAlignVertical: 'center',
     marginBottom: 15, 
     backgroundColor: '#666A', 
     borderRadius: 5, 

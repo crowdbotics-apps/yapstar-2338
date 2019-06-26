@@ -9,6 +9,7 @@ import {
 import { Text, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+
 import SplashScreen1 from '../pages/SplashScreen1';
 import SplashScreen2 from '../pages/SplashScreen2';
 import WelcomeScreen1 from '../pages/WelcomeScreen1';
@@ -31,7 +32,7 @@ import MainScreen from '../pages/Main';
 import { DrawerMenu } from '../components';
 import SingupScreen from '../pages/Signup';
 
-const dm = Dimensions.get('screen');
+const screenWidth = Dimensions.get('screen').width;
 
 const TopbarOption = {
   headerStyle: { backgroundColor: 'transparent' },
@@ -46,7 +47,6 @@ const AuthNavigator = createStackNavigator(
     signin: SigninScreen,
     welcome3: WelcomeScreen3,
     nickname: NicknameScreen,
-    // interest: InterestScreen,
 
     login: {
       screen: LoginScreen
@@ -70,21 +70,29 @@ const AuthNavigator = createStackNavigator(
   }
 );
 
-// const SettingStack = createStackNavigator({
-//   interest: InterestScreen
-// },{
-//   defaultNavigationOptions: TopbarOption
-// })
-
 const DrawerStack = createDrawerNavigator({
   interest: InterestScreen,
   stars: StarsScreen
 },{
-  // contentComponent: DrawerComponent,
+  initialRouteName: 'interest',
   drawerType: 'slide',
   drawerPosition: 'right',
   overlayColor: 'transparent',
-  drawerWidth: 200
+  drawerWidth: screenWidth,
+  contentComponent: (props) => (
+    <DrawerMenu currentScreen={props.navigation.state.routeName} {...props} />
+  ),
+  contentOptions: {
+    activeTintColor: 'white',
+    inactiveTintColor: 'white',
+    labelStyle: {
+      fontSize: 20,
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      marginLeft: 0,
+      paddingLeft: 0
+    }
+  }
 })
 
 const MainTabNavigator = createBottomTabNavigator(
@@ -114,7 +122,7 @@ const MainNavigator = createDrawerNavigator(
     profile: ProfileScreen
   },
   {
-    drawerWidth: dm.width * 0.6,
+    drawerWidth: screenWidth * 0.6,
     // eslint-disable-next-line react/display-name
     contentComponent: (props) => (
       <DrawerMenu currentScreen={props.navigation.state.routeName} {...props} />
