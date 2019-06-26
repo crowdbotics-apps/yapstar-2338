@@ -185,9 +185,7 @@ export default class InterestScreen extends React.Component {
               </TouchableOpacity>
             }
             centerComponent={{ text: 'Your Interests', style: cStyles.headerText }}
-            rightComponent={{ icon: 'menu', color: '#fff', 
-              // onPress: ()=> this.props.navigation.openDrawer()
-            }}
+            rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=> this.props.navigation.openDrawer()}}
           />
           <Text style={styles.text_search}>
             SEARCH YOUR INTERESTS

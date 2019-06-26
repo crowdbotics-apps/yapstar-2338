@@ -26,88 +26,88 @@ export default class StarsScreen extends React.Component {
       keyword: '',
       placeholder: 'Search Virat Kohli, Priyanka Chopra etc',
       categories_: [
-        // {
-        //   name: 'VIRAT KOHLI',
-        //   image: IMAGE_VIRAT,
-        //   selected: false
-        // },
-        // {
-        //   name: 'PRIYANKA CHOPRA',
-        //   image: IMAGE_PRIYANKA,
-        //   selected: false
-        // },
-        // {
-        //   name: 'AMITABH BACHCHAN',
-        //   image: IMAGE_AMITABH,
-        //   selected: false
-        // },
-        // {
-        //   name: 'AAMIR KHAN',
-        //   image: IMAGE_AAMIR,
-        //   selected: false
-        // },
-        // {
-        //   name: 'SALMAN KHAN',
-        //   image: IMAGE_SALMAN,
-        //   selected: false
-        // },
-        // {
-        //   name: 'KANGANA',
-        //   image: IMAGE_KANGANA,
-        //   selected: false
-        // },
-        // {
-        //   name: 'VIRAT KOHLI',
-        //   image: IMAGE_VIRAT,
-        //   selected: false
-        // },
-        // {
-        //   name: 'PRIYANKA CHOPRA',
-        //   image: IMAGE_PRIYANKA,
-        //   selected: false
-        // }
+        {
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
+          selected: false
+        },
+        {
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
+          selected: false
+        },
+        {
+          name: 'AMITABH BACHCHAN',
+          image: IMAGE_AMITABH,
+          selected: false
+        },
+        {
+          name: 'AAMIR KHAN',
+          image: IMAGE_AAMIR,
+          selected: false
+        },
+        {
+          name: 'SALMAN KHAN',
+          image: IMAGE_SALMAN,
+          selected: false
+        },
+        {
+          name: 'KANGANA',
+          image: IMAGE_KANGANA,
+          selected: false
+        },
+        {
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
+          selected: false
+        },
+        {
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
+          selected: false
+        }
       ],
       categories: [
-        // {
-        //   name: 'VIRAT KOHLI',
-        //   image: IMAGE_VIRAT,
-        //   selected: false
-        // },
-        // {
-        //   name: 'PRIYANKA CHOPRA',
-        //   image: IMAGE_PRIYANKA,
-        //   selected: false
-        // },
-        // {
-        //   name: 'AMITABH BACHCHAN',
-        //   image: IMAGE_AMITABH,
-        //   selected: false
-        // },
-        // {
-        //   name: 'AAMIR KHAN',
-        //   image: IMAGE_AAMIR,
-        //   selected: false
-        // },
-        // {
-        //   name: 'SALMAN KHAN',
-        //   image: IMAGE_SALMAN,
-        //   selected: false
-        // },
-        // {
-        //   name: 'KANGANA',
-        //   image: IMAGE_KANGANA,
-        //   selected: false
-        // },
-        // {
-        //   name: 'VIRAT KOHLI',
-        //   image: IMAGE_VIRAT,
-        //   selected: false
-        // },
-        // {
-        //   name: 'PRIYANKA CHOPRA',
-        //   image: IMAGE_PRIYANKA,
-        //   selected: false
-        // }
+        {
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
+          selected: false
+        },
+        {
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
+          selected: false
+        },
+        {
+          name: 'AMITABH BACHCHAN',
+          image: IMAGE_AMITABH,
+          selected: false
+        },
+        {
+          name: 'AAMIR KHAN',
+          image: IMAGE_AAMIR,
+          selected: false
+        },
+        {
+          name: 'SALMAN KHAN',
+          image: IMAGE_SALMAN,
+          selected: false
+        },
+        {
+          name: 'KANGANA',
+          image: IMAGE_KANGANA,
+          selected: false
+        },
+        {
+          name: 'VIRAT KOHLI',
+          image: IMAGE_VIRAT,
+          selected: false
+        },
+        {
+          name: 'PRIYANKA CHOPRA',
+          image: IMAGE_PRIYANKA,
+          selected: false
+        }
       ],
     }
   }
@@ -115,7 +115,6 @@ export default class StarsScreen extends React.Component {
     Orientation.lockToPortrait();
   }
   onPressNextButton() {
-    this.props.navigation.navigate('main')
     // console.warn('dddddddddddddd')
   }
   onPressItem(index) {
