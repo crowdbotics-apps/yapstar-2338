@@ -32,6 +32,7 @@ import MainScreen from '../pages/Main';
 import { DrawerMenu } from '../components';
 import SingupScreen from '../pages/Signup';
 
+
 const screenWidth = Dimensions.get('screen').width;
 
 const TopbarOption = {
@@ -159,8 +160,8 @@ export default createSwitchNavigator(
     welcome1: WelcomeScreen1,
     welcome2: WelcomeScreen2,
     auth: AuthNavigator,
-    // main: MainStackNavigator
-    drawer: DrawerStack
+    main: MainStackNavigator,
+    drawer: DrawerStack,
   },
   {
     initialRouteName: 'splash1'
