@@ -16,6 +16,10 @@ import WelcomeScreen2 from '../pages/WelcomeScreen2';
 import WelcomeScreen3 from '../pages/WelcomeScreen3';
 import SigninScreen from '../pages/SigninScreen';
 import NicknameScreen from '../pages/NicknameScreen';
+import InterestScreen from '../pages/InterestScreen';
+import StarsScreen from '../pages/StarsScreen';
+
+
 import LoginScreen from '../pages/Login';
 import SignupScreen from '../pages/Signup';
 import SignupPhoneScreen from '../pages/SignupPhone';
@@ -24,22 +28,25 @@ import SignupCategoryScreen from '../pages/SignupCategory';
 import ProfileScreen from '../pages/Profile';
 import MainScreen from '../pages/Main';
 
-import { DrawerMenu } from './../components';
+import { DrawerMenu } from '../components';
 import SingupScreen from '../pages/Signup';
 
 const dm = Dimensions.get('screen');
 
+const TopbarOption = {
+  headerStyle: { backgroundColor: 'transparent' },
+  headerTitleStyle: {fontWeight: 'normal', textAlign: 'center', flex: 1, alignSelf: 'center'},
+  headerLayoutPreset: 'center',
+  headerTintColor: 'transparent',
+  headerBackTitleVisible: true,
+}
+
 const AuthNavigator = createStackNavigator(
   {
-    signin: {
-      screen: SigninScreen
-    },
-    welcome3: {
-      screen: WelcomeScreen3
-    },
-    nickname: {
-      screen: NicknameScreen
-    },
+    signin: SigninScreen,
+    welcome3: WelcomeScreen3,
+    nickname: NicknameScreen,
+    // interest: InterestScreen,
 
     login: {
       screen: LoginScreen
@@ -62,6 +69,23 @@ const AuthNavigator = createStackNavigator(
     initialRouteName: 'signin'
   }
 );
+
+// const SettingStack = createStackNavigator({
+//   interest: InterestScreen
+// },{
+//   defaultNavigationOptions: TopbarOption
+// })
+
+const DrawerStack = createDrawerNavigator({
+  interest: InterestScreen,
+  stars: StarsScreen
+},{
+  // contentComponent: DrawerComponent,
+  drawerType: 'slide',
+  drawerPosition: 'right',
+  overlayColor: 'transparent',
+  drawerWidth: 200
+})
 
 const MainTabNavigator = createBottomTabNavigator(
   {
@@ -127,7 +151,8 @@ export default createSwitchNavigator(
     welcome1: WelcomeScreen1,
     welcome2: WelcomeScreen2,
     auth: AuthNavigator,
-    main: MainStackNavigator
+    // main: MainStackNavigator
+    drawer: DrawerStack
   },
   {
     initialRouteName: 'splash1'

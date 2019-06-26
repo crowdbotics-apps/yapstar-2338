@@ -26,11 +26,11 @@ class SignupPhoneScreen extends React.Component {
       value: null,
       nickName: this.props.navigation.getParam('nickName'),
       uid: this.props.navigation.getParam('uid'),
-      fullName: this.props.navigation.getParam('fullName'),
+      fullName: this.props.navigation.getParam('displayName'),
       email: this.props.navigation.getParam('email'),
       phoneNumber: this.props.navigation.getParam('phoneNumber'),
-      photoUrl: this.props.navigation.getParam('photoUrl'),
-      provider: this.props.navigation.getParam('provider')
+      photoUrl: this.props.navigation.getParam('photoURL'),
+      provider: this.props.navigation.getParam('providerId')
     };
   }
 
