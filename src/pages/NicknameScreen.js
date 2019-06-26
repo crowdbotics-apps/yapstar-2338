@@ -11,6 +11,7 @@ const IMAGE_TEXT = require('app/assets/images/profile_txt.png');
 const IMAGE_BUTTON = require('app/assets/images/profile_btn.png');
 const IMAGE_EDIT = require('app/assets/images/profile_editbox.png');
 const IMAGE_SUCCESS = require('app/assets/images/success.png');
+const IMAGE_RECT = require('app/assets/images/welcome3_rect.png');
 
 export default class NicknameScreen extends React.Component {
   constructor (props) {
@@ -50,6 +51,12 @@ export default class NicknameScreen extends React.Component {
     return(
       <SafeAreaView style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='stretch'>
+          <View style={styles.view_photo}>
+            <Image source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
+          </View>
+          <View style={styles.view_rect}>
+            <Image source={IMAGE_RECT} style={styles.image_rect} resizeMode='stretch'/>
+          </View>
           <View style={styles.view_middle}>
             <Image source={IMAGE_TEXT} style={styles.text}/>
             <Input
@@ -124,7 +131,28 @@ const styles = StyleSheet.create({
     borderColor: '#ECD39A', 
     borderWidth: 2, 
     borderRadius: 5, 
+  },
+  view_photo: {
+    width: '100%', 
+    height: '100%', 
+    position: 'absolute',
+  },
+  view_rect: {
+    width: '100%', 
+    height: '100%', 
+    position: 'absolute',
+    paddingTop: '10%'
+  },
+  image_rect: {
+    width: '100%', 
+    height: undefined, 
+    aspectRatio: 610/1084 
+  },
+  image_photo: {
+    width: '100%', 
+    height: '50%'
   }
+
 })
 
 NicknameScreen.contextType = AppContext;

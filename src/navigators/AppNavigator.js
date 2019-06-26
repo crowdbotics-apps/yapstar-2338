@@ -159,7 +159,7 @@ export default createSwitchNavigator(
     welcome1: WelcomeScreen1,
     welcome2: WelcomeScreen2,
     auth: AuthNavigator,
-    // main: MainStackNavigator
+    main: MainStackNavigator,
     drawer: DrawerStack
   },
   {

@@ -118,6 +118,7 @@ export default class SigninScreen extends React.Component {
       .auth()
       .signInWithCredential(credential);
     const user = await firebaseUserCredential.user._user;
+    console.warn(user)
     // const exist = Authentication.checkUser(user.uid);
     await this.context.hideLoading();
     // if (exist) {
@@ -129,9 +130,9 @@ export default class SigninScreen extends React.Component {
         'uid': user.uid,
         'displayName': user.displayName,
         'email': user.email,
-        'phoneNumber': user.phoneNumber,
-        'photoURL': user.photoURL,
-        'providerId': user.providerId
+        'phoneNumber': user.providerData[0].phoneNumber,
+        'photoURL': user.providerData[0].photoURL,
+        'providerId': user.providerData[0].providerId
       });
     // }
     // firestore.collection('users').where('id', '==', user.uid).get()
