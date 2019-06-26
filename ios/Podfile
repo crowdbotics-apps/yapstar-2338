@@ -1,72 +1,46 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+# platform :ios, '9.0'
 
 target 'YapStars' do
-  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
 
   # Pods for YapStars
 
-  # Required by RNFirebase
   pod 'Firebase/Core', '~> 5.20.1'
 
-  pod 'Firebase/AdMob', '~> 5.20.1'
   pod 'Firebase/Auth', '~> 5.20.1'
-  pod 'Firebase/Database', '~> 5.20.1'
-  pod 'Firebase/Functions', '~> 5.20.1'
-  pod 'Firebase/DynamicLinks', '~> 5.20.1'
+  pod 'Firebase/Functions', '~> 5.20.1'  
   pod 'Firebase/Firestore', '~> 5.20.1'
   pod 'Firebase/Messaging', '~> 5.20.1'
   pod 'Firebase/RemoteConfig', '~> 5.20.1'
   pod 'Firebase/Storage', '~> 5.20.1'
-  pod 'Firebase/Performance', '~> 5.20.1'
 
-  # Crashlytics
-  pod 'Fabric', '~> 1.9.0'
-  pod 'Crashlytics', '~> 3.12.0'
+  pod 'GoogleSignIn', '~> 4.4.0'
+  pod 'FBSDKCoreKit', '~> 4.39.0'
+  pod 'FBSDKLoginKit', '~> 4.39.0'
+  pod 'FBSDKShareKit', '~> 4.39.0'
+  pod 'TwitterKit', '~> 3.3.0'
 
-  # pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'Fabric', '~> 1.10.1'
+  pod 'Crashlytics', '~> 3.13.1'
 
+  target 'YapStarsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
-    pod 'FBSDKCoreKit', '~> 4.41.0'
-    pod 'FBSDKLoginKit', '~> 4.41.0'
-    pod 'FBSDKShareKit', '~> 4.41.0'
-    pod 'TwitterKit', '~> 3.3.0'
-    rn_path = '../node_modules/react-native'
-    pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
-    pod 'React', path: '../node_modules/react-native', :subspecs => [
-      'Core',
-      # 'Folly',
-      'DevSupport',
-      'RCTActionSheet',
-      'RCTAnimation',
-      'RCTGeolocation',
-      'RCTImage',
-      'RCTLinkingIOS',
-      'RCTNetwork',
-      'RCTSettings',
-      'RCTText',
-      'RCTVibration',
-      'RCTWebSocket',
-    ]
+end
 
-    pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+target 'YapStars-tvOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
 
-    pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+  # Pods for YapStars-tvOS
 
-    pod 'react-native-twitter-signin', :path => '../node_modules/react-native-twitter-signin'
+  target 'YapStars-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
-    pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
-
-    pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
-
-    pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
-
-    post_install do |installer|
-      installer.pods_project.targets.each do |target|
-        if target.name == "React"
-          target.remove_from_project
-        end
-      end
-    end
 end

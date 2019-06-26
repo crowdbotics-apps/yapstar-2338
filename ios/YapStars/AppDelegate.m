@@ -19,7 +19,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{  
+{
+  [FIRApp configure];
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
@@ -43,9 +44,9 @@
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
   BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options];
-  handled = [[Twitter sharedInstance] application:application openURL:url options:options];
+  handled = [[Twitter sharedInstance] application:app openURL:url options:options];
   
-      handled = [RNGoogleSignin application:application
+      handled = [RNGoogleSignin application:app
                                 openURL:url
                       sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
                              annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
@@ -54,9 +55,9 @@
     return YES;
   }
 
-  if ([RCTLinkingManager application:app openURL:url options:options]) {
-    return YES;
-  }
+//  if ([RCTLinkingManager application:app openURL:url options:options]) {
+//    return YES;
+//  }
 
   return NO;
 }
