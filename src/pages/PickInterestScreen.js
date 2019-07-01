@@ -22,7 +22,7 @@ const IMAGE_FILM = require('app/assets/images/image_film.png');
 const IMAGE_SPORTS = require('app/assets/images/image_sports.png');
 const IMAGE_STANDUP = require('app/assets/images/image_standup.png');
 
-export default class InterestScreen extends React.Component {
+export default class PickInterestScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -152,7 +152,7 @@ export default class InterestScreen extends React.Component {
     await this.context.hideLoading();
     console.warn(done)
     if (done) {
-      this.props.navigation.navigate('stars');
+      this.props.navigation.navigate('pick_star');
     } else {
       alert('Error Occurs. Please try again.')
     }
@@ -368,8 +368,8 @@ const styles = StyleSheet.create({
   }
 })
 
-InterestScreen.contextType = AppContext;
+PickInterestScreen.contextType = AppContext;
 
-InterestScreen.propTypes = {
+PickInterestScreen.propTypes = {
   navigation: PropTypes.object
 };

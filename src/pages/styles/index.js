@@ -1,6 +1,7 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 
 export const screenWidth = Dimensions.get('window').width;
+export const screenHeight = Dimensions.get('window').height;
 export const isiOS = Platform.OS === 'ios';
 
 export const cStyles = StyleSheet.create({
@@ -24,7 +25,7 @@ export const cStyles = StyleSheet.create({
     alignItems: 'center'
   },
   headerContainer: {
-    // height: Platform.OS === 'ios' ? 70 :  70 - 24,
+    height: Platform.OS === 'ios' ? 70 :  70 - 24,
     paddingHorizontal: 25,
     backgroundColor: 'transparent',
     borderBottomWidth: 0,

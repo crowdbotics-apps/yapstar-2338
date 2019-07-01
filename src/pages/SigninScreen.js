@@ -94,6 +94,7 @@ export default class SigninScreen extends React.Component {
       })
       .catch((error) => {
         this.context.hideLoading();
+        alert('Please check your internet connection state.')
         console.warn('twitter error:', error);
       });
   };
@@ -124,7 +125,7 @@ export default class SigninScreen extends React.Component {
     const exist = await Authentication.checkUser(user.uid);
     await this.context.hideLoading();
     if (exist) {
-      this.props.navigation.navigate('main', {
+      this.props.navigation.navigate('fanStack', {
         'uid': user.uid,
       });
     } else {
