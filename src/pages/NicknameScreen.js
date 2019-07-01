@@ -4,6 +4,7 @@ import { Input, colors } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from 'prop-types';
 import Orientation from 'react-native-orientation'
+import FastImage from 'react-native-fast-image'
 import { AppContext, Navbar } from '../components'
 
 const IMAGE_BACKGROUND = require('app/assets/images/profile.png');
@@ -35,16 +36,15 @@ export default class NicknameScreen extends React.Component {
       alert('Please enter Nick Name');
       return;
     }
-    this.props.navigation.navigate('interest')
-    // this.props.navigation.navigate('signupphone', {
-    //   nickName: this.state.nickName,
-    //   uid: this.props.navigation.getParam('uid'),
-    //   displayName: this.props.navigation.getParam('displayName'),
-    //   email: this.props.navigation.getParam('email'),
-    //   phoneNumber: this.props.navigation.getParam('phoneNumber'),
-    //   photoURL: this.props.navigation.getParam('photoURL'),
-    //   providerId: this.props.navigation.getParam('providerId')
-    // });
+    this.props.navigation.navigate('interest', {
+      nickName: this.state.nickName,
+      uid: this.props.navigation.getParam('uid'),
+      displayName: this.props.navigation.getParam('displayName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoURL: this.props.navigation.getParam('photoURL'),
+      providerId: this.props.navigation.getParam('providerId')
+    });
   };
 
   render() {
@@ -52,7 +52,7 @@ export default class NicknameScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='stretch'>
           <View style={styles.view_photo}>
-            <Image source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
+            <FastImage source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
           </View>
           <View style={styles.view_rect}>
             <Image source={IMAGE_RECT} style={styles.image_rect} resizeMode='stretch'/>

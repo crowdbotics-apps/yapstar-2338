@@ -10,6 +10,7 @@ import {
 import PropTypes from 'prop-types';
 import Orientation from 'react-native-orientation'
 import { AppContext, Navbar } from 'app/components';
+import FastImage from 'react-native-fast-image'
 
 const IMAGE_BACKGROUND = require('app/assets/images/welcome3.png');
 const IMAGE_TEXT = require('app/assets/images/welcome3_txt.png');
@@ -56,7 +57,7 @@ export default class WelcomeScreen3 extends React.Component {
       <SafeAreaView style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='cover'>
           <View style={styles.view_photo}>
-            <Image source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
+            <FastImage source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
           </View>
           <View style={styles.view_rect}>
             <Image source={IMAGE_RECT} style={styles.image_rect} resizeMode='stretch'/>

@@ -17,16 +17,16 @@ export default class SplashScreen1 extends React.Component {
     Orientation.lockToPortrait()
   }
   gotoNextScreen() {
-		// this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
-		// 	Splash.hide()
-		// 	if (user) {
-		// 		this.props.navigation.navigate('main');
-		// 	} else {
-		// 		this.props.navigation.navigate('welcome1');
-		// 	}
-    // });
-    Splash.hide()
-    this.props.navigation.navigate('welcome1');
+		this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
+			Splash.hide()
+			// if (user) {
+			// 	this.props.navigation.navigate('chatroom');
+			// } else {
+				this.props.navigation.navigate('welcome1');
+			// }
+    });
+    // Splash.hide()
+    // this.props.navigation.navigate('welcome1');
   }
 
   render() {

@@ -8,17 +8,17 @@ const signup = async (payload) => {
     let ref = store.collection('users').doc(payload.uid);
     await store.runTransaction(async (transaction) => {
       const doc = await transaction.get(ref);
-
       if (!doc.exists) {
         transaction.set(ref, {
           id: payload.uid,
           nickName: payload.nickName,
-          fullName: payload.fullName,
+          displayName: payload.displayName,
           email: payload.email,
           phoneNumber: payload.phoneNumber,
-          photoUrl: payload.photoUrl,
-          provider: payload.provider,
-          interests: payload.items
+          photoURL: payload.photoURL,
+          providerId: payload.providerId,
+          interests: payload.selectedItems,
+          role: 0
         });
       }
     });
@@ -29,23 +29,11 @@ const signup = async (payload) => {
 };
 
 const checkUser = async (uid) => {
-  // store.collection('users').where('id', '==', uid).get()
-  // .then(user => {
-  //   if (user.docs.length > 0) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // })
-  // .catch(() => {
-  //   return false
-  // })
   try {
     let usersRef = store.collection('users').doc(uid);
     let userExist = false;
 
     const docSnapshot = await usersRef.get();
-
     if (docSnapshot.exists) {
       userExist = true;
     }

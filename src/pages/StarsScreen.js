@@ -115,7 +115,7 @@ export default class StarsScreen extends React.Component {
     Orientation.lockToPortrait();
   }
   onPressNextButton() {
-    this.props.navigation.navigate('main')
+    this.props.navigation.navigate('chatroom')
     // console.warn('dddddddddddddd')
   }
   onPressItem(index) {

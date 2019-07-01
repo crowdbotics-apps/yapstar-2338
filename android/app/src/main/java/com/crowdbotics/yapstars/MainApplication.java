@@ -3,6 +3,7 @@ package com.crowdbotics.yapstars;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.opentokreactnative.OTPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.goldenowl.twittersignin.TwitterSigninPackage;
@@ -52,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OTPackage(),
             new OrientationPackage(),
           new VectorIconsPackage(),
           new TwitterSigninPackage(),
