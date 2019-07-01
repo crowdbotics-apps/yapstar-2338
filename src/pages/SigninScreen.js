@@ -33,6 +33,7 @@ export default class SigninScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state ={
+      userName: '',
     }
   }
 
@@ -79,10 +80,11 @@ export default class SigninScreen extends React.Component {
 
     RNTwitterSignIn.logIn()
       .then((loginData) => {
-        const { authToken, authTokenSecret } = loginData;
-        if (authToken && authTokenSecret) {
+        const { authToken, authTokenSecret, userName } = loginData;
+        if (authToken && authTokenSecret && userName) {
           this.setState({
-            isLoggedIn: true
+            isLoggedIn: true,
+            userName: userName
           });
           return TwitterAuthProvider.credential(authToken, authTokenSecret);
         }
@@ -92,7 +94,8 @@ export default class SigninScreen extends React.Component {
       })
       .catch((error) => {
         this.context.hideLoading();
-        console.log(error);
+        alert('Please check your internet connection state.')
+        console.warn('twitter error:', error);
       });
   };
 
@@ -119,45 +122,22 @@ export default class SigninScreen extends React.Component {
       .signInWithCredential(credential);
     const user = await firebaseUserCredential.user._user;
     console.warn(user)
-    // const exist = Authentication.checkUser(user.uid);
+    const exist = await Authentication.checkUser(user.uid);
     await this.context.hideLoading();
-    // if (exist) {
-    //   this.props.navigation.navigate('main', {
-    //     'uid': user.uid,
-    //   });
-    // } else {
+    if (exist) {
+      this.props.navigation.navigate('fanStack', {
+        'uid': user.uid,
+      });
+    } else {
       this.props.navigation.navigate('welcome3', {
         'uid': user.uid,
         'displayName': user.displayName,
         'email': user.email,
         'phoneNumber': user.providerData[0].phoneNumber,
-        'photoURL': user.providerData[0].photoURL,
+        'photoURL': `https://twitter.com/${this.state.userName}/profile_image?size=original`,
         'providerId': user.providerData[0].providerId
       });
-    // }
-    // firestore.collection('users').where('id', '==', user.uid).get()
-    // .then(users => {
-    //   console.warn()
-    //   this.context.hideLoading();
-    //   if (users.docs.length > 0) {
-    //     this.props.navigation.navigate('main', {
-    //       'uid': user.uid,
-    //     });
-    //   } else {
-    //     this.props.navigation.navigate('welcome3', {
-    //       'uid': user.uid,
-    //       'displayName': user.displayName,
-    //       'email': user.email,
-    //       'phoneNumber': user.phoneNumber,
-    //       'photoURL': user.photoURL,
-    //       'providerId': user.providerId
-    //     });
-    //   }
-    // })
-    // .catch(() => {
-    //   this.context.hideLoading();
-    //   alert('Auth error. Please try again later.');
-    // })
+    }
   };
   
   onPressPolicy() {

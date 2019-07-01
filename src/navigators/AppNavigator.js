@@ -17,8 +17,10 @@ import WelcomeScreen2 from '../pages/WelcomeScreen2';
 import WelcomeScreen3 from '../pages/WelcomeScreen3';
 import SigninScreen from '../pages/SigninScreen';
 import NicknameScreen from '../pages/NicknameScreen';
-import InterestScreen from '../pages/InterestScreen';
-import StarsScreen from '../pages/StarsScreen';
+import PickInterestScreen from '../pages/PickInterestScreen';
+import PickStarScreen from '../pages/PickStarScreen';
+import ChatRoomScreen from '../pages/ChatRoomScreen';
+import FanMainScreen from '../pages/FanMainScreen';
 
 
 import LoginScreen from '../pages/Login';
@@ -71,10 +73,34 @@ const AuthNavigator = createStackNavigator(
 );
 
 const DrawerStack = createDrawerNavigator({
-  interest: InterestScreen,
-  stars: StarsScreen
+  pick_interest: PickInterestScreen,
+  pick_star: PickStarScreen,
 },{
-  initialRouteName: 'interest',
+  initialRouteName: 'pick_interest',
+  drawerType: 'slide',
+  drawerPosition: 'right',
+  overlayColor: 'transparent',
+  drawerWidth: screenWidth,
+  contentComponent: (props) => (
+    <DrawerMenu currentScreen={props.navigation.state.routeName} {...props} />
+  ),
+  contentOptions: {
+    activeTintColor: 'white',
+    inactiveTintColor: 'white',
+    labelStyle: {
+      fontSize: 20,
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      marginLeft: 0,
+      paddingLeft: 0
+    }
+  }
+})
+
+const FanStack = createDrawerNavigator({
+  fan_main: FanMainScreen,
+},{
+  initialRouteName: 'fan_main',
   drawerType: 'slide',
   drawerPosition: 'right',
   overlayColor: 'transparent',
@@ -160,6 +186,8 @@ export default createSwitchNavigator(
     welcome2: WelcomeScreen2,
     auth: AuthNavigator,
     main: MainStackNavigator,
+    fanStack: FanStack,
+    chatroom: ChatRoomScreen,
     drawer: DrawerStack
   },
   {

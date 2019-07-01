@@ -19,7 +19,7 @@ const IMAGE_KANGANA = require('app/assets/images/image_kangana.png');
 const IMAGE_AAMIR = require('app/assets/images/image_aamir.png');
 const IMAGE_SALMAN = require('app/assets/images/image_salman.png');
 
-export default class StarsScreen extends React.Component {
+export default class PickStarScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -115,7 +115,7 @@ export default class StarsScreen extends React.Component {
     Orientation.lockToPortrait();
   }
   onPressNextButton() {
-    this.props.navigation.navigate('main')
+    this.props.navigation.navigate('chatroom')
     // console.warn('dddddddddddddd')
   }
   onPressItem(index) {
@@ -176,7 +176,7 @@ export default class StarsScreen extends React.Component {
             containerStyle={cStyles.headerContainer}
             placement="left"
             leftComponent= {
-              <TouchableOpacity onPress={()=>this.props.navigation.navigate('interest')}>
+              <TouchableOpacity onPress={()=>this.props.navigation.navigate('pick_interest')}>
                 <Image
                   style={{width:20, height:20}}
                   source={ICON_BACK}
@@ -328,8 +328,8 @@ const styles = StyleSheet.create({
   }
 })
 
-StarsScreen.contextType = AppContext;
+PickStarScreen.contextType = AppContext;
 
-StarsScreen.propTypes = {
+PickStarScreen.propTypes = {
   navigation: PropTypes.object
 };

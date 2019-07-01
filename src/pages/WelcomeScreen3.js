@@ -10,11 +10,13 @@ import {
 import PropTypes from 'prop-types';
 import Orientation from 'react-native-orientation'
 import { AppContext, Navbar } from 'app/components';
+import FastImage from 'react-native-fast-image'
 
 const IMAGE_BACKGROUND = require('app/assets/images/welcome3.png');
 const IMAGE_TEXT = require('app/assets/images/welcome3_txt.png');
-const IMAGE_BUTTON = require('app/assets/images/welcome3_btn.png');
 const IMAGE_RECT = require('app/assets/images/welcome3_rect.png');
+const IMAGE_TAB = require('app/assets/images/welcome3_tab.png');
+const IMAGE_TAB_IMG = require('app/assets/images/welcome3_tab_image.png');
 
 export default class WelcomeScreen3 extends React.Component {
   constructor (props) {
@@ -56,7 +58,7 @@ export default class WelcomeScreen3 extends React.Component {
       <SafeAreaView style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='cover'>
           <View style={styles.view_photo}>
-            <Image source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
+            <FastImage source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
           </View>
           <View style={styles.view_rect}>
             <Image source={IMAGE_RECT} style={styles.image_rect} resizeMode='stretch'/>
@@ -65,8 +67,10 @@ export default class WelcomeScreen3 extends React.Component {
             <Text style={styles.text_name}>{`Hi ${this.state.displayName}`}</Text>
             <Image source={IMAGE_TEXT} style={styles.text}/>
           </View>
-          <TouchableOpacity onPress={()=>this.onPress()}>
-            <Image source={IMAGE_BUTTON} style={styles.button}/>
+          <TouchableOpacity style={styles.view_bottom_tab} onPress={()=>this.onPress()}>
+            <ImageBackground source={IMAGE_TAB} style={styles.button_tab} resizeMode='stretch'>
+              <Image source={IMAGE_TAB_IMG} style={{height: 25}} resizeMode='contain'/>
+            </ImageBackground>
           </TouchableOpacity>
         </ImageBackground>
       </SafeAreaView>
@@ -94,14 +98,9 @@ const styles = StyleSheet.create({
     aspectRatio: 654 / 326,
     marginTop: 25,
   },
-  button: {
-    width: '82%',
-    height: undefined,
-    aspectRatio: 702 / 166,
-  },
   view_text: {
     width: '100%', 
-    height: '50%',
+    height: '60%',
     position: 'absolute',
     alignItems: 'center', 
   }, 
@@ -131,7 +130,19 @@ const styles = StyleSheet.create({
   image_photo: {
     width: '100%', 
     height: '50%'
-  }
+  },
+  view_bottom_tab: {
+    width: '100%',
+    height: 80,
+    alignItems: 'center',
+    paddingHorizontal: 15
+  },
+  button_tab: {
+    width: '100%',
+    height: 80,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 })
 
 WelcomeScreen3.contextType = AppContext;

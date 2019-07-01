@@ -5,6 +5,8 @@ import { Header, Input, Button } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, Navbar } from '../components';
 import { cStyles, screenWidth } from './styles';
+import { alert } from '../utils/Alert';
+import Authentication from '../services/Authentication';
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BUTTON = require('app/assets/images/interests_btn.png');
@@ -20,12 +22,20 @@ const IMAGE_FILM = require('app/assets/images/image_film.png');
 const IMAGE_SPORTS = require('app/assets/images/image_sports.png');
 const IMAGE_STANDUP = require('app/assets/images/image_standup.png');
 
-export default class InterestScreen extends React.Component {
+export default class PickInterestScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      selectedItems: [],
       keyword: '',
       placeholder: 'Search your interests, hobbies etc',
+      uid: this.props.navigation.getParam('uid'),
+      nickName: this.props.navigation.getParam('nickName'),
+      displayName: this.props.navigation.getParam('displayName'),
+      email: this.props.navigation.getParam('email'),
+      phoneNumber: this.props.navigation.getParam('phoneNumber'),
+      photoURL: this.props.navigation.getParam('photoURL'),
+      providerId: this.props.navigation.getParam('providerId'),
       categories_: [
         {
           name: 'CRICKET',
@@ -116,14 +126,45 @@ export default class InterestScreen extends React.Component {
     Orientation.lockToPortrait();
   }
   onPressNextButton() {
-    this.props.navigation.navigate('stars')
+    var selectedItems = []
+    this.state.categories.map((category, index) => {
+      if (category.selected) {
+        selectedItems.push(category.name)
+      }
+    })
+    if (selectedItems.length < 2) {
+      alert('Please choose at least 2 interests');
+      return
+    } else {
+      this.setState({
+        selectedItems: selectedItems
+      }, ()=>{
+        console.warn(this.state.selectedItems)
+        this.signup()
+      })
+    }
+    // this.props.navigation.navigate('stars')
   }
+
+  signup = async () => {
+    await this.context.showLoading();
+    const done = await Authentication.signup(this.state);
+    await this.context.hideLoading();
+    console.warn(done)
+    if (done) {
+      this.props.navigation.navigate('pick_star');
+    } else {
+      alert('Error Occurs. Please try again.')
+    }
+  }
+
   onPressItem(index) {
     this.state.categories[index].selected = !this.state.categories[index].selected
     this.setState({
       categories: this.state.categories
     })
   }
+
   onSearchBy(keyword) {
     this.context.showLoading();
     this.setState({keyword: keyword})
@@ -327,8 +368,8 @@ const styles = StyleSheet.create({
   }
 })
 
-InterestScreen.contextType = AppContext;
+PickInterestScreen.contextType = AppContext;
 
-InterestScreen.propTypes = {
+PickInterestScreen.propTypes = {
   navigation: PropTypes.object
 };
