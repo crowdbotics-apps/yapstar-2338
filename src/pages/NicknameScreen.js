@@ -65,7 +65,7 @@ export default class NicknameScreen extends React.Component {
               <Input
                 containerStyle={styles.input}
                 inputContainerStyle={{borderBottomWidth: 0}}
-                inputStyle={{color: 'white', paddingTop: isiOS? 10:0}}
+                inputStyle={{color: 'white', paddingTop: isiOS? 10:10}}
                 onChangeText={(nickName) => this.setState({nickName: nickName.toLowerCase()})}
                 underlineColorAndroid='transparent'
                 placeholder={this.state.placeholder}

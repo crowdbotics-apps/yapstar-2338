@@ -197,7 +197,7 @@ export default class PickStarScreen extends React.Component {
             <Input
               containerStyle={styles.input}
               inputContainerStyle={{borderBottomWidth: 0}}
-              inputStyle={{color: 'white', paddingTop: isiOS? 10:0, fontSize: 14}}
+              inputStyle={{color: 'white', paddingTop: isiOS? 10:10, fontSize: 14}}
               onChangeText={(keyword) => this.onSearchBy(keyword)}
               underlineColorAndroid='transparent'
               placeholder={this.state.placeholder}
@@ -236,11 +236,6 @@ export default class PickStarScreen extends React.Component {
             {/* <Image source={IMAGE_TAB_IMG} style={{height: 30}} resizeMode='contain'/> */}
           </ImageBackground>
         </TouchableOpacity>
-        {/* <View style={styles.view_button}>
-          <TouchableOpacity onPress={()=>this.onPressNextButton()}>
-            <Image source={IMAGE_BUTTON} style={styles.button}/>
-          </TouchableOpacity>
-        </View> */}
       </ImageBackground>
     )
   }  

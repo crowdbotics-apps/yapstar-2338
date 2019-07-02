@@ -224,19 +224,12 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center', 
   },
-  view_bottom_tab: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center', 
-    justifyContent: 'flex-end', 
-    position: 'absolute',
-    paddingHorizontal: 15
-  },
   button_tab: {
-    width: '100%',
+    width: screenWidth-30,
     height: 80,
     flexDirection: 'row',
     alignItems: 'center',
+    marginHorizontal: 15,
     justifyContent: 'space-around',
   },
   view_tab: {

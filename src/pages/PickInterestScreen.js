@@ -148,15 +148,15 @@ export default class PickInterestScreen extends React.Component {
 
   signup = async () => {
     this.props.navigation.navigate('pick_star')
-    // await this.context.showLoading();
-    // const done = await Authentication.signup(this.state);
-    // await this.context.hideLoading();
-    // console.warn(done)
-    // if (done) {
-    //   this.props.navigation.navigate('pick_star');
-    // } else {
-    //   alert('Error Occurs. Please try again.')
-    // }
+    await this.context.showLoading();
+    const done = await Authentication.signup(this.state);
+    await this.context.hideLoading();
+    console.warn(done)
+    if (done) {
+      this.props.navigation.navigate('pick_star');
+    } else {
+      alert('Error Occurs. Please try again.')
+    }
   }
 
   onPressItem(index) {
@@ -239,7 +239,7 @@ export default class PickInterestScreen extends React.Component {
             <Input
               containerStyle={styles.input}
               inputContainerStyle={{borderBottomWidth: 0}}
-              inputStyle={{color: 'white', paddingTop: isiOS? 10:0, fontSize: 14}}
+              inputStyle={{color: 'white', paddingTop: isiOS? 10:10, fontSize: 14}}
               onChangeText={(keyword) => this.onSearchBy(keyword)}
               underlineColorAndroid='transparent'
               placeholder={this.state.placeholder}
