@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -64,6 +65,8 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B9F73FF5EE954314B8EE3020 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A23467A507F54746940C7242 /* libRNGestureHandler.a */; };
 		C247E4230A9F4FF09D5DC451 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CACDB0505E847249B817FFC /* FontAwesome5_Brands.ttf */; };
+		D74F7DF922CB3DD700CCCB68 /* OTInstall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F7DF822CB3DD700CCCB68 /* OTInstall.swift */; };
+		D74F7ECD22CB4DFA00CCCB68 /* libOpenTokReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74F7E9D22CB4DE600CCCB68 /* libOpenTokReactNative.a */; };
 		D78093B122C3F2E800FE1E5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D78093B022C3F2E600FE1E5E /* GoogleService-Info.plist */; };
 		E23979F6D6204B4DB8516510 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D42AE8D40D140F994BFA6B8 /* libSplashScreen.a */; };
 		E8460D8EDAF24475B067ECE6 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1D27DC59FA94AADAF07F7B5 /* FontAwesome5_Solid.ttf */; };
@@ -71,7 +74,6 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F252DF6C16784C79BF7CB75E /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48594EF574EB4CE7B187789C /* libRNVectorIcons-tvOS.a */; };
-		108CBD8B2B3B444499DC98E4 /* libOpenTokReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5547C2ADE8F54BAFBC49B934 /* libOpenTokReactNative.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +322,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		D74F7E9C22CB4DE600CCCB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C6F95B420ACE8BE00FEAD68;
+			remoteInfo = OpenTokReactNative;
+		};
 		D780931F22C3DA7300FE1E5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -485,6 +494,7 @@
 		49E3BC1CA1424080BD74B056 /* libFastImage.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libFastImage.a; sourceTree = "<group>"; };
 		4A3B79C6E86B47DDACC98F5B /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		4B70BA4C5FCE4AA4AFD862B4 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
+		5547C2ADE8F54BAFBC49B934 /* libOpenTokReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libOpenTokReactNative.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		5F2D775AFD7E4B1BB36F4753 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		63796B81A4BA4850A7402004 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
@@ -512,6 +522,9 @@
 		C3430B3B510A4CD8B66ACA41 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		CE3CCD3177A94EB2901C2F48 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
 		D387DD0D17C84E1F902FE9E1 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
+		D74F7DF722CB3DD600CCCB68 /* YapStars-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YapStars-Bridging-Header.h"; sourceTree = "<group>"; };
+		D74F7DF822CB3DD700CCCB68 /* OTInstall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTInstall.swift; sourceTree = "<group>"; };
+		D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenTokReactNative.xcodeproj; path = "../node_modules/opentok-react-native/ios/OpenTokReactNative.xcodeproj"; sourceTree = "<group>"; };
 		D78093B022C3F2E600FE1E5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7DA694322C4C930008EC2BB /* YapStars.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = YapStars.entitlements; path = YapStars/YapStars.entitlements; sourceTree = "<group>"; };
 		DAEAA7B4B9A74CC7827B0AD4 /* libRCTOrientation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOrientation.a; sourceTree = "<group>"; };
@@ -521,8 +534,6 @@
 		F5E27B28208B427BBA48CFEA /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; };
 		F64C2B49BB011A49016F89DD /* Pods-YapStars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapStars.release.xcconfig"; path = "Target Support Files/Pods-YapStars/Pods-YapStars.release.xcconfig"; sourceTree = "<group>"; };
 		FD0FCCAA37FC4B4EA0C8EB0C /* RNTwitterSignIn.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNTwitterSignIn.xcodeproj; path = "../node_modules/react-native-twitter-signin/ios/RNTwitterSignIn.xcodeproj"; sourceTree = "<group>"; };
-		2464535960F548F8A22600C6 /* OpenTokReactNative.xcodeproj */ = {isa = PBXFileReference; name = "OpenTokReactNative.xcodeproj"; path = "../node_modules/opentok-react-native/ios/OpenTokReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		5547C2ADE8F54BAFBC49B934 /* libOpenTokReactNative.a */ = {isa = PBXFileReference; name = "libOpenTokReactNative.a"; path = "libOpenTokReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,6 +550,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D74F7ECD22CB4DFA00CCCB68 /* libOpenTokReactNative.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -563,7 +575,6 @@
 				7F945E3CCD0844178050683B /* libRNVectorIcons.a in Frameworks */,
 				851A7F690C344DDDB06F4DA7 /* libRCTOrientation.a in Frameworks */,
 				161C82A8552AE1420B87EE4C /* libPods-YapStars.a in Frameworks */,
-				108CBD8B2B3B444499DC98E4 /* libOpenTokReactNative.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +776,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -787,7 +799,6 @@
 				FD0FCCAA37FC4B4EA0C8EB0C /* RNTwitterSignIn.xcodeproj */,
 				A096E24FF26048819450068E /* RNVectorIcons.xcodeproj */,
 				D387DD0D17C84E1F902FE9E1 /* RCTOrientation.xcodeproj */,
-				2464535960F548F8A22600C6 /* OpenTokReactNative.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -804,6 +815,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				D74F7DF822CB3DD700CCCB68 /* OTInstall.swift */,
 				D78093B022C3F2E600FE1E5E /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* YapStars */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -813,6 +825,7 @@
 				8819678BA9F5432C8F8E2775 /* Resources */,
 				53E33DCC7B4A9359BA83E07E /* Pods */,
 				D78092F922C3DA7300FE1E5E /* Recovered References */,
+				D74F7DF722CB3DD600CCCB68 /* YapStars-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -861,6 +874,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D74F7E9822CB4DE500CCCB68 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D74F7E9D22CB4DE600CCCB68 /* libOpenTokReactNative.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D78092F922C3DA7300FE1E5E /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,6 +897,7 @@
 				DAEAA7B4B9A74CC7827B0AD4 /* libRCTOrientation.a */,
 				F5E27B28208B427BBA48CFEA /* libRNGestureHandler-tvOS.a */,
 				48594EF574EB4CE7B187789C /* libRNVectorIcons-tvOS.a */,
+				5547C2ADE8F54BAFBC49B934 /* libOpenTokReactNative.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1060,6 +1082,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6YKR59QXKM;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1093,6 +1116,10 @@
 				{
 					ProductGroup = D780933022C3DA7400FE1E5E /* Products */;
 					ProjectRef = 63EB95A7EB1A478EBDEBFE84 /* FastImage.xcodeproj */;
+				},
+				{
+					ProductGroup = D74F7E9822CB4DE500CCCB68 /* Products */;
+					ProjectRef = D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1419,6 +1446,13 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D74F7E9D22CB4DE600CCCB68 /* libOpenTokReactNative.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOpenTokReactNative.a;
+			remoteRef = D74F7E9C22CB4DE600CCCB68 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D780932022C3DA7300FE1E5E /* libjsi.a */ = {
@@ -1782,6 +1816,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				D74F7DF922CB3DD700CCCB68 /* OTInstall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1839,6 +1874,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD5F236A23BCA2966F9ED5A6 /* Pods-YapStarsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1856,7 +1892,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-twitter-signinios/**",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)..\node_modulesopentok-react-nativeiosOpenTokReactNative",
 				);
 				INFOPLIST_FILE = YapStarsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1891,6 +1927,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19A89576F75082578A076024 /* Pods-YapStarsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1905,7 +1942,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-twitter-signinios/**",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)..\node_modulesopentok-react-nativeiosOpenTokReactNative",
 				);
 				INFOPLIST_FILE = YapStarsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1941,6 +1978,7 @@
 			baseConfigurationReference = 275D5980F6FA9ABEED479255 /* Pods-YapStars.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YapStars/YapStars.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1957,7 +1995,7 @@
 					"$(SRCROOT)/../node_modules/react-native-twitter-signin/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOSRCTOrientation",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)/../node_modules/opentok-react-native/ios/OpenTokReactNative",
 				);
 				INFOPLIST_FILE = YapStars/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1968,6 +2006,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yapstar;
 				PRODUCT_NAME = YapStars;
+				SWIFT_OBJC_BRIDGING_HEADER = "YapStars-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1977,6 +2018,7 @@
 			baseConfigurationReference = F64C2B49BB011A49016F89DD /* Pods-YapStars.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YapStars/YapStars.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6YKR59QXKM;
@@ -1992,7 +2034,7 @@
 					"$(SRCROOT)/../node_modules/react-native-twitter-signin/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOSRCTOrientation",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)/../node_modules/opentok-react-native/ios/OpenTokReactNative",
 				);
 				INFOPLIST_FILE = YapStars/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2003,6 +2045,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.yapstar;
 				PRODUCT_NAME = YapStars;
+				SWIFT_OBJC_BRIDGING_HEADER = "YapStars-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2032,7 +2076,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-twitter-signinios/**",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)..\node_modulesopentok-react-nativeiosOpenTokReactNative",
 				);
 				INFOPLIST_FILE = "YapStars-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2089,7 +2133,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-twitter-signinios/**",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)..\node_modulesopentok-react-nativeiosOpenTokReactNative",
 				);
 				INFOPLIST_FILE = "YapStars-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2145,7 +2189,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-twitter-signinios/**",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)..\node_modulesopentok-react-nativeiosOpenTokReactNative",
 				);
 				INFOPLIST_FILE = "YapStars-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2201,7 +2245,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-twitter-signinios/**",
 					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)..\node_modules\neact-native-orientationiOSRCTOrientation/**",
-					"$(SRCROOT)\..\node_modules\opentok-react-native\ios\OpenTokReactNative",
+					"$(SRCROOT)..\node_modulesopentok-react-nativeiosOpenTokReactNative",
 				);
 				INFOPLIST_FILE = "YapStars-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

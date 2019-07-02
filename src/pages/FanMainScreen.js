@@ -66,7 +66,7 @@ export default class FanMainScreen extends React.Component {
  
   renderItemStar({item, index}) {
     return(
-      <TouchableOpacity style={styles.view_stars_item} onPress={() => console.warn(index)}>
+      <TouchableOpacity style={styles.view_stars_item} onPress={() => this.props.navigation.navigate('chatview')}>
         <Image source={item.image} style={styles.image_item} resizeMode='stretch'/>
         <Image source={IMAGE_RECT} style={styles.image_item} resizeMode='stretch'/>
         <View style={{width: '100%', height: '100%', padding: 5, justifyContent:'space-between'}}>
@@ -100,78 +100,79 @@ export default class FanMainScreen extends React.Component {
   }
   render() {
     return(
-      <SafeAreaView style={styles.container} >
-        <Image source={IMAGE_BACKGROUND} style={styles.image_background}/>
-        <View style={styles.view_main}>
-          <Header
-            containerStyle={cStyles.headerContainer}
-            placement="right"
-            centerComponent= {
-              <TouchableOpacity onPress={()=>console.warn('click bell')}>
-                <Image
-                  style={{width:20, height:20}}
-                  source={ICON_BELL}
-                  resizeMode='contain'
-                />
-              </TouchableOpacity>
-            }
-            rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=>console.warn('reeeeeeeeeeee') }}
-          />
-          <View style={styles.view_tab}>
-            <SegmentedControlTab
-              values={['LIVE', 'UPCOMING']}
-              selectedIndex={this.state.type}
-              onTabPress={this.onChangeType.bind(this)}
-              tabStyle={{borderColor: COLOR_TAB, backgroundColor: 'transparent'}}
-              tabTextStyle={{color: COLOR_TAB}}
-              activeTabStyle={{backgroundColor: COLOR_TAB}}
-              activeTabTextStyle={{color: COLOR_TAB_TEXT}}
-            />
-          </View>
-          <View style={styles.view_stars}>
-            <FlatList
-              horizontal
-              keyExtractor={(item, index) => `${index}`}
-              data={this.state.stars}
-              renderItem={this.renderItemStar.bind(this)}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-          <View style={styles.view_post}  >
-            <Avatar
-              rounded
-              size={58}
-              marginLeft = {10}
-              alignSelf='center'
-              source={IMAGE_KANGANA}
-            />
-            <Input
-              containerStyle={{flex:1, marginHorizontal: 10, alignSelf: 'center'}}
-              inputContainerStyle={{borderBottomWidth: 0}}
-              inputStyle={{color: 'white', fontSize: 15}}
-              // onChangeText={(nickName) => this.setState({nickName: nickName.toLowerCase()})}
-              underlineColorAndroid='transparent'
-              editable={false}
-              placeholder={this.state.placeholder}
-              placeholderTextColor='grey'
-            />
-            <TouchableOpacity style={{width:20, height:20, alignSelf: 'center'}}>
-              <Image 
+      <ImageBackground source={IMAGE_BACKGROUND} style={styles.container} >
+        <Header
+          containerStyle={cStyles.headerContainer}
+          placement="right"
+          centerComponent= {
+            <TouchableOpacity onPress={()=>console.warn('click bell')}>
+              <Image
                 style={{width:20, height:20}}
-                source={ICON_CAMERA}
-                resizeMode='contain'/>
+                source={ICON_BELL}
+                resizeMode='contain'
+              />
             </TouchableOpacity>
+          }
+          rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=>console.warn('reeeeeeeeeeee') }}
+        />
+          <View style={styles.view_main}>            
+            <ScrollView>
+              <View style={styles.view_tab}>
+                <SegmentedControlTab
+                  values={['LIVE', 'UPCOMING']}
+                  selectedIndex={this.state.type}
+                  onTabPress={this.onChangeType.bind(this)}
+                  tabStyle={{borderColor: COLOR_TAB, backgroundColor: 'transparent'}}
+                  tabTextStyle={{color: COLOR_TAB}}
+                  activeTabStyle={{backgroundColor: COLOR_TAB}}
+                  activeTabTextStyle={{color: COLOR_TAB_TEXT}}
+                />
+              </View>
+              <View style={styles.view_stars}>
+                <FlatList
+                  horizontal
+                  keyExtractor={(item, index) => `${index}`}
+                  data={this.state.stars}
+                  renderItem={this.renderItemStar.bind(this)}
+                  showsHorizontalScrollIndicator={false}
+                />
+              </View>
+              <View style={styles.view_post}  >
+                <Avatar
+                  rounded
+                  size={58}
+                  marginLeft = {10}
+                  alignSelf='center'
+                  source={IMAGE_KANGANA}
+                />
+                <Input
+                  containerStyle={{flex:1, marginHorizontal: 10, alignSelf: 'center'}}
+                  inputContainerStyle={{borderBottomWidth: 0}}
+                  inputStyle={{color: 'white', fontSize: 15}}
+                  // onChangeText={(nickName) => this.setState({nickName: nickName.toLowerCase()})}
+                  underlineColorAndroid='transparent'
+                  editable={false}
+                  placeholder={this.state.placeholder}
+                  placeholderTextColor='grey'
+                />
+                <TouchableOpacity style={{width:20, height:20, alignSelf: 'center'}}>
+                  <Image 
+                    style={{width:20, height:20}}
+                    source={ICON_CAMERA}
+                    resizeMode='contain'/>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.view_chatlist}>
+                <FlatList
+                  keyExtractor={(item, index) => `${index}`}
+                  data={this.state.stars}
+                  renderItem={this.renderItemChatList.bind(this)}
+                  showsVerticalScrollIndicator={false}
+                />
+              </View>
+            </ScrollView>
           </View>
-          <View style={styles.view_chatlist}>
-            <FlatList
-              keyExtractor={(item, index) => `${index}`}
-              data={this.state.stars}
-              renderItem={this.renderItemChatList.bind(this)}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
-        </View>
-        <View style={styles.view_bottom_tab}>
+        
           <ImageBackground source={IMAGE_BOTTOM_TAB} style={styles.button_tab} resizeMode='stretch'>
             <TouchableOpacity>
               <Image
@@ -202,15 +203,14 @@ export default class FanMainScreen extends React.Component {
               />           
             </TouchableOpacity>
           </ImageBackground>
-        </View>
-      </SafeAreaView>
+        </ImageBackground>
     )
   }  
 }
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   image_background: {
     width: '100%',
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
   },
   view_tab: {
     width: '70%',
-    marginTop: 20, 
+    alignSelf: 'center'
   },
   view_stars: {
     width: '100%',

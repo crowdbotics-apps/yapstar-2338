@@ -55,7 +55,7 @@ export default class WelcomeScreen3 extends React.Component {
 
   render() {
     return(
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='cover'>
           <View style={styles.view_photo}>
             <FastImage source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
@@ -73,7 +73,7 @@ export default class WelcomeScreen3 extends React.Component {
             </ImageBackground>
           </TouchableOpacity>
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     )
   }  
 }

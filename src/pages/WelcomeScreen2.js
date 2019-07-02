@@ -1,6 +1,6 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View } from 'react-native'
 
 const IMAGE_BACKGROUND = require('app/assets/images/welcome2.png');
 const IMAGE_TEXT = require('app/assets/images/welcome2_txt.png');
@@ -21,7 +21,7 @@ export default class WelcomeScreen2 extends React.Component {
 
   render() {
     return(
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='cover'>
           <Image source={IMAGE_TEXT} style={styles.text}/>
           <TouchableOpacity style={styles.view_bottom_tab} onPress={()=>this.onPress()}>
@@ -30,7 +30,7 @@ export default class WelcomeScreen2 extends React.Component {
             </ImageBackground>
           </TouchableOpacity>
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     )
   }  
 }

@@ -19,8 +19,9 @@ import SigninScreen from '../pages/SigninScreen';
 import NicknameScreen from '../pages/NicknameScreen';
 import PickInterestScreen from '../pages/PickInterestScreen';
 import PickStarScreen from '../pages/PickStarScreen';
-import ChatRoomScreen from '../pages/ChatRoomScreen';
 import FanMainScreen from '../pages/FanMainScreen';
+import ChatViewRoomScreen from '../pages/ChatViewRoomScreen';
+import ChatRoomScreen from '../pages/ChatRoomScreen';
 
 
 import LoginScreen from '../pages/Login';
@@ -188,6 +189,7 @@ export default createSwitchNavigator(
     main: MainStackNavigator,
     fanStack: FanStack,
     chatroom: ChatRoomScreen,
+    chatview: ChatViewRoomScreen,
     drawer: DrawerStack
   },
   {

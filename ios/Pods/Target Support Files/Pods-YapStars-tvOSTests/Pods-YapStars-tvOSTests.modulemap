@@ -1,6 +1,0 @@
-framework module Pods_YapStars_tvOSTests {
-  umbrella header "Pods-YapStars-tvOSTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

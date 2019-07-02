@@ -1,6 +1,6 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 
 const IMAGE_BACKGROUND = require('app/assets/images/splash2.png');
 
@@ -18,9 +18,9 @@ export default class SplashScreen2 extends React.Component {
 
   render() {
     return(
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Image source={IMAGE_BACKGROUND} style={styles.background}/>
-      </SafeAreaView>
+      </View>
     )
   }  
 }

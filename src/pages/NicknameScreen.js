@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Orientation from 'react-native-orientation'
 import FastImage from 'react-native-fast-image'
 import { AppContext, Navbar } from '../components'
-import { cStyles, screenWidth, screenHeight } from './styles';
+import { cStyles, isiOS, screenWidth, screenHeight } from './styles';
 
 const IMAGE_BACKGROUND = require('app/assets/images/profile.png');
 const IMAGE_TEXT = require('app/assets/images/profile_txt.png');
@@ -50,7 +50,7 @@ export default class NicknameScreen extends React.Component {
 
   render() {
     return(
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <ImageBackground source={IMAGE_BACKGROUND} style={styles.background} resizeMode='stretch'>
           <View style={styles.view_photo}>
             <FastImage source={this.state.photoURL!=''?{uri: this.state.photoURL}: {}} style={styles.image_photo} resizeMode='cover'/>
@@ -63,18 +63,18 @@ export default class NicknameScreen extends React.Component {
               <View style={{height: screenHeight/2}}></View>
               <Image source={IMAGE_TEXT} style={styles.text}/>
               <Input
-                  containerStyle={styles.input}
-                  inputContainerStyle={{borderBottomWidth: 0}}
-                  inputStyle={{color: 'white'}}
-                  onChangeText={(nickName) => this.setState({nickName: nickName.toLowerCase()})}
-                  underlineColorAndroid='transparent'
-                  placeholder={this.state.placeholder}
-                  placeholderTextColor='grey'
-                  value={this.state.nickName}
-                  rightIcon={
-                    <Image source={IMAGE_SUCCESS} style={{width: 20, height: 20, paddingRight: 10}}/>
-                  }
-                />
+                containerStyle={styles.input}
+                inputContainerStyle={{borderBottomWidth: 0}}
+                inputStyle={{color: 'white', paddingTop: isiOS? 10:0}}
+                onChangeText={(nickName) => this.setState({nickName: nickName.toLowerCase()})}
+                underlineColorAndroid='transparent'
+                placeholder={this.state.placeholder}
+                placeholderTextColor='grey'
+                value={this.state.nickName}
+                rightIcon={
+                  <Image source={IMAGE_SUCCESS} style={{width: 20, height: 20, paddingRight: 10, marginTop: isiOS? 10:0}}/>
+                }
+              />
             </KeyboardAwareScrollView>
             <View style={{flex:1, width:'100%', alignItems: 'center', justifyContent: 'flex-end', }}>
               <TouchableOpacity style={styles.view_bottom_tab} onPress={()=>this.onPresNext()}>
@@ -86,7 +86,7 @@ export default class NicknameScreen extends React.Component {
           </View>
           
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     )
   }  
 }

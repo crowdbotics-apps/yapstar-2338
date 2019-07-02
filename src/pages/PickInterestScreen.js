@@ -1,10 +1,10 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, ScrollView, FlatList, Text } from 'react-native'
 import { Header, Input, Button } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, Navbar } from '../components';
-import { cStyles, screenWidth } from './styles';
+import { cStyles, isiOS, screenWidth } from './styles';
 import { alert } from '../utils/Alert';
 import Authentication from '../services/Authentication';
 
@@ -147,15 +147,16 @@ export default class PickInterestScreen extends React.Component {
   }
 
   signup = async () => {
-    await this.context.showLoading();
-    const done = await Authentication.signup(this.state);
-    await this.context.hideLoading();
-    console.warn(done)
-    if (done) {
-      this.props.navigation.navigate('pick_star');
-    } else {
-      alert('Error Occurs. Please try again.')
-    }
+    this.props.navigation.navigate('pick_star')
+    // await this.context.showLoading();
+    // const done = await Authentication.signup(this.state);
+    // await this.context.hideLoading();
+    // console.warn(done)
+    // if (done) {
+    //   this.props.navigation.navigate('pick_star');
+    // } else {
+    //   alert('Error Occurs. Please try again.')
+    // }
   }
 
   onPressItem(index) {
@@ -186,10 +187,12 @@ export default class PickInterestScreen extends React.Component {
       <TouchableOpacity style={item.selected?styles.view_item_select:styles.view_item} onPress={() => this.onPressItem(index)}>
         <Image source={item.image} style={styles.image_item} resizeMode='stretch'/>
         <Image source={IMAGE_GRADIENT} style={styles.image_item} resizeMode='stretch'/>
-        <View style={styles.view_text_item}>
-          <Text style={styles.text_item}>
-            {item.name}
-          </Text>
+        <View style={styles.view_text}>
+          <View style={styles.view_text_item}>
+            <Text style={styles.text_item}>
+              {item.name}
+            </Text>
+          </View>
         </View>
       </TouchableOpacity>
     )
@@ -200,18 +203,19 @@ export default class PickInterestScreen extends React.Component {
       <TouchableOpacity style={item.selected?styles.view_item_select:styles.view_item} onPress={() => this.onPressItem(index)}>
         <Image source={item.image} style={styles.image_item} resizeMode='stretch'/>
         <Image source={IMAGE_GRADIENT} style={styles.image_item} resizeMode='stretch'/>
-        <View style={styles.view_text_item}>
-          <Text style={styles.text_item}>
-            {item.name}
-          </Text>
+        <View style={styles.view_text}>
+          <View style={styles.view_text_item}>
+            <Text style={styles.text_item}>
+              {item.name}
+            </Text>
+          </View>
         </View>
       </TouchableOpacity>
     )
   }
   render() {
     return(
-      <SafeAreaView style={styles.container} >
-        <Image source={IMAGE_BACKGROUND} style={styles.image_background}/>
+      <ImageBackground style={styles.container} source={IMAGE_BACKGROUND}>
         <View style={styles.view_main}>
           <Header
             containerStyle={cStyles.headerContainer}
@@ -235,19 +239,19 @@ export default class PickInterestScreen extends React.Component {
             <Input
               containerStyle={styles.input}
               inputContainerStyle={{borderBottomWidth: 0}}
-              inputStyle={{color: 'white'}}
+              inputStyle={{color: 'white', paddingTop: isiOS? 10:0, fontSize: 14}}
               onChangeText={(keyword) => this.onSearchBy(keyword)}
               underlineColorAndroid='transparent'
               placeholder={this.state.placeholder}
               placeholderTextColor='grey'
               value={this.state.keyword}
               leftIcon={
-                <Image source={ICON_SEARCH} style={{width: 20, height: 20, marginRight: 10}}/>
+                <Image source={ICON_SEARCH} style={{width: 20, height: 20, marginRight: 10, marginTop: isiOS? 10:0}}/>
               }
             />
           </View>
           <ScrollView
-            style={{flex:1, width: '100%', marginTop: 20}}>
+            style={{flex:1, width: '100%', marginTop: 10}}>
               <View style={{width: '100%', flexDirection: 'row', justifyContent: 'center', paddingHorizontal:25}}>
                 <FlatList
                   style={{paddingBottom: 20}}
@@ -269,12 +273,12 @@ export default class PickInterestScreen extends React.Component {
               </View>
           </ScrollView>
         </View>
-        <View style={styles.view_button}>
-          <TouchableOpacity onPress={()=>this.onPressNextButton()}>
-            <Image source={IMAGE_BUTTON} style={styles.button}/>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+        <TouchableOpacity style={styles.view_bottom_tab} onPress={()=>this.onPressNextButton()}>
+          <ImageBackground source={IMAGE_BUTTON} style={styles.button_tab} resizeMode='stretch'>
+            {/* <Image source={IMAGE_TAB_IMG} style={{height: 30}} resizeMode='contain'/> */}
+          </ImageBackground>
+        </TouchableOpacity>
+      </ImageBackground>
     )
   }  
 }
@@ -282,6 +286,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    justifyContent: 'flex-end'
   },
   image_background: {
     width: '100%',
@@ -303,21 +308,22 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   button: {
-    width: '82%',
+    width: screenWidth-50,
+
     height: undefined,
     aspectRatio: 702 / 166,
   },
   text_search: {
     color: '#F8D099', 
     marginLeft: 25, 
-    marginTop: 20, 
+    marginTop: 10, 
     fontSize: 16, 
     textAlign: 'left', 
     alignSelf: 'flex-start'
   },
   view_input: {
     width: '100%', 
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20,
     paddingHorizontal: 25, 
   },
@@ -341,7 +347,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     alignItems: 'center', 
     borderWidth: 2,
-    borderColor:'#F8D099'
+    borderColor:'#F8D099',
   },
   image_item: {
     width:'100%', 
@@ -349,23 +355,40 @@ const styles = StyleSheet.create({
     position: 'absolute', 
     borderRadius: 5
   },
-  view_text_item: {
-    width: '100%', 
-    height: '100%', 
-    alignItems: 'center', 
+  view_text: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    alignItems: 'center',
     justifyContent: 'flex-end'
   },
-  text_item: {
+  view_text_item: {
     width: '90%', 
-    fontSize: 14,
     height: 30,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    marginBottom: 15, 
+    alignItems: 'center',
+    marginBottom: 15,
     backgroundColor: '#666A', 
     borderRadius: 5, 
+    justifyContent: 'center'
+  },
+  text_item: {
+    fontSize: 14,
+    textAlign: 'center',
+    textAlignVertical: 'center',
     color: 'white', 
-  }
+  },
+  view_bottom_tab: {
+    width: '100%',
+    height: 80,
+    alignItems: 'center',
+    paddingHorizontal: 15
+  },
+  button_tab: {
+    width: '100%',
+    height: 80,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 })
 
 PickInterestScreen.contextType = AppContext;
