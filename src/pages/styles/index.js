@@ -25,10 +25,11 @@ export const cStyles = StyleSheet.create({
     alignItems: 'center'
   },
   headerContainer: {
-    height: Platform.OS === 'ios' ? 70 :  70 - 24,
+    height: Platform.OS === 'ios' ? 70 :  70 - 20,
     paddingHorizontal: 25,
     backgroundColor: 'transparent',
     borderBottomWidth: 0,
+    paddingBottom: 10,
   },
   headerText: {
     color: 'white', 
