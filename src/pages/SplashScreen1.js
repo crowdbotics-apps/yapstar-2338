@@ -19,11 +19,11 @@ export default class SplashScreen1 extends React.Component {
   gotoNextScreen() {
 		this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
 			Splash.hide()
-			// if (user) {
+			if (user) {
 				this.props.navigation.navigate('fanStack');
-			// } else {
-			// 	this.props.navigation.navigate('welcome1');
-			// }
+			} else {
+				this.props.navigation.navigate('welcome1');
+			}
     });
     // Splash.hide()
     // this.props.navigation.navigate('welcome1');
