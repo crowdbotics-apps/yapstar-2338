@@ -11,11 +11,10 @@ class DrawerMenu extends Component {
       case 0:
         this.props.navigation.navigate('profile');
         break;
-      
       default:
         try {
           await AuthController.logout();
-          this.props.navigation.navigate('signin');
+          this.props.navigation.navigate('auth');
         } catch (error) {
           alert(error.message);
         }
@@ -25,12 +24,12 @@ class DrawerMenu extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.menuItem}
           onPress={this.menuItemPressed(0)}
         >
           <Text style={styles.menuText}> Profile </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={styles.menuItem}
           onPress={this.menuItemPressed(2)}

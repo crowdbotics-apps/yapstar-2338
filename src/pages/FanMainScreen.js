@@ -113,7 +113,7 @@ export default class FanMainScreen extends React.Component {
               />
             </TouchableOpacity>
           }
-          rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=>console.warn('reeeeeeeeeeee') }}
+          rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=> this.props.navigation.openDrawer()}}
         />
           <View style={styles.view_main}>            
             <ScrollView>

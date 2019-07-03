@@ -26,88 +26,88 @@ export default class PickStarScreen extends React.Component {
       keyword: '',
       placeholder: 'Search Virat Kohli, Priyanka Chopra etc',
       categories_: [
-        {
-          name: 'VIRAT KOHLI',
-          image: IMAGE_VIRAT,
-          selected: false
-        },
-        {
-          name: 'PRIYANKA CHOPRA',
-          image: IMAGE_PRIYANKA,
-          selected: false
-        },
-        {
-          name: 'AMITABH BACHCHAN',
-          image: IMAGE_AMITABH,
-          selected: false
-        },
-        {
-          name: 'AAMIR KHAN',
-          image: IMAGE_AAMIR,
-          selected: false
-        },
-        {
-          name: 'SALMAN KHAN',
-          image: IMAGE_SALMAN,
-          selected: false
-        },
-        {
-          name: 'KANGANA',
-          image: IMAGE_KANGANA,
-          selected: false
-        },
-        {
-          name: 'VIRAT KOHLI',
-          image: IMAGE_VIRAT,
-          selected: false
-        },
-        {
-          name: 'PRIYANKA CHOPRA',
-          image: IMAGE_PRIYANKA,
-          selected: false
-        }
+        // {
+        //   name: 'VIRAT KOHLI',
+        //   image: IMAGE_VIRAT,
+        //   selected: false
+        // },
+        // {
+        //   name: 'PRIYANKA CHOPRA',
+        //   image: IMAGE_PRIYANKA,
+        //   selected: false
+        // },
+        // {
+        //   name: 'AMITABH BACHCHAN',
+        //   image: IMAGE_AMITABH,
+        //   selected: false
+        // },
+        // {
+        //   name: 'AAMIR KHAN',
+        //   image: IMAGE_AAMIR,
+        //   selected: false
+        // },
+        // {
+        //   name: 'SALMAN KHAN',
+        //   image: IMAGE_SALMAN,
+        //   selected: false
+        // },
+        // {
+        //   name: 'KANGANA',
+        //   image: IMAGE_KANGANA,
+        //   selected: false
+        // },
+        // {
+        //   name: 'VIRAT KOHLI',
+        //   image: IMAGE_VIRAT,
+        //   selected: false
+        // },
+        // {
+        //   name: 'PRIYANKA CHOPRA',
+        //   image: IMAGE_PRIYANKA,
+        //   selected: false
+        // }
       ],
       categories: [
-        {
-          name: 'VIRAT KOHLI',
-          image: IMAGE_VIRAT,
-          selected: false
-        },
-        {
-          name: 'PRIYANKA CHOPRA',
-          image: IMAGE_PRIYANKA,
-          selected: false
-        },
-        {
-          name: 'AMITABH BACHCHAN',
-          image: IMAGE_AMITABH,
-          selected: false
-        },
-        {
-          name: 'AAMIR KHAN',
-          image: IMAGE_AAMIR,
-          selected: false
-        },
-        {
-          name: 'SALMAN KHAN',
-          image: IMAGE_SALMAN,
-          selected: false
-        },
-        {
-          name: 'KANGANA',
-          image: IMAGE_KANGANA,
-          selected: false
-        },
-        {
-          name: 'VIRAT KOHLI',
-          image: IMAGE_VIRAT,
-          selected: false
-        },
-        {
-          name: 'PRIYANKA CHOPRA',
-          image: IMAGE_PRIYANKA,
-          selected: false
-        }
+        // {
+        //   name: 'VIRAT KOHLI',
+        //   image: IMAGE_VIRAT,
+        //   selected: false
+        // },
+        // {
+        //   name: 'PRIYANKA CHOPRA',
+        //   image: IMAGE_PRIYANKA,
+        //   selected: false
+        // },
+        // {
+        //   name: 'AMITABH BACHCHAN',
+        //   image: IMAGE_AMITABH,
+        //   selected: false
+        // },
+        // {
+        //   name: 'AAMIR KHAN',
+        //   image: IMAGE_AAMIR,
+        //   selected: false
+        // },
+        // {
+        //   name: 'SALMAN KHAN',
+        //   image: IMAGE_SALMAN,
+        //   selected: false
+        // },
+        // {
+        //   name: 'KANGANA',
+        //   image: IMAGE_KANGANA,
+        //   selected: false
+        // },
+        // {
+        //   name: 'VIRAT KOHLI',
+        //   image: IMAGE_VIRAT,
+        //   selected: false
+        // },
+        // {
+        //   name: 'PRIYANKA CHOPRA',
+        //   image: IMAGE_PRIYANKA,
+        //   selected: false
+        // }
       ],
     }
   }
@@ -188,7 +188,7 @@ export default class PickStarScreen extends React.Component {
               </TouchableOpacity>
             }
             centerComponent={{ text: 'Your Stars', style: cStyles.headerText }}
-            rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=>console.warn('reeeeeeeeeeee') }}
+            rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=> this.props.navigation.openDrawer() }}
           />
           <Text style={styles.text_search}>
             SEARCH YOUR STARS YOU WANT TO FOLLOW
