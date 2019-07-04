@@ -2,9 +2,8 @@ import React from 'react'
 import Orientation from 'react-native-orientation'
 import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
-import SegmentedControlTab from 'react-native-segmented-control-tab'
 import PropTypes from 'prop-types';
-import { AppContext, Navbar } from '../components';
+import { AppContext, RoomHeader } from '../components';
 import { cStyles, screenWidth } from './styles';
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
@@ -17,11 +16,13 @@ const IMAGE_SAMPLE2 = require('app/assets/images/chatview_sample2.png');
 const IMAGE_KANGANA = require('app/assets/images/image_kangana.png');
 
 const ICON_LIVE = require('app/assets/images/ic_live.png');
+const ICON_MORE = require('app/assets/images/ic_more.png');
 const ICON_JEWEL = require('app/assets/images/ic_gewel.png');
 const ICON_CALL = require('app/assets/images/ic_call.png');
 const ICON_AUDIO = require('app/assets/images/ic_audio.png');
 const ICON_VIDEO = require('app/assets/images/ic_video.png');
 const ICON_DOT = require('app/assets/images/ic_reddot.png');
+
 
 const COLOR_TAB = '#222222'
 const COLOR_GOLD = '#F8D099'
@@ -150,20 +151,11 @@ export default class ChatViewRoomScreen extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
-            {/* <Header
-              containerStyle={cStyles.headerContainer}
-              placement="right"
-              centerComponent= {
-                <TouchableOpacity onPress={()=>console.warn('click bell')}>
-                  <Image
-                    style={{width:20, height:20}}
-                    source={ICON_BELL}
-                    resizeMode='contain'
-                  />
-                </TouchableOpacity>
-              }
-              rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=>console.warn('reeeeeeeeeeee') }}
-            /> */}
+            <RoomHeader
+              eTime='03 m 1 s'
+              eTimeTag='elapsed time'
+              onPressRight={()=>console.warn('menu')}
+            />
             <Image
               style={styles.view_bar}
               source={IMAGE_BAR}

@@ -21,8 +21,9 @@ import PickInterestScreen from '../pages/PickInterestScreen';
 import PickStarScreen from '../pages/PickStarScreen';
 import FanMainScreen from '../pages/FanMainScreen';
 import ChatViewRoomScreen from '../pages/ChatViewRoomScreen';
+import ChatLiveRoomScreen from '../pages/ChatLiveRoomScreen';
+import ReviewScreen from '../pages/ReviewScreen';
 import ChatRoomScreen from '../pages/ChatRoomScreen';
-
 
 import LoginScreen from '../pages/Login';
 import SignupScreen from '../pages/Signup';
@@ -33,7 +34,6 @@ import ProfileScreen from '../pages/Profile';
 import MainScreen from '../pages/Main';
 
 import { DrawerMenu } from '../components';
-import SingupScreen from '../pages/Signup';
 
 const screenWidth = Dimensions.get('screen').width;
 
@@ -188,8 +188,10 @@ export default createSwitchNavigator(
     auth: AuthNavigator,
     main: MainStackNavigator,
     fanStack: FanStack,
-    chatroom: ChatRoomScreen,
     chatview: ChatViewRoomScreen,
+    chatlive: ChatLiveRoomScreen,
+    chatroom: ChatRoomScreen,
+    review: ReviewScreen,
     drawer: DrawerStack
   },
   {

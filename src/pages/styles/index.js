@@ -30,6 +30,14 @@ export const cStyles = StyleSheet.create({
     borderBottomWidth: 0,
     paddingBottom: 10,
   },
+  headerContainer_room: {
+    width: '100%',
+    paddingHorizontal: 25,
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0,
+    paddingBottom: 10,
+    position: 'absolute'
+  },
   headerText: {
     color: 'white', 
     fontSize: 20
