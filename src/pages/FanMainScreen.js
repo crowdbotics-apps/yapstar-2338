@@ -66,7 +66,7 @@ export default class FanMainScreen extends React.Component {
  
   renderItemStar({item, index}) {
     return(
-      <TouchableOpacity style={styles.view_stars_item} onPress={() => this.props.navigation.navigate('chatview')}>
+      <TouchableOpacity style={styles.view_stars_item} onPress={() => this.props.navigation.navigate('chatlive')}>
         <Image source={item.image} style={styles.image_item} resizeMode='stretch'/>
         <Image source={IMAGE_RECT} style={styles.image_item} resizeMode='stretch'/>
         <View style={{width: '100%', height: '100%', padding: 5, justifyContent:'space-between'}}>

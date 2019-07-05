@@ -60,14 +60,13 @@ export default class ReviewScreen extends React.Component {
       
       <ImageBackground source={IMAGE_BACKGROUND} style={styles.container} blurRadius={30} >
           <View style={styles.view_main}>
-            <View style={{height: screenHeight*0.1}}/>
             <ImageBackground style={styles.view_board}>
               <Image
-                style={{width:55, height:57, marginTop: 30}}
+                style={{width:40, height:57*40/55, marginTop: 30}}
                 source={IMAGE_MARK}
                 resizeMode='contain'
               /> 
-              <Text style={{color: COLOR_GOLD, fontSize: 16, marginTop: 20}}>Please rate your experience</Text>
+              <Text style={{color: COLOR_GOLD, fontSize: 15, marginTop: 15}}>Please rate your experience</Text>
               <StarRating
                 containerStyle={{marginTop: 20}}
                 starStyle={{marginHorizontal: 10}}
@@ -75,15 +74,15 @@ export default class ReviewScreen extends React.Component {
                 emptyStarColor={'white'}
                 fullStarColor={COLOR_GOLD}
                 halfStarColor={COLOR_GOLD}
-                starSize={30}
+                starSize={25}
                 rating={this.state.starCount}
                 selectedStar={(rating) => this.onStarRatingPress(rating)}
               />
-              <Text style={{width: '75%', color: 'white', fontSize: 14, marginTop: 30, textAlign: 'center'}}>
+              <Text style={{width: '75%', color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center'}}>
                 Your feedback will help improve the overall experience of the platform.
               </Text>
               <Input
-                containerStyle={{marginTop: 25, borderRadius: 2, width: '80%', height: 100, backgroundColor: COLOR_INPUT_BG, borderWidth: 1, borderColor: COLOR_INPUT_BORDER}}
+                containerStyle={{marginTop: 20, borderRadius: 2, width: '80%', height: 80, backgroundColor: COLOR_INPUT_BG, borderWidth: 1, borderColor: COLOR_INPUT_BORDER}}
                 inputContainerStyle={{borderBottomWidth: 0}}
                 inputStyle={{color: 'white', padding: isiOS? 5:5, fontSize: 14}}
                 onChangeText={(feedback) => this.setState({feedback: feedback})}
@@ -93,19 +92,19 @@ export default class ReviewScreen extends React.Component {
                 multiline={true}
                 value={this.state.feedback}
               />
-              <TouchableOpacity style={{width:'80%', height: (screenWidth-50)*0.8*73/510, marginTop: 30,}}  onPress={()=>this.onSubmit()}>
+              <TouchableOpacity style={{width:'80%', height: (screenWidth-50)*0.8*73/510, marginTop: 20, marginBottom: 30}}  onPress={()=>this.onSubmit()}>
                 <ImageBackground
                   style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}
                   source={IMAGE_BUTTON}
                   resizeMode='contain'
                 >
-                  <Text style={{color:'white', fontSize: 16}}>Submit</Text>
+                  <Text style={{color:'white', fontSize: 14}}>Submit</Text>
                 </ImageBackground>
               </TouchableOpacity>
             </ImageBackground>
-            <TouchableOpacity onPress={()=>this.props.navigation.navigate('chatlive')}>
+            <TouchableOpacity onPress={()=>this.props.navigation.navigate('fanStack')}>
               <Image
-                style={{width:50, height:50, marginTop: 30}}
+                style={{width: 40, height: 40, marginTop: 20}}
                 source={ICON_CLOSE}
                 resizeMode='contain'
               />              
@@ -142,8 +141,6 @@ export default class ReviewScreen extends React.Component {
               />           
             </TouchableOpacity>
           </ImageBackground>
-          
-
         </ImageBackground>
     )
   }  
@@ -163,13 +160,14 @@ const styles = StyleSheet.create({
   view_main: {
     flex: 1,
     width: '100%',
-    height: '100%',
+    height: screenHeight-80,
     alignItems: 'center', 
+    justifyContent: 'center',
     paddingHorizontal: 25
   },
   view_board: {
     width: '100%', 
-    height: screenHeight*0.6, 
+    // height: screenHeight*0.6, 
     backgroundColor: COLOR_BACKGROUND, 
     borderWidth: 1, 
     borderRadius: 5, 

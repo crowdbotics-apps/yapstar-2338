@@ -53,8 +53,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new OTPackage(),
-            new OrientationPackage(),
+          new OTPackage(),
+          new OrientationPackage(),
           new VectorIconsPackage(),
           new TwitterSigninPackage(),
           new SplashScreenReactPackage(),

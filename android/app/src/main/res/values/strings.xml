@@ -2,4 +2,6 @@
     <string name="app_name">YapStars</string>
     <string name="facebook_app_id">2908719935812333</string>
     <string name="fb_login_protocol_scheme">fb2908719935812333</string>
+    <string name="opentok_api_key">46354922</string>
+
 </resources>
