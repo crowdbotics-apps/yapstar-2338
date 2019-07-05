@@ -39,7 +39,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>9</string>
 	<key>FacebookAppID</key>
 	<string>2908719935812333</string>
 	<key>FacebookDisplayName</key>
@@ -70,10 +70,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>${PRODUCT_NAME} Camera Usage: This app has image upload functions for editing profile and video chat.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need sensitive user data.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Need sensitive user data.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>${PRODUCT_NAME} Microphone Usage: This app has video call function.</string>
+	<key>OPENTOK_API_KEY</key>
+	<string>46355482</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -104,13 +110,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  
-  <key>OPENTOK_API_KEY</key>
-  <string>46355482</string>
-  <key>NSCameraUsageDescription</key>
-  <string>${PRODUCT_NAME} Camera Usage: This app has image upload functions for editing profile and video chat.</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>${PRODUCT_NAME} Microphone Usage: This app has video call function.</string>
-  
 </dict>
 </plist>

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TouchableNativeFeedback, View, Platform, Text, Image } from 'react-native'
+import { TouchableOpacity, View, Platform, Text, Image } from 'react-native'
 import { Header } from 'react-native-elements'
 
 const isiOS = Platform.OS === 'ios';
@@ -52,22 +52,22 @@ export class RoomHeader extends React.Component {
         rightComponent={
           <View style={styles.view_right}>
             { this.props.showCast && this.props.showRight &&
-              <TouchableNativeFeedback onPress={this.props.onPressCast}>
+              <TouchableOpacity onPress={this.props.onPressCast}>
                 <Image
                   style={{width:25, height:25, marginRight: 15}}
                   source={ICON_CAST}
                   resizeMode='contain'
                 />
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
             }
             { this.props.showRight &&
-              <TouchableNativeFeedback onPress={this.props.onPressRight}>
+              <TouchableOpacity onPress={this.props.onPressRight}>
                 <Image
                   style={{width:20, height:20}}
                   source={ICON_MORE}
                   resizeMode='contain'
                 />
-              </TouchableNativeFeedback>
+              </TouchableOpacity>
             }
           </View>
         }
