@@ -10,7 +10,7 @@ import { cStyles, isiOS, screenWidth, screenHeight } from './styles';
 
 const IMAGE_BACKGROUND = require('app/assets/images/profile.png');
 const IMAGE_TEXT = require('app/assets/images/profile_txt.png');
-const IMAGE_SUCCESS = require('app/assets/images/success.png');
+const IMAGE_SUCCESS = require('app/assets/images/ic_check.png');
 const IMAGE_RECT = require('app/assets/images/welcome3_rect.png');
 const IMAGE_TAB = require('app/assets/images/profile_tab.png');
 const IMAGE_TAB_IMG = require('app/assets/images/profile_tab_image.png');

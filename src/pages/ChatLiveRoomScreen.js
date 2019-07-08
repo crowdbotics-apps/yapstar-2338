@@ -91,7 +91,7 @@ export default class ChatLiveRoomScreen extends React.Component {
                 source={IMAGE_GRAD2}
                 resizeMode='stretch'
               />
-              <TouchableOpacity style={{marginBottom: 20}}  onPress={()=>this.props.navigation.navigate('fanStack')}>
+              <TouchableOpacity style={{marginBottom: 20}}  onPress={()=>this.props.navigation.navigate('review')}>
                 <Image
                   style={styles.image_button}
                   source={ICON_CALL}
@@ -141,7 +141,7 @@ export default class ChatLiveRoomScreen extends React.Component {
               resizeMode='cover'
             />
             <OTSubscriber style={styles.view_absolute} />
-            <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.props.navigation.navigate('fanStack')}>
+            <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.props.navigation.navigate('review')}>
               <Image
                 style={styles.image_button}
                 source={ICON_CALL}

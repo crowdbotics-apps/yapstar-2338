@@ -14,7 +14,7 @@ class DrawerMenu extends Component {
       default:
         try {
           await AuthController.logout();
-          this.props.navigation.navigate('auth');
+          this.props.navigation.navigate('signin');
         } catch (error) {
           alert(error.message);
         }

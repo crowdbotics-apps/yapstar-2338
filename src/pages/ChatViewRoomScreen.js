@@ -135,7 +135,7 @@ export default class ChatViewRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('fanStack')}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('review')}>
                   <Image
                     style={styles.image_button}
                     source={ICON_CALL}

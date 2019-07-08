@@ -4,10 +4,11 @@ import Splash from 'react-native-splash-screen'
 import { View, StyleSheet } from 'react-native'
 import Orientation from 'react-native-orientation'
 
+const firestore = firebase.firestore()
+
 export default class SplashScreen1 extends React.Component {
   constructor (props) {
 		super(props)
-		this.unsubscriber = null;
     setTimeout(() => {
       this.gotoNextScreen()
     }, 1000)
@@ -17,16 +18,28 @@ export default class SplashScreen1 extends React.Component {
     Orientation.lockToPortrait()
   }
   gotoNextScreen() {
-		this.unsubscriber = firebase.auth().onAuthStateChanged((user) => {
-			Splash.hide()
+		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
-				this.props.navigation.navigate('fanStack');
+        firestore.doc(`users/${user.uid}`).get()
+        .then(userinfo => {
+          Splash.hide()
+          if (userinfo.data().role && userinfo.data().role === 1) {
+            this.props.navigation.navigate('starStack')
+          } else {
+            this.props.navigation.navigate('fanStack')
+          }
+        })
+        .catch(error => {
+          Splash.hide()
+          console.warn(error)
+          this.props.navigation.navigate('fanStack');
+        })
 			} else {
+        Splash.hide()
 				this.props.navigation.navigate('welcome1');
       }
     });
-    // Splash.hide()
-    // this.props.navigation.navigate('welcome1');
+    // this.props.navigation.navigate('signin');
   }
 
   render() {

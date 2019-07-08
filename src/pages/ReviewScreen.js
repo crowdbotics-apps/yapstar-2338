@@ -1,12 +1,15 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, Text, findNodeHandle, Platform } from 'react-native'
+import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, Text, findNodeHandle, Platform, Alert } from 'react-native'
 import StarRating from 'react-native-star-rating';
 import { Input } from 'react-native-elements'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import PropTypes from 'prop-types';
 import { AppContext } from '../components';
 import { isiOS, screenWidth, screenHeight } from './styles';
+import firebase from 'react-native-firebase';
+
+const auth = firebase.auth();
+const firestore = firebase.firestore()
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BOTTOM_TAB = require('app/assets/images/tab_bottom.png');
@@ -45,12 +48,30 @@ export default class ReviewScreen extends React.Component {
   }
   onSubmit() {
     console.warn('submit')
+    Alert.alert('Notice', 'Review logic in under development. Please click close button .')
   }
-
+  onClose() {
+    firestore.doc(`users/${auth.currentUser.uid}`).get()
+      .then(userinfo => {
+        console.warn(userinfo.data().role)
+        if (userinfo.data().role && userinfo.data().role === 1) {
+          this.props.navigation.navigate('starStack');
+        } 
+        else if (userinfo.data().role === 0) {
+          console.warn(userinfo.data().role)
+          this.props.navigation.navigate('fanStack');
+        } 
+        else {
+          this.props.navigation.navigate('signin');
+        }
+      })
+      .catch(error => {
+        this.props.navigation.navigate('signin');
+      })
+  }
   imageLoaded() {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, ()=>{console.warn(this.state.viewRef)});
   }
-
   onTextViewLoaded() {
     this.setState({ viewRef: findNodeHandle(this.viewRef) });
   }
@@ -102,7 +123,7 @@ export default class ReviewScreen extends React.Component {
                 </ImageBackground>
               </TouchableOpacity>
             </ImageBackground>
-            <TouchableOpacity onPress={()=>this.props.navigation.navigate('fanStack')}>
+            <TouchableOpacity onPress={()=>this.onClose()}>
               <Image
                 style={{width: 40, height: 40, marginTop: 20}}
                 source={ICON_CLOSE}

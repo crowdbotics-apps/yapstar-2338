@@ -37,7 +37,7 @@ const checkUser = async (uid) => {
     if (docSnapshot.exists) {
       userExist = true;
     }
-    return userExist;
+    return docSnapshot;
   } catch (error) {
     throw error;
   }

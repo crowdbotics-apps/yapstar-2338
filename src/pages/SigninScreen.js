@@ -122,12 +122,15 @@ export default class SigninScreen extends React.Component {
       .signInWithCredential(credential);
     const user = await firebaseUserCredential.user._user;
     console.warn(user)
-    const exist = await Authentication.checkUser(user.uid);
+    const userinfo = await Authentication.checkUser(user.uid);
     await this.context.hideLoading();
-    if (exist) {
-      this.props.navigation.navigate('fanStack', {
-        'uid': user.uid,
-      });
+    if (userinfo.exists) {
+      console.warn(userinfo.data().role)
+      if (userinfo.data().role && userinfo.data().role === 1) {
+        this.props.navigation.navigate('starStack');
+      } else {
+        this.props.navigation.navigate('fanStack');
+      }
     } else {
       this.props.navigation.navigate('welcome3', {
         'uid': user.uid,

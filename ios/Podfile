@@ -27,6 +27,8 @@ target 'YapStars' do
 
   pod 'OpenTok', '2.16.0'
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   target 'YapStarsTests' do
     inherit! :search_paths
     # Pods for testing

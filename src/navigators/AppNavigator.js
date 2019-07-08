@@ -20,9 +20,11 @@ import NicknameScreen from '../pages/NicknameScreen';
 import PickInterestScreen from '../pages/PickInterestScreen';
 import PickStarScreen from '../pages/PickStarScreen';
 import FanMainScreen from '../pages/FanMainScreen';
+import StarMainScreen from '../pages/StarMainScreen';
 import ChatViewRoomScreen from '../pages/ChatViewRoomScreen';
 import ChatLiveRoomScreen from '../pages/ChatLiveRoomScreen';
 import ReviewScreen from '../pages/ReviewScreen';
+import PrepareRoomScreen from '../pages/PrepareRoomScreen';
 import ChatRoomScreen from '../pages/ChatRoomScreen';
 
 import LoginScreen from '../pages/Login';
@@ -122,6 +124,31 @@ const FanStack = createDrawerNavigator({
   }
 })
 
+const StarStack = createDrawerNavigator({
+  star_main: StarMainScreen,
+  // prepareroom: PrepareRoomScreen
+},{
+  initialRouteName: 'star_main',
+  drawerType: 'slide',
+  drawerPosition: 'right',
+  overlayColor: 'transparent',
+  drawerWidth: screenWidth,
+  contentComponent: (props) => (
+    <DrawerMenu currentScreen={props.navigation.state.routeName} {...props} />
+  ),
+  contentOptions: {
+    activeTintColor: 'white',
+    inactiveTintColor: 'white',
+    labelStyle: {
+      fontSize: 20,
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      marginLeft: 0,
+      paddingLeft: 0
+    }
+  }
+})
+
 const MainTabNavigator = createBottomTabNavigator(
   {
     main: MainScreen
@@ -188,6 +215,8 @@ export default createSwitchNavigator(
     auth: AuthNavigator,
     main: MainStackNavigator,
     fanStack: FanStack,
+    starStack: StarStack,
+    prepareroom: PrepareRoomScreen,
     chatview: ChatViewRoomScreen,
     chatlive: ChatLiveRoomScreen,
     chatroom: ChatRoomScreen,
