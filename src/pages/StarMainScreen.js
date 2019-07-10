@@ -289,7 +289,7 @@ export default class StarMainScreen extends React.Component {
               resizeMode='contain'
             />             
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('prepareroom')}> 
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('starprepare')}> 
             <Image
               style={{width:45, height:45, marginTop:15}}
               source={ICON_BROADCAST}

@@ -24,8 +24,9 @@ import StarMainScreen from '../pages/StarMainScreen';
 import ChatViewRoomScreen from '../pages/ChatViewRoomScreen';
 import ChatLiveRoomScreen from '../pages/ChatLiveRoomScreen';
 import ReviewScreen from '../pages/ReviewScreen';
-import PrepareRoomScreen from '../pages/PrepareRoomScreen';
+import StarPrepareRoomScreen from '../pages/StarPrepareRoomScreen';
 import ChatRoomScreen from '../pages/ChatRoomScreen';
+import StarLiveRoomScreen from '../pages/StarLiveRoomScreen';
 
 import LoginScreen from '../pages/Login';
 import SignupScreen from '../pages/Signup';
@@ -216,7 +217,8 @@ export default createSwitchNavigator(
     main: MainStackNavigator,
     fanStack: FanStack,
     starStack: StarStack,
-    prepareroom: PrepareRoomScreen,
+    starlive: StarLiveRoomScreen,
+    starprepare: StarPrepareRoomScreen,
     chatview: ChatViewRoomScreen,
     chatlive: ChatLiveRoomScreen,
     chatroom: ChatRoomScreen,

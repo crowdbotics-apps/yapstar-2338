@@ -6,6 +6,15 @@ import PropTypes from 'prop-types';
 import { AppContext, RoomHeader } from '../components';
 import { cStyles, screenWidth } from './styles';
 import { OTPublisher, OTSession, OTSubscriber, OT } from 'opentok-react-native'
+import { OPENTOK } from '../utils/Constants'
+
+import OTPublisherStream from './OTPublisherStream';
+import OTSubscriberStream from './OTSubscriberStream';
+
+import firebase from 'react-native-firebase'
+import { throwStatement } from '@babel/types';
+const auth = firebase.auth();
+const firestore = firebase.firestore()
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
@@ -29,12 +38,12 @@ const COLOR_TAB = '#222222'
 const COLOR_GOLD = '#F8D099'
 const COLOR_TEXT_GRAY = '#595558'
 
-export default class ChatViewRoomScreen extends React.Component {
+export default class StarLiveRoomScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      type: 0,
       placeholder: 'Post something new ...',
+      isFanConnect: false,
       stars: [
         {
           name: 'VIRAT KOHLI',
@@ -63,17 +72,74 @@ export default class ChatViewRoomScreen extends React.Component {
         },
       ],
     }
+    this.sessionEventHandlers = {
+      connectionCreated: event =>  { 
+        console.warn("connection created", event);
+      },
+      connectionDestroyed: event =>  { 
+        console.warn("connection destroyed", event);
+      },
+      sessionConnected: event => { 
+        console.warn("Client connect to a session")
+      },
+      sessionDisconnected: event => {
+        console.warn("Client disConnect to a session")
+        
+      },
+      sessionReconnected: event => {
+        console.warn("session reconnected")
+      },
+    };
   }
+
   componentDidMount() {
     Orientation.lockToPortrait();
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
     const token = this.props.navigation.getParam('token', '')
     console.warn(apiKey, sessionId, token)
+    this.context.showLoading();
     this.setState({
       apiKey: apiKey,
       sessionId: sessionId,
-      token, token
+      token: token
+    }, () => {
+      firestore.doc(`users/${auth.currentUser.uid}`).set({
+        isLive: true
+      }, {merge: true})
+      .then(() => {
+        firestore.collection('sessions').where('sessionId', '==', sessionId).get()
+        .then(session => {
+          this.context.hideLoading();
+          this.setState({
+            sid: session.docs[0].id
+          })
+        })
+        .catch(()=>{
+          this.context.hideLoading();
+        })
+      })
+      .catch(()=>{
+        this.context.hideLoading();
+      })
+    })
+  }
+
+  onEndCall() {
+    this.context.showLoading();
+    firestore.doc(`users/${auth.currentUser.uid}`).set({
+      isLive: false
+    }, {merge: true})
+    .then(()=>{
+      firestore.doc(`sessions/${this.state.sid}`).delete()
+      this.context.hideLoading();
+      this.props.navigation.navigate('review')
+    })
+    .catch(() => {
+      // this.props.navigation.navigate('review')
+      firestore.doc(`sessions/${this.state.sid}`).delete()
+      this.context.hideLoading();
+      this.props.navigation.navigate('review')
     })
   }
  
@@ -96,21 +162,19 @@ export default class ChatViewRoomScreen extends React.Component {
       </TouchableOpacity>
     )
   }
-  onChangeType(selectedIndex) {
-    this.setState({type: selectedIndex})
-  }
+ 
   render() {
     return(
       <ImageBackground style={styles.container} source={IMAGE_BACKGROUND}>
         <View style={styles.view_main}>
           <ScrollView style={{width: '100%'}}>
             <View style={styles.view_video}>
-              <View style={{width: '100%', height: '100%', flexDirection: 'row', position: 'absolute'}}>
+              <View style={{width: '100%', height: '100%', flexDirection: 'row', position: 'absolute', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
-                  <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} >
+                  <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} eventHandlers={this.sessionEventHandlers}>
                     <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
-                      <OTPublisher style={{flex: 1, height: '100%'}}/>
-                      <OTSubscriber style={{width: screenWidth/2, height: '100%'}} />
+                      <OTPublisherStream style={{flex: 1, height: '100%'}}/>
+                      <OTSubscriberStream style={{width: screenWidth/2, height: '100%'}} />
                     </View>
                   </OTSession>
                 }
@@ -142,7 +206,7 @@ export default class ChatViewRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('review')}>
+                <TouchableOpacity onPress={()=>this.onEndCall()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_CALL}
@@ -315,8 +379,8 @@ const styles = StyleSheet.create({
   }
 })
 
-ChatViewRoomScreen.contextType = AppContext;
+StarLiveRoomScreen.contextType = AppContext;
 
-ChatViewRoomScreen.propTypes = {
+StarLiveRoomScreen.propTypes = {
   navigation: PropTypes.object
 };

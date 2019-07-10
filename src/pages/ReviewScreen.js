@@ -34,6 +34,7 @@ export default class ReviewScreen extends React.Component {
     this.state = {
       starCount: 3,
       placeholder: 'Please type in your feedback here',
+      feedback: '',
       viewRef: null
     }
   }
@@ -43,12 +44,13 @@ export default class ReviewScreen extends React.Component {
   onStarRatingPress(rating) {
     this.setState({
       starCount: rating,
-      feedback: '',
     });
   }
   onSubmit() {
     console.warn('submit')
-    Alert.alert('Notice', 'Review logic in under development. Please click close button .')
+    // Alert.alert('Notice', 'Review logic in under development. Please click close button .')
+    // firestore.collection.
+
   }
   onClose() {
     firestore.doc(`users/${auth.currentUser.uid}`).get()
@@ -78,91 +80,90 @@ export default class ReviewScreen extends React.Component {
  
   render() {
     return(
-      
       <ImageBackground source={IMAGE_BACKGROUND} style={styles.container} blurRadius={30} >
-          <View style={styles.view_main}>
-            <ImageBackground style={styles.view_board}>
-              <Image
-                style={{width:40, height:57*40/55, marginTop: 30}}
-                source={IMAGE_MARK}
+        <View style={styles.view_main}>
+          <ImageBackground style={styles.view_board}>
+            <Image
+              style={{width:40, height:57*40/55, marginTop: 30}}
+              source={IMAGE_MARK}
+              resizeMode='contain'
+            /> 
+            <Text style={{color: COLOR_GOLD, fontSize: 15, marginTop: 15}}>Please rate your experience</Text>
+            <StarRating
+              containerStyle={{marginTop: 20}}
+              starStyle={{marginHorizontal: 10}}
+              maxStars={5}
+              emptyStarColor={'white'}
+              fullStarColor={COLOR_GOLD}
+              halfStarColor={COLOR_GOLD}
+              starSize={25}
+              rating={this.state.starCount}
+              selectedStar={(rating) => this.onStarRatingPress(rating)}
+            />
+            <Text style={{width: '75%', color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center'}}>
+              Your feedback will help improve the overall experience of the platform.
+            </Text>
+            <Input
+              containerStyle={{marginTop: 20, borderRadius: 2, width: '80%', height: 80, backgroundColor: COLOR_INPUT_BG, borderWidth: 1, borderColor: COLOR_INPUT_BORDER}}
+              inputContainerStyle={{borderBottomWidth: 0}}
+              inputStyle={{color: 'white', padding: isiOS? 5:5, fontSize: 14}}
+              onChangeText={(feedback) => this.setState({feedback: feedback})}
+              underlineColorAndroid='transparent'
+              placeholder={this.state.placeholder}
+              placeholderTextColor='grey'
+              multiline={true}
+              value={this.state.feedback}
+            />
+            <TouchableOpacity style={{width:'80%', height: (screenWidth-50)*0.8*73/510, marginTop: 20, marginBottom: 30}}  onPress={()=>this.onSubmit()}>
+              <ImageBackground
+                style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}
+                source={IMAGE_BUTTON}
                 resizeMode='contain'
-              /> 
-              <Text style={{color: COLOR_GOLD, fontSize: 15, marginTop: 15}}>Please rate your experience</Text>
-              <StarRating
-                containerStyle={{marginTop: 20}}
-                starStyle={{marginHorizontal: 10}}
-                maxStars={5}
-                emptyStarColor={'white'}
-                fullStarColor={COLOR_GOLD}
-                halfStarColor={COLOR_GOLD}
-                starSize={25}
-                rating={this.state.starCount}
-                selectedStar={(rating) => this.onStarRatingPress(rating)}
-              />
-              <Text style={{width: '75%', color: 'white', fontSize: 14, marginTop: 20, textAlign: 'center'}}>
-                Your feedback will help improve the overall experience of the platform.
-              </Text>
-              <Input
-                containerStyle={{marginTop: 20, borderRadius: 2, width: '80%', height: 80, backgroundColor: COLOR_INPUT_BG, borderWidth: 1, borderColor: COLOR_INPUT_BORDER}}
-                inputContainerStyle={{borderBottomWidth: 0}}
-                inputStyle={{color: 'white', padding: isiOS? 5:5, fontSize: 14}}
-                onChangeText={(feedback) => this.setState({feedback: feedback})}
-                underlineColorAndroid='transparent'
-                placeholder={this.state.placeholder}
-                placeholderTextColor='grey'
-                multiline={true}
-                value={this.state.feedback}
-              />
-              <TouchableOpacity style={{width:'80%', height: (screenWidth-50)*0.8*73/510, marginTop: 20, marginBottom: 30}}  onPress={()=>this.onSubmit()}>
-                <ImageBackground
-                  style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}
-                  source={IMAGE_BUTTON}
-                  resizeMode='contain'
-                >
-                  <Text style={{color:'white', fontSize: 14}}>Submit</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            </ImageBackground>
-            <TouchableOpacity onPress={()=>this.onClose()}>
-              <Image
-                style={{width: 40, height: 40, marginTop: 20}}
-                source={ICON_CLOSE}
-                resizeMode='contain'
-              />              
-            </TouchableOpacity>
-          </View>
-        
-          <ImageBackground source={IMAGE_BOTTOM_TAB} style={styles.button_tab} resizeMode='stretch' > 
-            <TouchableOpacity>
-              <Image
-                style={{width:25, height:25}}
-                source={ICON_HOME}
-                resizeMode='contain'
-              />              
-            </TouchableOpacity>
-            <TouchableOpacity> 
-              <Image
-                style={{width:25, height:25}}
-                source={ICON_SEARCH}
-                resizeMode='contain'
-              />             
-            </TouchableOpacity>
-            <TouchableOpacity> 
-              <Image
-                style={{width:30, height:30}}
-                source={ICON_GROUP}
-                resizeMode='contain'
-              />             
-            </TouchableOpacity>
-            <TouchableOpacity>   
-              <Image
-                style={{width:25, height:25}}
-                source={ICON_PERSON}
-                resizeMode='contain'
-              />           
+              >
+                <Text style={{color:'white', fontSize: 14}}>Submit</Text>
+              </ImageBackground>
             </TouchableOpacity>
           </ImageBackground>
+          <TouchableOpacity onPress={()=>this.onClose()}>
+            <Image
+              style={{width: 40, height: 40, marginTop: 20}}
+              source={ICON_CLOSE}
+              resizeMode='contain'
+            />              
+          </TouchableOpacity>
+        </View>
+      
+        <ImageBackground source={IMAGE_BOTTOM_TAB} style={styles.button_tab} resizeMode='stretch' > 
+          <TouchableOpacity>
+            <Image
+              style={{width:25, height:25}}
+              source={ICON_HOME}
+              resizeMode='contain'
+            />              
+          </TouchableOpacity>
+          <TouchableOpacity> 
+            <Image
+              style={{width:25, height:25}}
+              source={ICON_SEARCH}
+              resizeMode='contain'
+            />             
+          </TouchableOpacity>
+          <TouchableOpacity> 
+            <Image
+              style={{width:30, height:30}}
+              source={ICON_GROUP}
+              resizeMode='contain'
+            />             
+          </TouchableOpacity>
+          <TouchableOpacity>   
+            <Image
+              style={{width:25, height:25}}
+              source={ICON_PERSON}
+              resizeMode='contain'
+            />           
+          </TouchableOpacity>
         </ImageBackground>
+      </ImageBackground>
     )
   }  
 }

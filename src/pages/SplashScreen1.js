@@ -39,7 +39,7 @@ export default class SplashScreen1 extends React.Component {
 				this.props.navigation.navigate('welcome1');
       }
     });
-    // this.props.navigation.navigate('signin');
+    // this.props.navigation.navigate('welcome1');
   }
 
   render() {

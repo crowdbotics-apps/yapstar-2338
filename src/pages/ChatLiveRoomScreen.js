@@ -4,9 +4,12 @@ import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, Vie
 import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, RoomHeader } from '../components';
-import { OTPublisher, OTSession, OTSubscriber } from 'opentok-react-native'
-import { OPENTOK } from '../utils/Constants'
+import { OTPublisher, OTSession, OTSubscriber, OT } from 'opentok-react-native'
+import { OPENTOK, ToS_URL } from '../utils/Constants'
 import { cStyles, screenWidth, screenHeight } from './styles';
+
+import OTPublisherStream from './OTPublisherStream';
+import OTSubscriberStream from './OTSubscriberStream';
 
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
 const IMAGE_GRAD1 = require('app/assets/images/chatview_grad1.png');
@@ -29,18 +32,17 @@ export default class ChatLiveRoomScreen extends React.Component {
     super(props)
     this.state = {
       isFullScreen: false,
-      sessionId: '1_MX40NjM1NDkyMn5-MTU2MjMyMDIzOTAzOX5lNWx5eitwcE5Ocy9zUElVMmlRWTZ6QVN-fg',
-      token: 'T1==cGFydG5lcl9pZD00NjM1NDkyMiZzaWc9NTJhMTA0NWZhZDM1MWY1YjU1ZTk0OTQ1YmQ2MDQ0M2Q2Mzc2NTZmMjpzZXNzaW9uX2lkPTFfTVg0ME5qTTFORGt5TW41LU1UVTJNak15TURJek9UQXpPWDVsTld4NWVpdHdjRTVPY3k5elVFbFZNbWxSV1RaNlFWTi1mZyZjcmVhdGVfdGltZT0xNTYyMzIwMjczJm5vbmNlPTAuNzAyMTEyODExNDcxMjAzOSZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTYyNDA2NjcyJmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9'
     }
     this.sessionEventHandlers = {
       connectionCreated: event =>  { 
-          console.warn("connection created", event);
+        console.warn("connection created", event);
       },
       connectionDestroyed: event =>  { 
-          console.warn("connection destroyed", event);
+        console.warn("connection destroyed", event);
+        this.props.navigation.navigate('review')
       },
       sessionConnected: event => { 
-          console.warn("Client connect to a session")
+        console.warn("Client connect to a session")
       },
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
@@ -50,116 +52,130 @@ export default class ChatLiveRoomScreen extends React.Component {
       },
     };
   }
+
   componentDidMount() {
     Orientation.lockToPortrait();
+    const apiKey = this.props.navigation.getParam('apiKey', '')
+    const sessionId = this.props.navigation.getParam('sessionId', '')
+    const token = this.props.navigation.getParam('token', '')
+    this.setState({
+      apiKey: apiKey,
+      sessionId: sessionId,
+      token, token
+    })
   }
   
+  onDisconnect() {
+    OTSession.connectionDestroyed()
+  }
+
   render() {
     return(
       <View style={styles.container}>
-        <OTSession apiKey={OPENTOK.API_KEY} sessionId={this.state.sessionId} token={this.state.token} eventHandlers={this.sessionEventHandlers}>
-
-        {!this.state.isFullScreen &&
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.view_star} onPress={()=>this.setState({isFullScreen: true})} >
+        {this.state.apiKey && this.state.token && this.state.sessionId &&
+        <OTSession apiKey={this.state.apiKey? this.state.apiKey:null} sessionId={this.state.sessionId? this.state.sessionId:null} token={this.state.token? this.state.token: null} eventHandlers={this.sessionEventHandlers}>
+          {!this.state.isFullScreen &&
+            <View style={styles.container}>
+              <TouchableOpacity style={styles.view_star}  >
+                <Image
+                  style={styles.view_absolute}
+                  source={IMAGE_SAMPLE1} 
+                  resizeMode='cover'
+                />
+                <OTSubscriberStream style={{width: '100%', height: '100%'}} />
+                <Image
+                  style={{width: '100%', height: '50%', position: 'absolute'}}
+                  source={IMAGE_GRAD1}
+                  resizeMode='cover'
+                />
+            </TouchableOpacity>
+              <Image
+                style={styles.view_bar}
+                source={IMAGE_BAR}
+                resizeMode='cover'
+              />
+              <View style={styles.view_fan}>
+                <Image
+                  style={styles.view_absolute}
+                  source={IMAGE_SAMPLE2} 
+                  resizeMode='cover'
+                />
+                {/* <OTPublisherStream style={styles.view_absolute} /> */}
+                <Image
+                  style={{width: '100%', height: '80%', position: 'absolute'}}
+                  source={IMAGE_GRAD2}
+                  resizeMode='stretch'
+                />
+                <TouchableOpacity style={{marginBottom: 20}}  onPress={()=>this.props.navigation.navigate('review')} >
+                  <Image
+                    style={styles.image_button}
+                    source={ICON_CALL}
+                    resizeMode='stretch'
+                  />
+                </TouchableOpacity>
+                
+                <View style={styles.view_control}>
+                  <TouchableOpacity>
+                    <Image
+                      style={styles.image_button}
+                      source={ICON_VIDEO}
+                      resizeMode='stretch'
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Image
+                      style={styles.image_button}
+                      source={ICON_AUDIO}
+                      resizeMode='stretch'
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Image
+                      style={styles.image_button}
+                      source={ICON_MESSAGE}
+                      resizeMode='stretch'
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Image
+                      style={styles.image_button}
+                      source={ICON_PHOTO}
+                      resizeMode='stretch'
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          }
+          
+          {this.state.isFullScreen &&
+            <View style={styles.view_full}>
+              {/* <OTSubscriberStream style={{width:'100%', height: '100%'}} /> */}
               <Image
                 style={styles.view_absolute}
                 source={IMAGE_SAMPLE1} 
                 resizeMode='cover'
               />
-              <OTSubscriber style={styles.view_absolute} />
-              <Image
-                style={{width: '100%', height: '50%', position: 'absolute'}}
-                source={IMAGE_GRAD1}
-                resizeMode='cover'
-              />
-            </TouchableOpacity>
-            <Image
-              style={styles.view_bar}
-              source={IMAGE_BAR}
-              resizeMode='cover'
-            />
-            <View style={styles.view_fan}>
-              <Image
-                style={styles.view_absolute}
-                source={IMAGE_SAMPLE2} 
-                resizeMode='cover'
-              />
-              <OTPublisher style={styles.view_absolute} />
-              <Image
-                style={{width: '100%', height: '80%', position: 'absolute'}}
-                source={IMAGE_GRAD2}
-                resizeMode='stretch'
-              />
-              <TouchableOpacity style={{marginBottom: 20}}  onPress={()=>this.props.navigation.navigate('review')}>
+              <OTSubscriberStream style={{width:'100%', height: '100%'}} />
+              <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.props.navigation.navigate('review')}>
                 <Image
                   style={styles.image_button}
                   source={ICON_CALL}
                   resizeMode='stretch'
                 />
               </TouchableOpacity>
-              
-              <View style={styles.view_control}>
-                <TouchableOpacity>
+              <View style={{width:'100%', position: 'absolute', paddingRight: 25, paddingBottom: 50,justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                <TouchableOpacity onPress={()=>this.setState({isFullScreen: false})} style={{width: 100, height: 100, borderColor: COLOR_GOLD, borderWidth: 2, borderRadius:10, overflow: 'hidden'}}> 
                   <Image
-                    style={styles.image_button}
-                    source={ICON_VIDEO}
-                    resizeMode='stretch'
+                    style={{width: '100%', height: '100%'}}
+                    source={IMAGE_SAMPLE2}
+                    resizeMode='cover'
                   />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.image_button}
-                    source={ICON_AUDIO}
-                    resizeMode='stretch'
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.image_button}
-                    source={ICON_MESSAGE}
-                    resizeMode='stretch'
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Image
-                    style={styles.image_button}
-                    source={ICON_PHOTO}
-                    resizeMode='stretch'
-                  />
+                  <OTPublisherStream style={styles.view_absolute} />
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
-        }
-        
-        {this.state.isFullScreen &&
-          <View style={styles.view_full}>
-            <Image
-              style={styles.view_absolute}
-              source={IMAGE_SAMPLE1} 
-              resizeMode='cover'
-            />
-            <OTSubscriber style={styles.view_absolute} />
-            <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.props.navigation.navigate('review')}>
-              <Image
-                style={styles.image_button}
-                source={ICON_CALL}
-                resizeMode='stretch'
-              />
-            </TouchableOpacity>
-            <View style={{width:'100%', position: 'absolute', paddingRight: 25, paddingBottom: 50,justifyContent: 'flex-end', alignItems: 'flex-end'}}>
-              <TouchableOpacity onPress={()=>this.setState({isFullScreen: false})} style={{width: 100, height: 100, borderColor: COLOR_GOLD, borderWidth: 2, borderRadius:10, overflow: 'hidden'}}> 
-                <Image
-                  style={{width: '100%', height: '100%'}}
-                  source={IMAGE_SAMPLE2}
-                  resizeMode='cover'
-                />
-                <OTPublisher style={{width: '100%', height: '100%', position: 'absolute'}} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        }
+          }
 
         <RoomHeader
           eTime='03 m 1 s'
@@ -171,7 +187,8 @@ export default class ChatLiveRoomScreen extends React.Component {
           onPressRight={()=>console.warn('menu')}
         />
         </OTSession>
-        </View>
+        }
+      </View>
     )
   }  
 }

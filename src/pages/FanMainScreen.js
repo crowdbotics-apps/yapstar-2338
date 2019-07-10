@@ -1,11 +1,17 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, Alert } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import PropTypes from 'prop-types';
 import { AppContext, Navbar } from '../components';
 import { cStyles, screenWidth } from './styles';
+import firebase from 'react-native-firebase';
+import FastImage from 'react-native-fast-image'
+
+const auth = firebase.auth()
+const firestore = firebase.firestore()
+const createToken = firebase.functions().httpsCallable('createToken');
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BOTTOM_TAB = require('app/assets/images/fanmain_tab.png');
@@ -31,6 +37,7 @@ export default class FanMainScreen extends React.Component {
     this.state = {
       type: 0,
       placeholder: 'Post something new ...',
+      liveStars: [],
       stars: [
         {
           name: 'VIRAT KOHLI',
@@ -60,14 +67,59 @@ export default class FanMainScreen extends React.Component {
       ],
     }
   }
+
+  componentWillUnmount() {
+    if (this.unsubscript) {
+      this.unsubscript()
+    }
+  }
+
   componentDidMount() {
     Orientation.lockToPortrait();
+    this.onLoadingLiveStars()
+  }
+
+  onLoadingLiveStars() {
+    if (this.unsubscript) {
+      this.unsubscript()
+      this.unsubscript = null
+    }
+    this.context.showLoading();
+    this.unsubscript = firestore.collection('users').where('role', '==', 1).where('isLive', '==', true).onSnapshot(
+      stars => {
+        this.context.hideLoading();
+        this.setState({liveStars: stars.docs})
+      }
+    )
+  }
+
+  gotoChatRoom(item) {
+    this.context.showLoading();
+    firestore.collection('sessions').where('publisherId', '==', item.id).get()
+    .then(session => {      
+      var data = {sessionId: session.docs[0].data().sessionId, role: 1}
+      createToken(data)
+      .then(result => {
+        this.context.hideLoading();
+        console.warn(result)
+        this.props.navigation.navigate('chatlive', {'starId': item.id, 'apiKey': session.docs[0].data().apiKey, 'sessionId': session.docs[0].data().sessionId, 'token': result.data.token})
+      })
+      .catch(err => {
+        this.context.hideLoading();
+        console.warn(err)
+      })
+    })
+    .catch(err => {
+      this.context.hideLoading();
+      Alert.alert('notice', 'Star closed connection.')
+    })
   }
  
   renderItemStar({item, index}) {
+    console.warn(item.data().photoURL)
     return(
-      <TouchableOpacity style={styles.view_stars_item} onPress={() => this.props.navigation.navigate('chatlive')}>
-        <Image source={item.image} style={styles.image_item} resizeMode='stretch'/>
+      <TouchableOpacity style={styles.view_stars_item} onPress={() => this.gotoChatRoom(item)}>
+        <FastImage source={{uri: item.data().photoURL}} style={styles.image_item} resizeMode='cover'/>
         <Image source={IMAGE_RECT} style={styles.image_item} resizeMode='stretch'/>
         <View style={{width: '100%', height: '100%', padding: 5, justifyContent:'space-between'}}>
           <View style={{height: 20, justifyContent:'space-between', flexDirection:'row'}}>
@@ -132,7 +184,7 @@ export default class FanMainScreen extends React.Component {
                 <FlatList
                   horizontal
                   keyExtractor={(item, index) => `${index}`}
-                  data={this.state.stars}
+                  data={this.state.liveStars}
                   renderItem={this.renderItemStar.bind(this)}
                   showsHorizontalScrollIndicator={false}
                 />

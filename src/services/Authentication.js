@@ -18,7 +18,8 @@ const signup = async (payload) => {
           photoURL: payload.photoURL,
           providerId: payload.providerId,
           interests: payload.selectedItems,
-          role: 0
+          role: 0,
+          isLive: false
         });
       }
     });
