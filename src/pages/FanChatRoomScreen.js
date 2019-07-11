@@ -39,7 +39,7 @@ export default class FanChatRoomScreen extends React.Component {
       },
       connectionDestroyed: event =>  { 
         console.warn("connection destroyed", event);
-        this.props.navigation.navigate('review')
+        this.gotoReview()
       },
       sessionConnected: event => { 
         console.warn("Client connect to a session")
@@ -108,7 +108,7 @@ export default class FanChatRoomScreen extends React.Component {
                   source={IMAGE_SAMPLE2} 
                   resizeMode='cover'
                 />
-                {/* <OTPublisherStream style={styles.view_absolute} /> */}
+                <OTPublisherStream style={styles.view_absolute} />
                 <Image
                   style={{width: '100%', height: '80%', position: 'absolute'}}
                   source={IMAGE_GRAD2}

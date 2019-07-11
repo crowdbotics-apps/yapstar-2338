@@ -63,14 +63,34 @@ export default class FanViewRoomScreen extends React.Component {
         },
       ],
     }
+    this.sessionEventHandlers = {
+      connectionCreated: event =>  { 
+        console.warn("connection created", event);
+      },
+      connectionDestroyed: event =>  { 
+        console.warn("connection destroyed", event);
+        this.gotoReview()
+      },
+      sessionConnected: event => { 
+        console.warn("Client connect to a session")
+      },
+      sessionDisconnected: event => {
+        console.warn("Client disConnect to a session")
+      },
+      sessionReconnected: event => {
+        console.warn("session reconnected")
+      },
+    };
   }
   componentDidMount() {
     Orientation.lockToPortrait();
+    const starId = this.props.navigation.getParam('starId', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
     const token = this.props.navigation.getParam('token', '')
     console.warn(apiKey, sessionId, token)
     this.setState({
+      starId: starId,
       apiKey: apiKey,
       sessionId: sessionId,
       token, token
@@ -96,8 +116,10 @@ export default class FanViewRoomScreen extends React.Component {
       </TouchableOpacity>
     )
   }
-  onChangeType(selectedIndex) {
-    this.setState({type: selectedIndex})
+  gotoReview() {
+    this.props.navigation.navigate('review', {
+      starId: this.state.starId
+    })
   }
   render() {
     return(
@@ -109,8 +131,8 @@ export default class FanViewRoomScreen extends React.Component {
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
                   <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} >
                     <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
-                      <OTPublisher style={{flex: 1, height: '100%'}}/>
-                      <OTSubscriber style={{width: screenWidth/2, height: '100%'}} />
+                      {/* <OTPublisher style={{flex: 1, height: '100%'}}/> */}
+                      <OTSubscriber style={{width: screenWidth, height: '100%'}} />
                     </View>
                   </OTSession>
                 }
@@ -142,7 +164,7 @@ export default class FanViewRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('fanStack')}>
+                <TouchableOpacity onPress={()=>this.gotoReview()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_CALL}
