@@ -35,25 +35,11 @@ export default class ReviewScreen extends React.Component {
       starCount: 3,
       placeholder: 'Please type in your feedback here',
       feedback: '',
-      receiverid: '',
-      isStar: false,
-      viewRef: null
+      receiverid: this.props.navigation.getParam('starId', ''),
     }
   }
   componentDidMount() {
     Orientation.lockToPortrait();
-    this.context.showLoading();
-    firestore.doc(`users/${auth.currentUser.uid}`).get()
-    .then(user => {
-      this.context.hideLoading()
-      if (user.data().role === 1) {
-        this.setState({ isStar: true })
-      }
-    })
-    .catch(err => {
-      this.context.hideLoading()
-      console.log('Review screen/set isStar error occurs')
-    })
   }
   onStarRatingPress(rating) {
     this.setState({
@@ -62,7 +48,6 @@ export default class ReviewScreen extends React.Component {
   }
   onSubmit() {
     console.warn('submit')
-    // Alert.alert('Notice', 'Review logic in under development. Please click close button .')
     this.context.showLoading()
     firestore.collection('reviews').add({
       senderid: auth.currentUser.uid,
@@ -74,11 +59,7 @@ export default class ReviewScreen extends React.Component {
     .then(() => {
       this.context.hideLoading()
       Alert.alert('Notice', 'You give a feedback successfully.')
-      if (this.state.isStar) {
-        this.props.navigation.navigate('starStack')
-      } else {
-        this.props.navigation.navigate('fanStack')
-      }
+      this.props.navigation.navigate('fanStack')
     })
     .catch(() => {
       this.context.hideLoading()
@@ -87,29 +68,7 @@ export default class ReviewScreen extends React.Component {
 
   }
   onClose() {
-    firestore.doc(`users/${auth.currentUser.uid}`).get()
-      .then(userinfo => {
-        console.warn(userinfo.data().role)
-        if (userinfo.data().role && userinfo.data().role === 1) {
-          this.props.navigation.navigate('starStack');
-        } 
-        else if (userinfo.data().role === 0) {
-          console.warn(userinfo.data().role)
-          this.props.navigation.navigate('fanStack');
-        } 
-        else {
-          this.props.navigation.navigate('signin');
-        }
-      })
-      .catch(error => {
-        this.props.navigation.navigate('signin');
-      })
-  }
-  imageLoaded() {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) }, ()=>{console.warn(this.state.viewRef)});
-  }
-  onTextViewLoaded() {
-    this.setState({ viewRef: findNodeHandle(this.viewRef) });
+    this.props.navigation.navigate('fanStack');
   }
  
   render() {

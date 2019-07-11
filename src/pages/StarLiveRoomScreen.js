@@ -133,13 +133,12 @@ export default class StarLiveRoomScreen extends React.Component {
     .then(()=>{
       firestore.doc(`sessions/${this.state.sid}`).delete()
       this.context.hideLoading();
-      this.props.navigation.navigate('review')
+      this.props.navigation.navigate('starStack')
     })
     .catch(() => {
-      // this.props.navigation.navigate('review')
       firestore.doc(`sessions/${this.state.sid}`).delete()
       this.context.hideLoading();
-      this.props.navigation.navigate('review')
+      this.props.navigation.navigate('starStack')
     })
   }
  

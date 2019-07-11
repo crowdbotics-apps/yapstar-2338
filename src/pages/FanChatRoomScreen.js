@@ -27,7 +27,7 @@ const ICON_MESSAGE = require('app/assets/images/ic_message.png');
 const COLOR_GOLD = '#F8D099'
 
 
-export default class ChatLiveRoomScreen extends React.Component {
+export default class FanChatRoomScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -55,10 +55,12 @@ export default class ChatLiveRoomScreen extends React.Component {
 
   componentDidMount() {
     Orientation.lockToPortrait();
+    const starId = this.props.navigation.getParam('starId', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
     const token = this.props.navigation.getParam('token', '')
     this.setState({
+      starId: starId,
       apiKey: apiKey,
       sessionId: sessionId,
       token, token
@@ -67,6 +69,12 @@ export default class ChatLiveRoomScreen extends React.Component {
   
   onDisconnect() {
     OTSession.connectionDestroyed()
+  }
+
+  gotoReview() {
+    this.props.navigation.navigate('review', {
+      starId: this.state.starId
+    })
   }
 
   render() {
@@ -106,7 +114,7 @@ export default class ChatLiveRoomScreen extends React.Component {
                   source={IMAGE_GRAD2}
                   resizeMode='stretch'
                 />
-                <TouchableOpacity style={{marginBottom: 20}}  onPress={()=>this.props.navigation.navigate('review')} >
+                <TouchableOpacity style={{marginBottom: 20}}  onPress={()=>this.gotoReview()} >
                   <Image
                     style={styles.image_button}
                     source={ICON_CALL}
@@ -237,8 +245,8 @@ const styles = StyleSheet.create({
   }
 })
 
-ChatLiveRoomScreen.contextType = AppContext;
+FanChatRoomScreen.contextType = AppContext;
 
-ChatLiveRoomScreen.propTypes = {
+FanChatRoomScreen.propTypes = {
   navigation: PropTypes.object
 };

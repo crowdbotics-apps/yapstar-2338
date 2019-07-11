@@ -102,7 +102,11 @@ export default class FanMainScreen extends React.Component {
       .then(result => {
         this.context.hideLoading();
         console.warn(result)
-        this.props.navigation.navigate('chatlive', {'starId': item.id, 'apiKey': session.docs[0].data().apiKey, 'sessionId': session.docs[0].data().sessionId, 'token': result.data.token})
+        this.props.navigation.navigate('fanChat', {
+          'starId': item.id, 
+          'apiKey': session.docs[0].data().apiKey, 
+          'sessionId': session.docs[0].data().sessionId, 
+          'token': result.data.token})
       })
       .catch(err => {
         this.context.hideLoading();

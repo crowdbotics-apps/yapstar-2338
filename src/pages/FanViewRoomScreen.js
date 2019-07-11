@@ -29,7 +29,7 @@ const COLOR_TAB = '#222222'
 const COLOR_GOLD = '#F8D099'
 const COLOR_TEXT_GRAY = '#595558'
 
-export default class ChatViewRoomScreen extends React.Component {
+export default class FanViewRoomScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -142,7 +142,7 @@ export default class ChatViewRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('review')}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('fanStack')}>
                   <Image
                     style={styles.image_button}
                     source={ICON_CALL}
@@ -315,8 +315,8 @@ const styles = StyleSheet.create({
   }
 })
 
-ChatViewRoomScreen.contextType = AppContext;
+FanViewRoomScreen.contextType = AppContext;
 
-ChatViewRoomScreen.propTypes = {
+FanViewRoomScreen.propTypes = {
   navigation: PropTypes.object
 };
