@@ -97,7 +97,7 @@ export default class FanMainScreen extends React.Component {
     this.context.showLoading();
     firestore.collection('sessions').where('publisherId', '==', item.id).get()
     .then(session => {      
-      var data = {sessionId: session.docs[0].data().sessionId, role: 0}
+      var data = {sessionId: session.docs[0].data().sessionId, role: 1}
       createToken(data)
       .then(result => {
         this.context.hideLoading();

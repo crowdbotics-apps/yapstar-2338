@@ -131,8 +131,8 @@ export default class FanViewRoomScreen extends React.Component {
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
                   <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} >
                     <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
-                      {/* <OTPublisher style={{flex: 1, height: '100%'}}/> */}
-                      <OTSubscriber style={{width: screenWidth, height: '100%'}} />
+                      <OTPublisher style={{flex: 1, height: '100%'}}/>
+                      <OTSubscriber style={{width: screenWidth/2, height: '100%'}} />
                     </View>
                   </OTSession>
                 }
