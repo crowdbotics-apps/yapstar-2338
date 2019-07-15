@@ -40,6 +40,7 @@ export default class ReviewScreen extends React.Component {
   }
   componentDidMount() {
     Orientation.lockToPortrait();
+    this.context.hideLoading();
   }
   onStarRatingPress(rating) {
     this.setState({

@@ -69,6 +69,7 @@ export default class StarPrepareRoomScreen extends React.Component {
                   type: result.data.type,
                   limit: result.data.limit,
                   starTime: starTime,
+                  isChatting: false,
                   endTime: endTime
                 })
                 .then(() => {

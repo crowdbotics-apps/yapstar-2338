@@ -5,11 +5,15 @@ import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, RoomHeader } from '../components';
 import { OTPublisher, OTSession, OTSubscriber, OT } from 'opentok-react-native'
+import firebase from 'react-native-firebase';
 import { OPENTOK, ToS_URL } from '../utils/Constants'
 import { cStyles, screenWidth, screenHeight } from './styles';
 
 import OTPublisherStream from './OTPublisherStream';
 import OTSubscriberStream from './OTSubscriberStream';
+
+const auth = firebase.auth()
+const firestore = firebase.firestore()
 
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
 const IMAGE_GRAD1 = require('app/assets/images/chatview_grad1.png');
@@ -58,13 +62,18 @@ export default class FanChatRoomScreen extends React.Component {
     const starId = this.props.navigation.getParam('starId', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
+    const sid = this.props.navigation.getParam('sid', '')
     const token = this.props.navigation.getParam('token', '')
+    firestore.doc(`sessions/${sid}`).set({
+      isChatting: true
+    }, {merge: true})
     this.setState({
       starId: starId,
       apiKey: apiKey,
       sessionId: sessionId,
+      sid: sid,
       token, token
-    })
+    }, () => {this.context.hideLoading()})
   }
   
   onDisconnect() {
@@ -72,9 +81,23 @@ export default class FanChatRoomScreen extends React.Component {
   }
 
   gotoReview() {
-    this.props.navigation.navigate('review', {
-      starId: this.state.starId
+    this.context.showLoading();
+    firestore.doc(`sessions/${this.state.sid}`).set({
+      isChatting: false
+    }, {merge: true})
+    .then(() => {
+      this.context.hideLoading();
+      this.props.navigation.navigate('review', {
+        starId: this.state.starId
+      })
     })
+    .catch(() => {
+      this.context.hideLoading();
+      this.props.navigation.navigate('review', {
+        starId: this.state.starId
+      })
+    })
+    
   }
 
   render() {
@@ -84,13 +107,13 @@ export default class FanChatRoomScreen extends React.Component {
         <OTSession apiKey={this.state.apiKey? this.state.apiKey:null} sessionId={this.state.sessionId? this.state.sessionId:null} token={this.state.token? this.state.token: null} eventHandlers={this.sessionEventHandlers}>
           {!this.state.isFullScreen &&
             <View style={styles.container}>
-              <TouchableOpacity style={styles.view_star}  >
+              <TouchableOpacity style={styles.view_star}>
                 <Image
                   style={styles.view_absolute}
                   source={IMAGE_SAMPLE1} 
                   resizeMode='cover'
                 />
-                <OTSubscriberStream style={{width: '100%', height: '100%'}} />
+                <OTSubscriberStream style={{width:'100%', height: '100%'}} />
                 <Image
                   style={{width: '100%', height: '50%', position: 'absolute'}}
                   source={IMAGE_GRAD1}
@@ -158,12 +181,11 @@ export default class FanChatRoomScreen extends React.Component {
           
           {this.state.isFullScreen &&
             <View style={styles.view_full}>
-              {/* <OTSubscriberStream style={{width:'100%', height: '100%'}} /> */}
-              <Image
+              {/* <Image
                 style={styles.view_absolute}
                 source={IMAGE_SAMPLE1} 
                 resizeMode='cover'
-              />
+              /> */}
               <OTSubscriberStream style={{width:'100%', height: '100%'}} />
               <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.props.navigation.navigate('review')}>
                 <Image

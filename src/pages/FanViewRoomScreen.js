@@ -1,11 +1,16 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, Alert } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, RoomHeader } from '../components';
 import { cStyles, screenWidth } from './styles';
 import { OTPublisher, OTSession, OTSubscriber, OT } from 'opentok-react-native'
+import firebase from 'react-native-firebase';
+
+const auth = firebase.auth()
+const firestore = firebase.firestore()
+const createToken = firebase.functions().httpsCallable('createToken');
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
@@ -87,9 +92,11 @@ export default class FanViewRoomScreen extends React.Component {
     const starId = this.props.navigation.getParam('starId', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
+    const sid = this.props.navigation.getParam('sid', '')
     const token = this.props.navigation.getParam('token', '')
     console.warn(apiKey, sessionId, token)
     this.setState({
+      sid: sid,
       starId: starId,
       apiKey: apiKey,
       sessionId: sessionId,
@@ -121,6 +128,40 @@ export default class FanViewRoomScreen extends React.Component {
       starId: this.state.starId
     })
   }
+  gotoMain() {
+    this.props.navigation.navigate('fanStack')
+  }
+  gotoChatroom() {
+    this.context.showLoading();
+    firestore.collection('sessions').where('publisherId', '==', this.state.starId).get()
+    .then(session => {
+      if (session.docs[0].data().isChatting) {
+        this.context.hideLoading();
+        Alert.alert('notice', 'Star is on chatting with other fan.')
+      } else {
+        var data = {sessionId: session.docs[0].data().sessionId, role: 1}
+        createToken(data)
+        .then(result => {
+          // this.context.hideLoading();
+          console.warn(result)
+          this.props.navigation.navigate('fanChat', {
+            'sid': session.docs[0].id,
+            'starId': item.id, 
+            'apiKey': session.docs[0].data().apiKey, 
+            'sessionId': session.docs[0].data().sessionId, 
+            'token': result.data.token})
+        })
+        .catch(err => {
+          this.context.hideLoading();
+          console.warn(err)
+        })
+      }     
+    })
+    .catch(err => {
+      this.context.hideLoading();
+      Alert.alert('notice', 'Star closed connection.')
+    })
+  }
   render() {
     return(
       <ImageBackground style={styles.container} source={IMAGE_BACKGROUND}>
@@ -131,8 +172,8 @@ export default class FanViewRoomScreen extends React.Component {
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
                   <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} >
                     <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
-                      <OTPublisher style={{flex: 1, height: '100%'}}/>
-                      <OTSubscriber style={{width: screenWidth/2, height: '100%'}} />
+                      {/* <OTPublisher style={{flex: 1, height: '100%'}}/> */}
+                      <OTSubscriber style={{width: screenWidth, height: '100%'}} />
                     </View>
                   </OTSession>
                 }
@@ -150,7 +191,7 @@ export default class FanViewRoomScreen extends React.Component {
                 />
               </View>
               <View style={styles.view_control}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.gotoChatroom()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_JEWEL}
@@ -164,7 +205,7 @@ export default class FanViewRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.gotoReview()}>
+                <TouchableOpacity onPress={()=>this.gotoMain()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_CALL}

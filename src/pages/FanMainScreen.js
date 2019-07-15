@@ -96,22 +96,43 @@ export default class FanMainScreen extends React.Component {
   gotoChatRoom(item) {
     this.context.showLoading();
     firestore.collection('sessions').where('publisherId', '==', item.id).get()
-    .then(session => {      
-      var data = {sessionId: session.docs[0].data().sessionId, role: 1}
-      createToken(data)
-      .then(result => {
-        this.context.hideLoading();
-        console.warn(result)
-        this.props.navigation.navigate('fanView', {
-          'starId': item.id, 
-          'apiKey': session.docs[0].data().apiKey, 
-          'sessionId': session.docs[0].data().sessionId, 
-          'token': result.data.token})
-      })
-      .catch(err => {
-        this.context.hideLoading();
-        console.warn(err)
-      })
+    .then(session => {
+      if (session.docs[0].data().isChatting) {
+        var data = {sessionId: session.docs[0].data().sessionId, role: 0}
+        createToken(data)
+        .then(result => {
+          this.context.hideLoading();
+          console.warn(result)
+          this.props.navigation.navigate('fanView', {
+            'sid': session.docs[0].id,
+            'starId': item.id, 
+            'apiKey': session.docs[0].data().apiKey, 
+            'sessionId': session.docs[0].data().sessionId, 
+            'token': result.data.token})
+        })
+        .catch(err => {
+          this.context.hideLoading();
+          console.warn(err)
+        })
+      } else {
+        var data = {sessionId: session.docs[0].data().sessionId, role: 1}
+        createToken(data)
+        .then(result => {
+          this.context.hideLoading();
+          console.warn(result)
+          this.props.navigation.navigate('fanChat', {
+            'sid': session.docs[0].id,
+            'starId': item.id, 
+            'apiKey': session.docs[0].data().apiKey, 
+            'sessionId': session.docs[0].data().sessionId, 
+            'token': result.data.token})
+        })
+        .catch(err => {
+          this.context.hideLoading();
+          console.warn(err)
+        })
+      }     
+      
     })
     .catch(err => {
       this.context.hideLoading();
