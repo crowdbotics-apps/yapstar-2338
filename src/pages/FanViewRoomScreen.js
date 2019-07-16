@@ -1,6 +1,6 @@
 import React from 'react'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, Alert } from 'react-native'
+import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, ScrollView, FlatList, Text, Alert } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, RoomHeader } from '../components';
@@ -142,7 +142,7 @@ export default class FanViewRoomScreen extends React.Component {
         var data = {sessionId: session.docs[0].data().sessionId, role: 1}
         createToken(data)
         .then(result => {
-          // this.context.hideLoading();
+          this.context.hideLoading();
           console.warn(result)
           this.props.navigation.navigate('fanChat', {
             'sid': session.docs[0].id,
@@ -171,9 +171,9 @@ export default class FanViewRoomScreen extends React.Component {
               <View style={{width: '100%', height: '100%', flexDirection: 'row', position: 'absolute'}}>
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
                   <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} >
-                    <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
+                    <View style={{width: '100%', height: '100%', flexDirection: 'row'}}> 
                       {/* <OTPublisher style={{flex: 1, height: '100%'}}/> */}
-                      <OTSubscriber style={{width: screenWidth, height: '100%'}} />
+                      <OTSubscriber containerStyle={{flexDirection: 'row', width: '100%', height: '100%', justifyContent: 'flex-end'}} style={{flex: 1, height: '100%'}} />
                     </View>
                   </OTSession>
                 }
