@@ -36,6 +36,7 @@ export default class FanChatRoomScreen extends React.Component {
     super(props)
     this.state = {
       isFullScreen: false,
+      sid: ''
     }
     this.sessionEventHandlers = {
       connectionCreated: event =>  { 
@@ -43,7 +44,6 @@ export default class FanChatRoomScreen extends React.Component {
       },
       connectionDestroyed: event =>  { 
         console.warn("connection destroyed", event);
-        this.gotoReview()
       },
       sessionConnected: event => { 
         console.warn("Client connect to a session")
@@ -82,6 +82,7 @@ export default class FanChatRoomScreen extends React.Component {
 
   gotoReview() {
     this.context.showLoading();
+    console.warn(this.state.sid)
     firestore.doc(`sessions/${this.state.sid}`).set({
       isChatting: false
     }, {merge: true})
@@ -97,7 +98,6 @@ export default class FanChatRoomScreen extends React.Component {
         starId: this.state.starId
       })
     })
-    
   }
 
   render() {
@@ -105,15 +105,10 @@ export default class FanChatRoomScreen extends React.Component {
       <View style={styles.container}>
         {this.state.apiKey && this.state.token && this.state.sessionId &&
         <OTSession apiKey={this.state.apiKey? this.state.apiKey:null} sessionId={this.state.sessionId? this.state.sessionId:null} token={this.state.token? this.state.token: null} eventHandlers={this.sessionEventHandlers}>
+          <OTSubscriber style={{width: '100%', height:this.state.isFullScreen?screenHeight:screenHeight*0.65, position: 'absolute'}} />
           {!this.state.isFullScreen &&
             <View style={styles.container}>
               <TouchableOpacity style={styles.view_star}>
-                <Image
-                  style={styles.view_absolute}
-                  source={IMAGE_SAMPLE1} 
-                  resizeMode='cover'
-                />
-                <OTSubscriberStream style={{width:'100%', height: '100%'}} />
                 <Image
                   style={{width: '100%', height: '50%', position: 'absolute'}}
                   source={IMAGE_GRAD1}
@@ -126,12 +121,7 @@ export default class FanChatRoomScreen extends React.Component {
                 resizeMode='cover'
               />
               <View style={styles.view_fan}>
-                <Image
-                  style={styles.view_absolute}
-                  source={IMAGE_SAMPLE2} 
-                  resizeMode='cover'
-                />
-                <OTPublisherStream style={styles.view_absolute} />
+                <OTPublisher style={styles.view_absolute} />
                 <Image
                   style={{width: '100%', height: '80%', position: 'absolute'}}
                   source={IMAGE_GRAD2}
@@ -181,27 +171,16 @@ export default class FanChatRoomScreen extends React.Component {
           
           {this.state.isFullScreen &&
             <View style={styles.view_full}>
-              {/* <Image
-                style={styles.view_absolute}
-                source={IMAGE_SAMPLE1} 
-                resizeMode='cover'
-              /> */}
-              <OTSubscriberStream style={{width:'100%', height: '100%'}} />
-              <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.props.navigation.navigate('review')}>
+              <TouchableOpacity style={{marginBottom: 30}} onPress={()=>this.gotoReview()}>
                 <Image
                   style={styles.image_button}
                   source={ICON_CALL}
                   resizeMode='stretch'
                 />
               </TouchableOpacity>
-              <View style={{width:'100%', position: 'absolute', paddingRight: 25, paddingBottom: 50,justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+              <View style={{width:'100%', height: 150, position: 'absolute', paddingRight: 25, paddingBottom: 50,justifyContent: 'flex-end', alignItems: 'flex-end'}}>
                 <TouchableOpacity onPress={()=>this.setState({isFullScreen: false})} style={{width: 100, height: 100, borderColor: COLOR_GOLD, borderWidth: 2, borderRadius:10, overflow: 'hidden'}}> 
-                  <Image
-                    style={{width: '100%', height: '100%'}}
-                    source={IMAGE_SAMPLE2}
-                    resizeMode='cover'
-                  />
-                  <OTPublisherStream style={styles.view_absolute} />
+                  <OTPublisher style={styles.view_absolute} />
                 </TouchableOpacity>
               </View>
             </View>

@@ -1,16 +1,15 @@
 import React from 'react'
 import { 
-  SafeAreaView, 
   StyleSheet, 
   Image, 
   ImageBackground, 
   TouchableOpacity, 
   Text, 
   View } from 'react-native'
-import PropTypes from 'prop-types';
-import Orientation from 'react-native-orientation'
-import { AppContext, Navbar } from 'app/components';
+import PropTypes from 'prop-types'
 import FastImage from 'react-native-fast-image'
+import Orientation from 'react-native-orientation'
+import { AppContext } from 'app/components'
 
 const IMAGE_BACKGROUND = require('app/assets/images/welcome3.png');
 const IMAGE_TEXT = require('app/assets/images/welcome3_txt.png');
