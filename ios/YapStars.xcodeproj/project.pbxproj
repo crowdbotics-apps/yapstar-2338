@@ -65,6 +65,7 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B9F73FF5EE954314B8EE3020 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A23467A507F54746940C7242 /* libRNGestureHandler.a */; };
 		C247E4230A9F4FF09D5DC451 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CACDB0505E847249B817FFC /* FontAwesome5_Brands.ttf */; };
+		D700544822D7451E0075A34E /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D700543F22D7450B0075A34E /* libRNCamera.a */; };
 		D74F7DF922CB3DD700CCCB68 /* OTInstall.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74F7DF822CB3DD700CCCB68 /* OTInstall.swift */; };
 		D74F7ECD22CB4DFA00CCCB68 /* libOpenTokReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D74F7E9D22CB4DE600CCCB68 /* libOpenTokReactNative.a */; };
 		D78093B122C3F2E800FE1E5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D78093B022C3F2E600FE1E5E /* GoogleService-Info.plist */; };
@@ -322,6 +323,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		D700543E22D7450B0075A34E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D700541122D7450B0075A34E /* RNCamera.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
+			remoteInfo = RNCamera;
+		};
 		D74F7E9C22CB4DE600CCCB68 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */;
@@ -522,6 +530,7 @@
 		C3430B3B510A4CD8B66ACA41 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		CE3CCD3177A94EB2901C2F48 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = "<group>"; };
 		D387DD0D17C84E1F902FE9E1 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
+		D700541122D7450B0075A34E /* RNCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
 		D74F7DF722CB3DD600CCCB68 /* YapStars-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YapStars-Bridging-Header.h"; sourceTree = "<group>"; };
 		D74F7DF822CB3DD700CCCB68 /* OTInstall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTInstall.swift; sourceTree = "<group>"; };
 		D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenTokReactNative.xcodeproj; path = "../node_modules/opentok-react-native/ios/OpenTokReactNative.xcodeproj"; sourceTree = "<group>"; };
@@ -550,6 +559,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D700544822D7451E0075A34E /* libRNCamera.a in Frameworks */,
 				D74F7ECD22CB4DFA00CCCB68 /* libOpenTokReactNative.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -776,6 +786,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D700541122D7450B0075A34E /* RNCamera.xcodeproj */,
 				D74F7E9722CB4DE500CCCB68 /* OpenTokReactNative.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -870,6 +881,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D700541222D7450B0075A34E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D700543F22D7450B0075A34E /* libRNCamera.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1178,6 +1197,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = D700541222D7450B0075A34E /* Products */;
+					ProjectRef = D700541122D7450B0075A34E /* RNCamera.xcodeproj */;
+				},
+				{
 					ProductGroup = D780934222C3DA7600FE1E5E /* Products */;
 					ProjectRef = 63796B81A4BA4850A7402004 /* RNCAsyncStorage.xcodeproj */;
 				},
@@ -1446,6 +1469,13 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D700543F22D7450B0075A34E /* libRNCamera.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCamera.a;
+			remoteRef = D700543E22D7450B0075A34E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D74F7E9D22CB4DE600CCCB68 /* libOpenTokReactNative.a */ = {
