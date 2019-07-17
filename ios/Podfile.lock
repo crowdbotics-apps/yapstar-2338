@@ -167,7 +167,7 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - OpenTok (2.16.0)
+  - OpenTok (2.16.1)
   - Protobuf (3.8.0)
   - TwitterCore (3.2.0)
   - TwitterKit (3.3.0):
@@ -187,7 +187,7 @@ DEPENDENCIES:
   - Firebase/RemoteConfig (~> 5.20.1)
   - Firebase/Storage (~> 5.20.1)
   - GoogleSignIn (~> 4.4.0)
-  - OpenTok (= 2.16.0)
+  - OpenTok (= 2.16.1)
   - TwitterKit (~> 3.3.0)
 
 SPEC REPOS:
@@ -256,11 +256,11 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  OpenTok: 12d3b8ce66ed7b59ac524dad75c7aa3fffd9ae52
+  OpenTok: 556374577b66cbf791190c84612346c8f3997c9e
   Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: a2e60ddcedbf54091eac6f27685ca7a87681e1d7
 
-PODFILE CHECKSUM: c63e247992231567b112d17e4c5bea2197757ea5
+PODFILE CHECKSUM: 54f9f2f74b5315244eabdff17be71bd0010a747b
 
 COCOAPODS: 1.7.1
