@@ -43,6 +43,7 @@ export default class StarPrepareRoomScreen extends React.Component {
       var data = {
         uid: auth.currentUser.uid,
         type: 0,
+        role: 2
       }
       createSessionId(data)
       .then(result => {

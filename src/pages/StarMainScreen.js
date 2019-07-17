@@ -5,6 +5,12 @@ import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, Navbar } from '../components';
 import { cStyles, screenWidth } from './styles';
+import firebase from 'react-native-firebase'
+const auth = firebase.auth();
+const firestore = firebase.firestore()
+
+const historyArchive = firebase.functions().httpsCallable('historyArchive');
+const downloadArchive = firebase.functions().httpsCallable('downloadArchive');
 
 const IMAGE_BACKGROUND = require('app/assets/images/starmain_bg.png');
 const IMAGE_BOTTOM_TAB = require('app/assets/images/starmain_bottom.png');
@@ -43,6 +49,7 @@ export default class StarMainScreen extends React.Component {
     this.state = {
       isPlus: true,
       placeholder: 'Post something new ...',
+      archiveList: [],
       stars: [
         {
           name: 'VIRAT KOHLI',
@@ -74,6 +81,62 @@ export default class StarMainScreen extends React.Component {
   }
   componentDidMount() {
     Orientation.lockToPortrait();
+    this.getArchiveList()
+  }
+
+  getArchiveList() {
+    try {
+      this.context.showLoading();
+      var data = {
+        offset: 0,
+        count: 5,
+      }
+      historyArchive(data)
+      .then(result => {
+        console.warn(result)
+        this.context.hideLoading();
+        if (result.data.success) {
+          console.warn(result.data)
+          this.setState({
+            archiveList: result.data.archives
+          })
+        } else {
+          console.warn(result.data)
+        }
+      })
+      .catch(err => {
+        this.context.hideLoading();
+      })
+    } catch (e) {
+      this.context.hideLoading();
+      console.warn(e)
+    }
+  }
+
+  getArchiveLink() {
+    try {
+      this.context.showLoading();
+      var data = {
+        archiveId: this.state.archiveList[0].id
+      }
+      downloadArchive(data)
+      .then(result => {
+        console.warn(result)
+        this.context.hideLoading();
+        if (result.data.success) {
+          console.warn(result.data)
+        } else {
+          console.warn(result.data)
+        }
+      })
+      .catch(err => {
+        this.context.hideLoading();
+      })
+    } catch (e) {
+      this.context.hideLoading();
+      console.warn(e)
+    }
+
   }
 
   renderItemUpcoming({item, index}) {
@@ -142,11 +205,13 @@ export default class StarMainScreen extends React.Component {
         <Text style={{color: '#595558', fontSize: 16, marginTop: 10}} numberOfLines={2}>Upcoming auction for a one-to-one meeting with the one and only Bollywood icon.</Text>
         <ImageBackground source={IMAGE_THUMBS} style={{width:'100%', height: (screenWidth-50)*367/652,  borderRadius: 5, borderWidth:1, borderColor: COLOR_STAR_BORDER, overflow: 'hidden', marginTop:10, alignItems: 'center', justifyContent: 'space-between'}} resizeMode='stretch'>
           <Text></Text>
+          <TouchableOpacity onPress={()=>this.getArchiveLink()}>
           <Image
             style={{width:45, height:45}}
             source={ICON_PLAY}
             resizeMode='contain'
           />
+          </TouchableOpacity>
           <Text style={{width: '100%',color: 'white', fontSize: 14, paddingLeft: 5, paddingBottom: 5}} numberOfLines={1}>19:45</Text>
         </ImageBackground>
         <View style={{width:'100%', height: 20, marginTop:20, marginBottom: 15, flexDirection:'row', justifyContent: 'center'}}>

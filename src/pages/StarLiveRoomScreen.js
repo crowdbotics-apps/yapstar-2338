@@ -12,9 +12,11 @@ import OTPublisherStream from './OTPublisherStream';
 import OTSubscriberStream from './OTSubscriberStream';
 
 import firebase from 'react-native-firebase'
-import { throwStatement } from '@babel/types';
 const auth = firebase.auth();
 const firestore = firebase.firestore()
+
+const startArchive = firebase.functions().httpsCallable('startArchive');
+const stopArchive = firebase.functions().httpsCallable('stopArchive');
 
 const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
@@ -127,6 +129,33 @@ export default class StarLiveRoomScreen extends React.Component {
     })
   }
 
+  onRecording() {
+    this.context.showLoading();
+    data = {
+      sessionId: this.state.sessionId,
+      hasAudio: true,
+      hasVideo: true,
+      outputMode: 'composed',
+      name: 'YapStar First Recording'
+    }
+    startArchive(data)
+      .then(result => {
+        console.warn(result)
+        this.context.hideLoading();
+        if (result.data.success) {
+          console.warn(result.data)
+          this.setState({
+            archive: result.data.archive
+          })
+        } else {
+          console.warn(result.data)
+        }
+      })
+      .catch(err => {
+        this.context.hideLoading();
+      })
+  }
+
   onEndCall() {
     this.context.showLoading();
     firestore.doc(`users/${auth.currentUser.uid}`).set({
@@ -134,6 +163,8 @@ export default class StarLiveRoomScreen extends React.Component {
     }, {merge: true})
     .then(()=>{
       firestore.doc(`sessions/${this.state.sid}`).delete()
+      data = {archiveId: this.state.archive.id}
+      stopArchive(data)
       this.context.hideLoading();
       this.props.navigation.navigate('starStack')
     })
@@ -200,7 +231,7 @@ export default class StarLiveRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.onRecording()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_VIDEO}
