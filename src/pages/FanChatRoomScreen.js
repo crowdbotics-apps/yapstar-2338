@@ -44,12 +44,18 @@ export default class FanChatRoomScreen extends React.Component {
       },
       connectionDestroyed: event =>  { 
         console.warn("connection destroyed", event);
+        firestore.doc(`sessions/${this.state.sid}`).set({
+          isChatting: false
+        }, {merge: true})
       },
       sessionConnected: event => { 
         console.warn("Client connect to a session")
       },
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
+        firestore.doc(`sessions/${this.state.sid}`).set({
+          isChatting: false
+        }, {merge: true})
       },
       sessionReconnected: event => {
         console.warn("session reconnected")

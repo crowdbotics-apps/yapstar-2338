@@ -6106,10 +6106,10 @@ opencollective-postinstall@^2.0.0:
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
 
-opentok-react-native@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/opentok-react-native/-/opentok-react-native-0.11.1.tgz#b337c8c07c532496980ff5503a690e281ed586bf"
-  integrity sha512-rFSOWywYz7OSfxw3UCB7/uR8KOYgL8U/dIRScK7GrIg4knnI5Msx9MISX3O1Eso5BeGLzdAl4YIZ9PVRc1xtkA==
+opentok-react-native@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/opentok-react-native/-/opentok-react-native-0.11.2.tgz#079cda28627f04e7b50e76f77789a3a686f53f32"
+  integrity sha512-+tftQarfiax/S8ams4DGiIdzPuaPKTautDy6C9debNBww/qDVfRsT9LeVxd6SO3PL9mdQ/0DVqeGeTIieDWTFA==
   dependencies:
     axios "^0.19.0"
     prop-types "^15.6.0"

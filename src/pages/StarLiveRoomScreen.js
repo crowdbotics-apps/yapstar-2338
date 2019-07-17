@@ -84,7 +84,9 @@ export default class StarLiveRoomScreen extends React.Component {
       },
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
-        
+        firestore.doc(`users/${auth.currentUser.uid}`).set({
+          isLive: false
+        }, {merge: true})
       },
       sessionReconnected: event => {
         console.warn("session reconnected")
