@@ -46,6 +46,9 @@ export default class StarLiveRoomScreen extends React.Component {
     this.state = {
       placeholder: 'Post something new ...',
       isFanConnect: false,
+      publishAudio: true,
+      publishVideo: true,
+      isFrontCamera: true,
       stars: [
         {
           name: 'VIRAT KOHLI',
@@ -174,6 +177,22 @@ export default class StarLiveRoomScreen extends React.Component {
       this.props.navigation.navigate('starStack')
     })
   }
+  onChangeCamera() {
+    this.setState({
+      isFrontCamera: !this.state.isFrontCamera
+    })
+  }
+  onChangeAudio() {
+    this.setState({
+      publishAudio: !this.state.publishAudio
+    })
+  }
+  onChangeVideo() {
+    this.setState({
+      publishVideo: !this.state.publishVideo
+    })
+  }
+  
  
   renderItemChatList({item, index}) {
     return(
@@ -205,8 +224,8 @@ export default class StarLiveRoomScreen extends React.Component {
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
                   <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} eventHandlers={this.sessionEventHandlers}>
                     <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
-                      <OTPublisherStream style={{flex: 1, height: '100%'}}/>
-                      <OTSubscriberStream style={{width: screenWidth/2, height: '100%'}} />
+                      <OTPublisher style={{flex: 1, height: '100%'}} properties={{publishAudio: this.state.publishAudio, publishVideo: this.state.publishVideo, cameraPosition: this.state.isFrontCamera?'front':'back'}}/>
+                      <OTSubscriber style={{width: screenWidth/2, height: '100%'}} />
                     </View>
                   </OTSession>
                 }
@@ -224,14 +243,14 @@ export default class StarLiveRoomScreen extends React.Component {
                 />
               </View>
               <View style={styles.view_control}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.onRecording()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_JEWEL}
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.onRecording()}>
+                <TouchableOpacity onPress={()=>this.onChangeVideo()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_VIDEO}
@@ -245,7 +264,7 @@ export default class StarLiveRoomScreen extends React.Component {
                     resizeMode='stretch'
                   />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.onChangeAudio()}>
                   <Image
                     style={styles.image_button}
                     source={ICON_AUDIO}
@@ -257,7 +276,7 @@ export default class StarLiveRoomScreen extends React.Component {
             <RoomHeader
               eTime='03 m 1 s'
               eTimeTag='elapsed time'
-              onPressRight={()=>console.warn('menu')}
+              onPressRight={()=>this.onChangeCamera()}
             />
             <Image
               style={styles.view_bar}

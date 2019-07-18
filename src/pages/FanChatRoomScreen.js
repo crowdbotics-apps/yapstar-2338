@@ -36,7 +36,10 @@ export default class FanChatRoomScreen extends React.Component {
     super(props)
     this.state = {
       isFullScreen: false,
-      sid: ''
+      sid: '',
+      publishAudio: true,
+      publishVideo: true,
+      isFrontCamera: true
     }
     this.sessionEventHandlers = {
       connectionCreated: event =>  { 
@@ -106,11 +109,35 @@ export default class FanChatRoomScreen extends React.Component {
     })
   }
 
+  onChangeCamera() {
+    console.warn(this.state.isFrontCamera)
+    this.setState({
+      isFrontCamera: !this.state.isFrontCamera
+    })
+  }
+  onChangeAudio() {
+    console.warn(this.state.publishAudio)
+    this.setState({
+      publishAudio: !this.state.publishAudio
+    })
+  }
+  onChangeVideo() {
+    console.warn(this.state.publishVideo)
+    this.setState({
+      publishVideo: !this.state.publishVideo
+    })
+  }
+
   render() {
     return(
       <View style={styles.container}>
         {this.state.apiKey && this.state.token && this.state.sessionId &&
-        <OTSession apiKey={this.state.apiKey? this.state.apiKey:null} sessionId={this.state.sessionId? this.state.sessionId:null} token={this.state.token? this.state.token: null} eventHandlers={this.sessionEventHandlers}>
+        <OTSession
+          apiKey={this.state.apiKey? this.state.apiKey:null}
+          sessionId={this.state.sessionId? this.state.sessionId:null}
+          token={this.state.token? this.state.token: null} 
+          eventHandlers={this.sessionEventHandlers}
+         >
           <OTSubscriber style={{width: '100%', height:this.state.isFullScreen?screenHeight:screenHeight*0.65, position: 'absolute'}} />
           {!this.state.isFullScreen &&
             <View style={styles.container}>
@@ -127,7 +154,9 @@ export default class FanChatRoomScreen extends React.Component {
                 resizeMode='cover'
               />
               <View style={styles.view_fan}>
-                <OTPublisher style={styles.view_absolute} />
+                <OTPublisher 
+                  style={styles.view_absolute} 
+                  properties={{publishAudio: this.state.publishAudio, publishVideo: this.state.publishVideo, cameraPosition: this.state.isFrontCamera?'front':'back'}}/>
                 <Image
                   style={{width: '100%', height: '80%', position: 'absolute'}}
                   source={IMAGE_GRAD2}
@@ -142,14 +171,14 @@ export default class FanChatRoomScreen extends React.Component {
                 </TouchableOpacity>
                 
                 <View style={styles.view_control}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()=>this.onChangeVideo()}>
                     <Image
                       style={styles.image_button}
                       source={ICON_VIDEO}
                       resizeMode='stretch'
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()=>this.onChangeAudio()}>
                     <Image
                       style={styles.image_button}
                       source={ICON_AUDIO}
@@ -186,7 +215,9 @@ export default class FanChatRoomScreen extends React.Component {
               </TouchableOpacity>
               <View style={{width:'100%', height: 150, position: 'absolute', paddingRight: 25, paddingBottom: 50,justifyContent: 'flex-end', alignItems: 'flex-end'}}>
                 <TouchableOpacity onPress={()=>this.setState({isFullScreen: false})} style={{width: 100, height: 100, borderColor: COLOR_GOLD, borderWidth: 2, borderRadius:10, overflow: 'hidden'}}> 
-                  <OTPublisher style={styles.view_absolute} />
+                  <OTPublisher 
+                    style={styles.view_absolute}  
+                    />
                 </TouchableOpacity>
               </View>
             </View>
@@ -199,7 +230,7 @@ export default class FanChatRoomScreen extends React.Component {
           showRight = {this.state.isFullScreen? false:true}
           showLeft = {this.state.isFullScreen? false:true}
           onPressCast = {()=>console.warn('cast')}
-          onPressRight={()=>console.warn('menu')}
+          onPressRight={()=>this.onChangeCamera()}
         />
         </OTSession>
         }
