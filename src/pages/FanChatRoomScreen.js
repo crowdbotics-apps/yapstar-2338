@@ -54,7 +54,7 @@ export default class FanChatRoomScreen extends React.Component {
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
         this.context.showLoading();
-        firestore.collection('sessions').where('publisherId', '==', this.state.sid).get()
+        firestore.collection('sessions').where('publisherId', '==', this.state.starId).get()
         .then(session => {
           this.context.hideLoading();
           if (session.docs.length > 0) {

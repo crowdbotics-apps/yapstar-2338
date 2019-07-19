@@ -112,7 +112,7 @@ export default class StarLiveRoomScreen extends React.Component {
 
   componentDidMount() {
     Orientation.lockToPortrait();
-    const sid = this.props.navigation.navigate('sid', '')
+    const sid = this.props.navigation.getParam('sid', '')
     const token = this.props.navigation.getParam('token', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
