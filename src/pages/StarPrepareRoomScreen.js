@@ -1,134 +1,97 @@
 import React from 'react'
-
-
+import moment from 'moment'
+import PropTypes from 'prop-types'
+import firebase from 'react-native-firebase'
 import Orientation from 'react-native-orientation'
 import { RNCamera } from 'react-native-camera'
-import PropTypes from 'prop-types';
-import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
-import { AppContext, Navbar } from '../components';
-import Authentication from '../services/Authentication';
 import { Header, Input, Button, Avatar } from 'react-native-elements'
-import { cStyles, screenWidth } from './styles';
-import moment from 'moment'
-import firebase from 'react-native-firebase'
+import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
+import { AppContext, Navbar } from '../components'
+import { cStyles, screenWidth } from './styles'
+
 const auth = firebase.auth();
-const firestore = firebase.firestore()
-
+const firestore = firebase.firestore();
 const createSessionId = firebase.functions().httpsCallable('createSessionId');
-const checkHealth = firebase.functions().httpsCallable('checkHealth');
 
-const IMAGE_SAMPLE = require('app/assets/images/prepareroom_sample.png');
-const ICON_MORE = require('app/assets/images/ic_more.png');
-const ICON_CLOSE = require('app/assets/images/ic_close.png');
 const COLOR_BUTTON = '#C9AD6F'
 const COLOR_BUTTON_BORDER = '#F8D099'
+const ICON_MORE = require('app/assets/images/ic_more.png');
+const ICON_CLOSE = require('app/assets/images/ic_close.png');
 
 
 export default class StarPrepareRoomScreen extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
-  
   componentDidMount() {
     Orientation.lockToPortrait()
   }
-
   onCreateSession() {
-    const starTime = new Date()
-    const endTime= moment(starTime).add(1, 'day')
+    var starTime = new Date()
+    var endTime = moment(starTime).add(1, 'day').format('YYYY-MM-DD')
+    starTime = moment(starTime).format('YYYY-MM-DD')
     try {
       this.context.showLoading();
       var data = {
         uid: auth.currentUser.uid,
-        type: 0,
-        role: 2
+        type: 0, // type => 0: routed, 1: relayed
+        role: 2  // role => 0: subscriber, 1: publisher, 2: moderator
       }
       createSessionId(data)
       .then(result => {
         console.warn(result)
-        this.context.hideLoading();
         if (result.data.success) {
           this.setState({
+            token: result.data.token,
             apiKey: result.data.apiKey,
             sessionId: result.data.sessionId,
-            token: result.data.token
           },() => {
             firestore.collection('sessions').where('publisherId', '==', auth.currentUser.uid).get()
             .then(session => {
-              if (session.docs.length>0) {
+              if (session.docs.length > 0) {
+                firestore.doc(`sessions/${session.docs[0].id}`).delete()
+              } 
+              firestore.collection('sessions').add({
+                apiKey: result.data.apiKey,
+                apiSecret: result.data.apiSecret,
+                publisherId: auth.currentUser.uid,
+                sessionId: result.data.sessionId,
+                token: result.data.token,
+                type: result.data.type,
+                limit: result.data.limit,
+                starTime: starTime,
+                endTime: endTime,
+                isChatting: false,
+              })
+              .then(created_session => {
                 this.context.hideLoading();
-                this.props.navigation.navigate('starlive', {'apiKey': session.docs[0].data().apiKey, 'sessionId': session.docs[0].data().sessionId, 'token': session.docs[0].data().token})
-              } else {
-                firestore.collection('sessions').add({
-                  apiKey: result.data.apiKey,
-                  apiSecret: result.data.apiSecret,
-                  publisherId: auth.currentUser.uid,
-                  sessionId: result.data.sessionId,
-                  token: result.data.token,
-                  type: result.data.type,
-                  limit: result.data.limit,
-                  starTime: starTime,
-                  isChatting: false,
-                  endTime: endTime
+                this.props.navigation.navigate('starlive', {
+                  'sid': created_session.id,
+                  'token': result.data.token,
+                  'apiKey': result.data.apiKey, 
+                  'sessionId': result.data.sessionId, 
                 })
-                .then(() => {
-                  this.context.hideLoading();
-                  this.props.navigation.navigate('starlive', {'apiKey': result.data.apiKey, 'sessionId': result.data.sessionId, 'token': result.data.token})
-                })
-                .catch(err2 => {
-                  this.context.hideLoading();
-                  console.warn(err2)
-                })
-              }
+              })
+              .catch(create_err => {
+                this.context.hideLoading();
+                console.warn(create_err)
+              })
             })
-            .catch(err1 => {
+            .catch(session_get_err => {
               this.context.hideLoading();
-              console.warn(err1)
+              console.warn('session_get_err: ', session_get_err)
             })
           })
         } else {
-          console.warn(result.data)
+          this.context.hideLoading();
+          console.warn('return false: ', result.data)
         }
       })
-      .catch(err => {
+      .catch(firebase_err => {
         this.context.hideLoading();
+        console.warn('firebase_err: ', firebase_err)
       })
-
-
-      // firestore.collection('sessions').where('publisherId', '==', auth.currentUser.uid).get()
-      // .then(session => {
-      //   if (session.docs.length>0) {
-      //     this.context.hideLoading();
-      //     this.props.navigation.navigate('starlive', {'apiKey': session.docs[0].data().apiKey, 'sessionId': session.docs[0].data().sessionId, 'token': session.docs[0].data().token})
-      //   } else {
-      //     firestore.collection('sessions').add({
-      //       apiKey: this.state.apiKey,
-      //       publisherId: auth.currentUser.uid,
-      //       sessionId: this.state.sessionId, //result.data.sessionId,
-      //       token: this.state.token, // result.data.token,
-      //       type: 'routed', //result.data.type,
-      //       limit: 0, //result.data.limit,
-      //       starTime: starTime,
-      //       endTime: endTime
-      //     })
-      //     .then(() => {
-      //       this.context.hideLoading();
-      //       this.props.navigation.navigate('starlive', {'apiKey': this.state.apiKey, 'sessionId': this.state.sessionId, 'token': this.state.token})
-      //     })
-      //     .catch(err2 => {
-      //       this.context.hideLoading();
-      //       console.warn(err2)
-      //     })
-      //       // this.props.navigation.navigate('starlive')
-      //   }
-      // })
-      // .catch(err1 => {
-      //   this.context.hideLoading();
-      //   console.warn(err1)
-      // })
-
     } catch (e) {
       this.context.hideLoading();
       console.warn(e)
@@ -139,16 +102,11 @@ export default class StarPrepareRoomScreen extends React.Component {
     return (
       <View style={styles.container} >
         <RNCamera
-          ref={ref => {
-            this.camera = ref;
-          }}
+          ref={ref => { this.camera = ref; }}
           type={RNCamera.Constants.Type.front}
           flashMode={RNCamera.Constants.FlashMode.on}
           captureAudio={false}
-          style={styles.camera}
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera phone'}/>
-        
+          style={styles.camera}/>
         <Header
           containerStyle={cStyles.headerContainer_room}
           placement="right"          
@@ -157,8 +115,7 @@ export default class StarPrepareRoomScreen extends React.Component {
               <Image
                 style={{width:20, height:20}}
                 source={ICON_MORE}
-                resizeMode='contain'
-              />
+                resizeMode='contain'/>
             </TouchableOpacity>
           }
         />
@@ -167,8 +124,7 @@ export default class StarPrepareRoomScreen extends React.Component {
            <Image
               style={{width:45, height:45}}
               source={ICON_CLOSE}
-              resizeMode='contain'
-            />
+              resizeMode='contain'/>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.onCreateSession()} style={styles.view_button}>
             <Text style={{color: 'black', fontSize: 16}}>START LIVE STREAM</Text>
@@ -193,23 +149,22 @@ const styles = StyleSheet.create({
   view_main: {
     flex: 1, 
     width: '100%', 
-    paddingHorizontal: 25, 
     alignItems: 'center', 
+    paddingHorizontal: 25, 
     justifyContent: 'flex-end'
   },
   view_button: {
     width: '100%', 
     height: 50, 
-    marginVertical: 20,
     borderWidth: 1,
     borderRadius: 25, 
+    marginVertical: 20,
     overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderColor: COLOR_BUTTON_BORDER,
     backgroundColor: COLOR_BUTTON,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
-  
 })
 
 StarPrepareRoomScreen.contextType = AppContext;

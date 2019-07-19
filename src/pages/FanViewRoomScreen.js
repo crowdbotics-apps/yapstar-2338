@@ -16,9 +16,6 @@ const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
 const IMAGE_GRAD1 = require('app/assets/images/chatview_grad1.png');
 const IMAGE_GRAD2 = require('app/assets/images/chatview_grad2.png');
-
-const IMAGE_SAMPLE1 = require('app/assets/images/chatview_sample1.png');
-const IMAGE_SAMPLE2 = require('app/assets/images/chatview_sample2.png');
 const IMAGE_KANGANA = require('app/assets/images/image_kangana.png');
 
 const ICON_LIVE = require('app/assets/images/ic_live.png');
@@ -28,7 +25,6 @@ const ICON_CALL = require('app/assets/images/ic_call.png');
 const ICON_AUDIO = require('app/assets/images/ic_audio.png');
 const ICON_VIDEO = require('app/assets/images/ic_video.png');
 const ICON_DOT = require('app/assets/images/ic_reddot.png');
-
 
 const COLOR_TAB = '#222222'
 const COLOR_GOLD = '#F8D099'
@@ -68,39 +64,20 @@ export default class FanViewRoomScreen extends React.Component {
         },
       ],
     }
-    this.sessionEventHandlers = {
-      connectionCreated: event =>  { 
-        console.warn("connection created", event);
-      },
-      connectionDestroyed: event =>  { 
-        console.warn("connection destroyed", event);
-        this.gotoReview()
-      },
-      sessionConnected: event => { 
-        console.warn("Client connect to a session")
-      },
-      sessionDisconnected: event => {
-        console.warn("Client disConnect to a session")
-      },
-      sessionReconnected: event => {
-        console.warn("session reconnected")
-      },
-    };
   }
   componentDidMount() {
     Orientation.lockToPortrait();
+    const sid = this.props.navigation.getParam('sid', '')
+    const token = this.props.navigation.getParam('token', '')
     const starId = this.props.navigation.getParam('starId', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
-    const sid = this.props.navigation.getParam('sid', '')
-    const token = this.props.navigation.getParam('token', '')
-    console.warn(apiKey, sessionId, token)
     this.setState({
       sid: sid,
+      token, token,
       starId: starId,
       apiKey: apiKey,
       sessionId: sessionId,
-      token, token
     })
   }
  
@@ -131,6 +108,7 @@ export default class FanViewRoomScreen extends React.Component {
   gotoMain() {
     this.props.navigation.navigate('fanStack')
   }
+
   gotoChatroom() {
     this.context.showLoading();
     firestore.collection('sessions').where('publisherId', '==', this.state.starId).get()
@@ -162,6 +140,7 @@ export default class FanViewRoomScreen extends React.Component {
       Alert.alert('notice', 'Star closed connection.')
     })
   }
+
   render() {
     return(
       <ImageBackground style={styles.container} source={IMAGE_BACKGROUND}>

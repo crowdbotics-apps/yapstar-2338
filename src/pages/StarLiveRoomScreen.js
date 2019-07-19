@@ -1,17 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import firebase from 'react-native-firebase'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
-import PropTypes from 'prop-types';
+import { OTPublisher, OTSession, OTSubscriber, OT } from 'opentok-react-native'
+import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, ScrollView, FlatList, Text } from 'react-native'
+
 import { AppContext, RoomHeader } from '../components';
 import { cStyles, screenWidth } from './styles';
-import { OTPublisher, OTSession, OTSubscriber, OT } from 'opentok-react-native'
-import { OPENTOK } from '../utils/Constants'
 
-import OTPublisherStream from './OTPublisherStream';
-import OTSubscriberStream from './OTSubscriberStream';
-
-import firebase from 'react-native-firebase'
 const auth = firebase.auth();
 const firestore = firebase.firestore()
 
@@ -22,9 +19,6 @@ const IMAGE_BACKGROUND = require('app/assets/images/interests.png');
 const IMAGE_BAR = require('app/assets/images/chatview_bar.png');
 const IMAGE_GRAD1 = require('app/assets/images/chatview_grad1.png');
 const IMAGE_GRAD2 = require('app/assets/images/chatview_grad2.png');
-
-const IMAGE_SAMPLE1 = require('app/assets/images/chatview_sample1.png');
-const IMAGE_SAMPLE2 = require('app/assets/images/chatview_sample2.png');
 const IMAGE_KANGANA = require('app/assets/images/image_kangana.png');
 
 const ICON_LIVE = require('app/assets/images/ic_live.png');
@@ -34,7 +28,6 @@ const ICON_CALL = require('app/assets/images/ic_call.png');
 const ICON_AUDIO = require('app/assets/images/ic_audio.png');
 const ICON_VIDEO = require('app/assets/images/ic_video.png');
 const ICON_DOT = require('app/assets/images/ic_reddot.png');
-
 
 const COLOR_TAB = '#222222'
 const COLOR_GOLD = '#F8D099'
@@ -77,6 +70,7 @@ export default class StarLiveRoomScreen extends React.Component {
         },
       ],
     }
+
     this.sessionEventHandlers = {
       connectionCreated: event =>  { 
         console.warn("connection created", event);
@@ -89,93 +83,85 @@ export default class StarLiveRoomScreen extends React.Component {
       },
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
+        this.context.showLoading();
         firestore.doc(`users/${auth.currentUser.uid}`).set({
           isLive: false
         }, {merge: true})
+        .then(() => {
+          this.context.hideLoading();
+          firestore.doc(`sessions/${this.state.sid}`).delete()
+        })
+        .catch(() => {
+          this.context.hideLoading();
+        })
       },
       sessionReconnected: event => {
         console.warn("session reconnected")
       },
     };
+    this.publisherEventHandlers = {
+      streamCreated: event => {
+        console.log('Publisher stream created!', event);
+        this.context.hideLoading();
+      },
+      streamDestroyed: event => {
+        console.log('Publisher stream destroyed!', event);
+      }
+    };
   }
 
   componentDidMount() {
     Orientation.lockToPortrait();
+    const sid = this.props.navigation.navigate('sid', '')
+    const token = this.props.navigation.getParam('token', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
-    const token = this.props.navigation.getParam('token', '')
-    console.warn(apiKey, sessionId, token)
     this.context.showLoading();
     this.setState({
+      sid: sid,
+      token: token,
       apiKey: apiKey,
       sessionId: sessionId,
-      token: token
     }, () => {
       firestore.doc(`users/${auth.currentUser.uid}`).set({
         isLive: true
       }, {merge: true})
-      .then(() => {
-        firestore.collection('sessions').where('sessionId', '==', sessionId).get()
-        .then(session => {
-          this.context.hideLoading();
-          this.setState({
-            sid: session.docs[0].id
-          })
-        })
-        .catch(()=>{
-          this.context.hideLoading();
-        })
-      })
       .catch(()=>{
         this.context.hideLoading();
+        this.props.navigation.navigate('star_main')
       })
     })
   }
-
   onRecording() {
     this.context.showLoading();
     data = {
-      sessionId: this.state.sessionId,
       hasAudio: true,
       hasVideo: true,
+      sessionId: this.state.sessionId,
+      name: 'YapStar First Recording',
       outputMode: 'composed',
-      name: 'YapStar First Recording'
     }
     startArchive(data)
-      .then(result => {
-        console.warn(result)
-        this.context.hideLoading();
-        if (result.data.success) {
-          console.warn(result.data)
-          this.setState({
-            archive: result.data.archive
-          })
-        } else {
-          console.warn(result.data)
-        }
-      })
-      .catch(err => {
-        this.context.hideLoading();
-      })
+    .then(result => {
+      this.context.hideLoading();
+      console.warn(result.data)
+      if (result.data.success) {
+        this.setState({
+          archive: result.data.archive
+        })
+      }
+    })
+    .catch(err => {
+      this.context.hideLoading();
+      console.warn(err)
+    })
   }
-
   onEndCall() {
-    this.context.showLoading();
-    firestore.doc(`users/${auth.currentUser.uid}`).set({
-      isLive: false
-    }, {merge: true})
-    .then(()=>{
-      firestore.doc(`sessions/${this.state.sid}`).delete()
+    if (this.state.archive) {
       data = {archiveId: this.state.archive.id}
       stopArchive(data)
-      this.context.hideLoading();
-      this.props.navigation.navigate('starStack')
-    })
-    .catch(() => {
-      firestore.doc(`sessions/${this.state.sid}`).delete()
-      this.context.hideLoading();
-      this.props.navigation.navigate('starStack')
-    })
+    }
+    this.props.navigation.navigate('starStack')
   }
   onChangeCamera() {
     this.setState({
@@ -192,7 +178,6 @@ export default class StarLiveRoomScreen extends React.Component {
       publishVideo: !this.state.publishVideo
     })
   }
-  
  
   renderItemChatList({item, index}) {
     return(
@@ -224,7 +209,10 @@ export default class StarLiveRoomScreen extends React.Component {
                 {this.state.apiKey && this.state.token && this.state.sessionId &&
                   <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token} eventHandlers={this.sessionEventHandlers}>
                     <View style={{width: '100%', height: '100%', flexDirection: 'row', justifyContent: 'flex-end'}}> 
-                      <OTPublisher style={{flex: 1, height: '100%'}} properties={{publishAudio: this.state.publishAudio, publishVideo: this.state.publishVideo, cameraPosition: this.state.isFrontCamera?'front':'back'}}/>
+                      <OTPublisher 
+                        style={{flex: 1, height: '100%'}} 
+                        eventHandlers={this.publisherEventHandlers}
+                        properties={{publishAudio: this.state.publishAudio, publishVideo: this.state.publishVideo, cameraPosition: this.state.isFrontCamera?'front':'back'}}/>
                       <OTSubscriber style={{width: screenWidth/2, height: '100%'}} />
                     </View>
                   </OTSession>

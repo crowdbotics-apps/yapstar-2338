@@ -1,11 +1,12 @@
 import React from 'react'
+import firebase from 'react-native-firebase'
 import Orientation from 'react-native-orientation'
-import { SafeAreaView, StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, } from 'react-native'
+import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, Navbar } from '../components';
 import { cStyles, screenWidth } from './styles';
-import firebase from 'react-native-firebase'
+
 const auth = firebase.auth();
 const firestore = firebase.firestore()
 
@@ -17,10 +18,8 @@ const IMAGE_BOTTOM_TAB = require('app/assets/images/starmain_bottom.png');
 const IMAGE_KANGANA = require('app/assets/images/image_kangana.png');
 const IMAGE_THUMBS= require('app/assets/images/starmain_thumbs.png');
 const IMAGE_UPCOMING= require('app/assets/images/starmain_upcoming.png');
-
 const IMAGE_RECT = require('app/assets/images/chatview_grad2.png');
 const IMAGE_SAMPLE = require('app/assets/images/image_priyanka.png');
-
 const ICON_BELL = require('app/assets/images/ic_bell.png');
 const ICON_RECODER = require('app/assets/images/ic_recoder.png');
 const ICON_CAMERA = require('app/assets/images/ic_camera.png');
@@ -93,7 +92,6 @@ export default class StarMainScreen extends React.Component {
       }
       historyArchive(data)
       .then(result => {
-        console.warn(result)
         this.context.hideLoading();
         if (result.data.success) {
           console.warn(result.data)
@@ -121,13 +119,8 @@ export default class StarMainScreen extends React.Component {
       }
       downloadArchive(data)
       .then(result => {
-        console.warn(result)
         this.context.hideLoading();
-        if (result.data.success) {
-          console.warn(result.data)
-        } else {
-          console.warn(result.data)
-        }
+        console.warn('result.data: ', result.data)
       })
       .catch(err => {
         this.context.hideLoading();
@@ -136,7 +129,6 @@ export default class StarMainScreen extends React.Component {
       this.context.hideLoading();
       console.warn(e)
     }
-
   }
 
   renderItemUpcoming({item, index}) {
@@ -395,7 +387,6 @@ const styles = StyleSheet.create({
   view_main: {
     flex: 1,
     width: '100%',
-    height: '100%',
     alignItems: 'center', 
   },
   button_tab: {

@@ -47,65 +47,63 @@ export default class FanChatRoomScreen extends React.Component {
       },
       connectionDestroyed: event =>  { 
         console.warn("connection destroyed", event);
-        firestore.doc(`sessions/${this.state.sid}`).set({
-          isChatting: false
-        }, {merge: true})
       },
       sessionConnected: event => { 
         console.warn("Client connect to a session")
       },
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
-        firestore.doc(`sessions/${this.state.sid}`).set({
-          isChatting: false
-        }, {merge: true})
+        this.context.showLoading();
+        firestore.collection('sessions').where('publisherId', '==', this.state.sid).get()
+        .then(session => {
+          this.context.hideLoading();
+          if (session.docs.length > 0) {
+            firestore.doc(`sessions/${this.state.sid}`).set({
+              isChatting: false
+            }, {merge: true})
+          }
+        })
+        .catch(() => {
+          this.context.hideLoading();
+        })
       },
       sessionReconnected: event => {
         console.warn("session reconnected")
       },
     };
+    this.publisherEventHandlers = {
+      streamCreated: event => {
+        console.log('Publisher stream created!', event);
+        this.context.hideLoading();
+      },
+      streamDestroyed: event => {
+        console.log('Publisher stream destroyed!', event);
+      }
+    };
   }
 
   componentDidMount() {
     Orientation.lockToPortrait();
+    const sid = this.props.navigation.getParam('sid', '')
+    const token = this.props.navigation.getParam('token', '')
     const starId = this.props.navigation.getParam('starId', '')
     const apiKey = this.props.navigation.getParam('apiKey', '')
     const sessionId = this.props.navigation.getParam('sessionId', '')
-    const sid = this.props.navigation.getParam('sid', '')
-    const token = this.props.navigation.getParam('token', '')
     firestore.doc(`sessions/${sid}`).set({
       isChatting: true
     }, {merge: true})
     this.setState({
+      sid: sid,
+      token, token,
       starId: starId,
       apiKey: apiKey,
       sessionId: sessionId,
-      sid: sid,
-      token, token
-    }, () => {this.context.hideLoading()})
-  }
-  
-  onDisconnect() {
-    OTSession.connectionDestroyed()
+    })
   }
 
   gotoReview() {
-    this.context.showLoading();
-    console.warn(this.state.sid)
-    firestore.doc(`sessions/${this.state.sid}`).set({
-      isChatting: false
-    }, {merge: true})
-    .then(() => {
-      this.context.hideLoading();
-      this.props.navigation.navigate('review', {
-        starId: this.state.starId
-      })
-    })
-    .catch(() => {
-      this.context.hideLoading();
-      this.props.navigation.navigate('review', {
-        starId: this.state.starId
-      })
+    this.props.navigation.navigate('review', {
+      starId: this.state.starId
     })
   }
 
@@ -156,6 +154,7 @@ export default class FanChatRoomScreen extends React.Component {
               <View style={styles.view_fan}>
                 <OTPublisher 
                   style={styles.view_absolute} 
+                  eventHandlers={this.publisherEventHandlers}  
                   properties={{publishAudio: this.state.publishAudio, publishVideo: this.state.publishVideo, cameraPosition: this.state.isFrontCamera?'front':'back'}}/>
                 <Image
                   style={{width: '100%', height: '80%', position: 'absolute'}}
@@ -216,7 +215,8 @@ export default class FanChatRoomScreen extends React.Component {
               <View style={{width:'100%', height: 150, position: 'absolute', paddingRight: 25, paddingBottom: 50,justifyContent: 'flex-end', alignItems: 'flex-end'}}>
                 <TouchableOpacity onPress={()=>this.setState({isFullScreen: false})} style={{width: 100, height: 100, borderColor: COLOR_GOLD, borderWidth: 2, borderRadius:10, overflow: 'hidden'}}> 
                   <OTPublisher 
-                    style={styles.view_absolute}  
+                    style={styles.view_absolute}
+                    eventHandlers={this.publisherEventHandlers}  
                     />
                 </TouchableOpacity>
               </View>
