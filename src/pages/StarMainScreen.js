@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from 'react-native-firebase'
 import Orientation from 'react-native-orientation'
-import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, } from 'react-native'
+import { StyleSheet, Image, ImageBackground, TouchableOpacity, View, Platform, ScrollView, FlatList, Text, RefreshControl } from 'react-native'
 import { Header, Input, Button, Avatar } from 'react-native-elements'
 import PropTypes from 'prop-types';
 import { AppContext, Navbar } from '../components';
@@ -49,6 +49,7 @@ export default class StarMainScreen extends React.Component {
       isPlus: true,
       placeholder: 'Post something new ...',
       archiveList: [],
+      refreshing: false,
       stars: [
         {
           name: 'VIRAT KOHLI',
@@ -83,6 +84,25 @@ export default class StarMainScreen extends React.Component {
     this.getArchiveList()
   }
 
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.getArchiveList();
+  }
+  _secToTime(s) {
+    // Pad to 2 or 3 digits, default is 2
+    function pad(n, z) {
+      z = z || 2;
+      return ('00' + n).slice(-z);
+    }
+    // var ms = s % 1000;
+    // s = (s - ms) / 1000;
+    var secs = s % 60;
+    s = (s - secs) / 60;
+    var mins = s % 60;
+    // var hrs = (s - mins) / 60;
+    return pad(mins) + ':' + pad(secs) //+ '.' + pad(ms, 3);
+  }
+
   getArchiveList() {
     try {
       this.context.showLoading();
@@ -96,16 +116,20 @@ export default class StarMainScreen extends React.Component {
         if (result.data.success) {
           console.warn(result.data)
           this.setState({
+            refreshing: false,
             archiveList: result.data.archives
           })
         } else {
+          this.setState({refreshing: false})
           console.warn(result.data)
         }
       })
       .catch(err => {
+        this.setState({refreshing: false})
         this.context.hideLoading();
       })
     } catch (e) {
+      this.setState({refreshing: false})
       this.context.hideLoading();
       console.warn(e)
     }
@@ -184,7 +208,7 @@ export default class StarMainScreen extends React.Component {
     return(
       <View style={styles.view_videolist_item}>
         <View style={{width: '100%', height: 34, flexDirection: 'row', justifyContent: 'space-between', marginTop: 15}}>
-          <Image source={item.image} style={{width: 34, height: 34, alignSelf: 'center',  borderRadius: 5}} resizeMode='cover'/>
+          <Image source={IMAGE_SAMPLE} style={{width: 34, height: 34, alignSelf: 'center',  borderRadius: 5}} resizeMode='cover'/>
           <View style={{flex: 1, justifyContent: 'center', paddingLeft: 20}}>
             <Text style={{color: 'white', fontSize: 16}} numberOfLines={1}>Ranveer Singh</Text>
           </View>
@@ -204,7 +228,7 @@ export default class StarMainScreen extends React.Component {
             resizeMode='contain'
           />
           </TouchableOpacity>
-          <Text style={{width: '100%',color: 'white', fontSize: 14, paddingLeft: 5, paddingBottom: 5}} numberOfLines={1}>19:45</Text>
+          <Text style={{width: '100%',color: 'white', fontSize: 14, paddingLeft: 5, paddingBottom: 5}} numberOfLines={1}>11:20</Text>
         </ImageBackground>
         <View style={{width:'100%', height: 20, marginTop:20, marginBottom: 15, flexDirection:'row', justifyContent: 'center'}}>
           <Image
@@ -257,7 +281,13 @@ export default class StarMainScreen extends React.Component {
           rightComponent={{ icon: 'menu', color: '#fff', onPress: ()=> this.props.navigation.openDrawer()}}
         />
         <View style={styles.view_main}>            
-          <ScrollView>
+          <ScrollView 
+            // refreshControl={
+            //   <RefreshControl
+            //     refreshing={this.state.refreshing}
+            //     onRefresh={this._onRefresh}/>
+            // }
+          >
             <View style={styles.view_upcoming}>
               <FlatList
                 horizontal

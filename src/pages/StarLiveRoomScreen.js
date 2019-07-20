@@ -83,7 +83,7 @@ export default class StarLiveRoomScreen extends React.Component {
       },
       sessionDisconnected: event => {
         console.warn("Client disConnect to a session")
-        this.context.showLoading();
+        
         firestore.doc(`users/${auth.currentUser.uid}`).set({
           isLive: false
         }, {merge: true})
@@ -157,11 +157,20 @@ export default class StarLiveRoomScreen extends React.Component {
     })
   }
   onEndCall() {
+    this.context.showLoading();
     if (this.state.archive) {
+      console.warn('ddddddddddddd')
       data = {archiveId: this.state.archive.id}
       stopArchive(data)
+      .then(() => {
+        this.props.navigation.navigate('starStack')
+      })
+      .catch(() => {
+        this.props.navigation.navigate('starStack')
+      })
+    } else {
+      this.props.navigation.navigate('starStack')
     }
-    this.props.navigation.navigate('starStack')
   }
   onChangeCamera() {
     this.setState({
