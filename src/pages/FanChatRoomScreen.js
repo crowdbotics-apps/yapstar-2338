@@ -139,13 +139,13 @@ export default class FanChatRoomScreen extends React.Component {
           <OTSubscriber style={{width: '100%', height:this.state.isFullScreen?screenHeight:screenHeight*0.65, position: 'absolute'}} />
           {!this.state.isFullScreen &&
             <View style={styles.container}>
-              <TouchableOpacity style={styles.view_star}>
+              <View style={styles.view_star}>
                 <Image
                   style={{width: '100%', height: '50%', position: 'absolute'}}
                   source={IMAGE_GRAD1}
                   resizeMode='cover'
                 />
-            </TouchableOpacity>
+            </View>
               <Image
                 style={styles.view_bar}
                 source={IMAGE_BAR}

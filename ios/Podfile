@@ -25,7 +25,7 @@ target 'YapStars' do
   pod 'Fabric', '~> 1.10.1'
   pod 'Crashlytics', '~> 3.13.1'
 
-  pod 'OpenTok', '2.16.1'
+  pod 'OpenTok', '2.15.3'
 
   target 'YapStarsTests' do
     inherit! :search_paths
